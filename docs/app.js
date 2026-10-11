@@ -1,7 +1,7 @@
 'use strict';
-import { boundedScene } from './depth.mjs';
-import { boundedProgress,advanceCamera,cameraState } from './camera.mjs';
-import { stageLayout,keyboardVisible } from './layout.mjs';
+import { boundedProgress,cameraState,journeyProgress,readingRange } from './camera.mjs';
+import { createLandscape } from './landscape.mjs';
+import { actorLayout,keyboardVisible } from './layout.mjs';
 document.documentElement.classList.add('js');
 const $=s=>document.querySelector(s);
 const demo=document.body.dataset.demo==='true';
@@ -13,7 +13,7 @@ function setMotion(){document.body.classList.toggle('reduced',reduced);$('#motio
 $('#motion').onclick=()=>{reduced=!reduced;safeSet('motion',reduced?'reduce':'full');setMotion();cancelAnimationFrame(frame);if(!reduced)frame=requestAnimationFrame(loop);};
 preference.addEventListener('change',e=>{if(safeGet('motion')===null){reduced=e.matches;setMotion();}});
 let mode='day';$('#theme').value=safeGet('theme')||'auto';
-function setTheme(){const hour=new Date().getHours(),choice=$('#theme').value;mode=choice==='auto'?(hour>=6&&hour<16?'day':hour>=16&&hour<19?'dusk':'night'):choice;document.body.dataset.theme=mode;document.querySelector('meta[name=theme-color]').content=getComputedStyle(document.body).getPropertyValue('--bg').trim()||'#f7eee2';drawSky(performance.now());}
+function setTheme(){const hour=new Date().getHours(),choice=$('#theme').value;mode=choice==='auto'?(hour>=6&&hour<16?'day':hour>=16&&hour<19?'dusk':'night'):choice;document.body.dataset.theme=mode;document.querySelector('meta[name=theme-color]').content=getComputedStyle(document.body).getPropertyValue('--bg').trim()||'#f7eee2';drawSky(performance.now());document.dispatchEvent(new Event('palettechange'));}
 $('#theme').onchange=()=>{safeSet('theme',$('#theme').value);setTheme();};setInterval(setTheme,60000);
 const canvas=$('#sky'),ctx=canvas.getContext('2d');let w=0,h=0,particles=[],frame;
 function resizeSky(){w=innerWidth;h=innerHeight;const d=Math.min(devicePixelRatio||1,2);canvas.width=w*d;canvas.height=h*d;ctx?.setTransform(d,0,0,d,0,0);particles=Array.from({length:w<700?45:100},(_,i)=>({x:Math.random()*w,y:Math.random()*h,r:.35+Math.random()*1.35,s:Math.random()*6.28,speed:.2+Math.random()*.6,glint:i%7===0}));drawSky(performance.now());}
@@ -60,8 +60,9 @@ function drawSky(t){
 }
 function loop(t){if(reduced)return;drawSky(t);frame=requestAnimationFrame(loop);}document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(frame);if(!document.hidden)frame=requestAnimationFrame(loop);});window.addEventListener('resize',resizeSky);resizeSky();setTheme();setMotion();frame=requestAnimationFrame(loop);
 const intro=$('#intro');let opening=false;
-function closeIntro(animate){if(opening)return;opening=true;$('#open').disabled=true;intro.classList.toggle('opening',animate&&!reduced);const finish=()=>{intro.classList.add('gone');intro.inert=true;document.body.classList.remove('intro-open');safeSet('opened','1');document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('visible'));};if(animate&&!reduced)setTimeout(finish,2600);else finish();}
-if(safeGet('opened')==='1'||location.hash)closeIntro(false);else document.body.classList.add('intro-open');$('#open').onclick=()=>closeIntro(true);$('#skip').onclick=()=>closeIntro(false);
+function closeIntro(animate){if(opening)return;opening=true;$('#open').disabled=true;intro.classList.toggle('opening',animate&&!reduced);const finish=()=>{intro.classList.add('gone');intro.inert=true;document.body.classList.remove('intro-open');document.querySelectorAll('header,#film,.film-controls,.bottom-nav').forEach(el=>el.inert=false);if(document.activeElement?.closest('#intro'))$('#arrival').focus({preventScroll:true});safeSet('opened-cinema','1');document.dispatchEvent(new Event('invitationopen'));document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('visible'));};if(animate&&!reduced)setTimeout(finish,2600);else finish();}
+if(safeGet('opened-cinema')==='1'||location.hash)closeIntro(false);else document.body.classList.add('intro-open');$('#open').onclick=()=>closeIntro(true);$('#skip').onclick=()=>closeIntro(false);
+if(document.body.classList.contains('intro-open')){document.querySelectorAll('header,#film,.film-controls,.bottom-nav').forEach(el=>el.inert=true);$('#open').focus({preventScroll:true});}
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 let memories=[],index=0,busy=false;
 fetch('./content.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(config=>{memories=config.memories;renderMemory();renderContent(config);}).catch(()=>{memories=['hero-dawn','memory-rings','memory-night'].map((name,n)=>({src:`./assets/${name}.webp`,alt:'Tranh màu nước minh họa lễ cưới',caption:['Một khởi đầu dịu dàng','Chọn một người, cùng một đời','Cùng nhau, qua mọi sắc trời'][n],placeholder:true}));renderMemory();});
@@ -82,152 +83,103 @@ attachForm('#rsvp-form','/api/rsvp','Chúng mình đã nhận lời hồi âm c�
 if(!demo)fetch('/api/wishes').then(r=>{if(!r.ok)throw Error();return r.json();}).then(items=>{for(const item of items){const card=document.createElement('article');card.className='wish-note';const p=document.createElement('p'),name=document.createElement('small');p.textContent=item.message;name.textContent=item.name;card.append(p,name);$('#wish-list').append(card);}}).catch(()=>{$('#wish-list').textContent='Chưa tải được lời chúc. Bạn có thể thử lại sau.';});
 
 
-// One uninterrupted camera timeline. Text, scenery and actors share its position.
-const film=$('#film');
-initResponsive();
-initGarden();
+// The page scrolls normally. The landscape is scenery, never a pinned content container.
+const film=$('#film'),landscape=createLandscape($('#world'),schedulePaint);
 const scenes=Array.from(film.children).filter(el=>el.matches('section,footer'));
-const sceneNames=['Lời mời','Những ngày có nhau','Lễ cưới','Hồi âm','Lời chúc','Lời cảm ơn'];
-const position=$('#scene-position'),playButton=$('#play-film');
-position.max=String(scenes.length-1);
+const sceneNames=['Khung cửa','Lời mời','Những ngày có nhau','Lễ cưới','Hồi âm','Lời chúc','Lời cảm ơn'];
+const position=$('#scene-position'),playButton=$('#play-film'),couple=$('#couple-companion');
 const poses=Array.from(document.querySelectorAll('.doll-pose'));
-let activeScene=0,cameraPosition=0,cameraVelocity=0,targetProgress=0,cameraFrame=0,lastCameraTime=0;
-let playing=false,replaying=false,seeking=false,wheelTimer=0;
-scenes.forEach(scene=>scene.classList.add('depth-scene'));
+const foreground=$('#world-foreground'),foregroundCtx=foreground.getContext('2d');
+position.max=String(scenes.length-1);
+let ranges=[],activeScene=0,cameraPosition=0,playing=false,seeking=false,paintFrame=0;
+let viewportWidth=innerWidth,viewportHeight=innerHeight,measureFrame=0,baseline=innerHeight,keyboard=false;
+let playbackFrame=0,playbackTime=0;
+const viewport=window.visualViewport;
+const editing=()=>Boolean(document.activeElement?.matches('#film input,#film textarea,#film select'));
 function updateScene(){
  position.setAttribute('aria-valuetext',sceneNames[activeScene]);
- $('#scene-label').textContent=`${String(activeScene+1).padStart(2,'0')} / ${String(scenes.length).padStart(2,'0')} · ${sceneNames[activeScene]}`;
+ $('#scene-label').textContent=`${String(activeScene+1).padStart(2,'0')} / 07 · ${sceneNames[activeScene]}`;
  $('#scene-prev').disabled=activeScene===0;$('#scene-next').disabled=activeScene===scenes.length-1;
- scenes.forEach((scene,i)=>{scene.classList.toggle('current',i===activeScene);scene.inert=i!==activeScene;scene.setAttribute('aria-hidden',String(i!==activeScene));});
  document.querySelectorAll('.bottom-nav a').forEach(a=>{if(a.hash==='#'+scenes[activeScene].id)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');});
- playButton.disabled=reduced;playButton.setAttribute('aria-label',playing?'Dừng phim tại chặng hiện tại':'Xem thiệp như một đoạn phim tự chạy');playButton.setAttribute('aria-pressed',String(playing));playButton.textContent=playing?'Dừng phim Ⅱ':'Xem như phim ▷';
+ playButton.disabled=reduced;playButton.setAttribute('aria-pressed',String(playing));playButton.textContent=playing?'Dừng phim Ⅱ':'Xem như phim ▷';
+ playButton.setAttribute('aria-label',playing?'Dừng phim':'Xem hành trình tự động, có dừng để đọc từng tấm thiệp');
 }
 function renderCamera(){
- const view=cameraState(cameraPosition,scenes.length);
- if(view.active!==activeScene){
-  if(scenes[activeScene].contains(document.activeElement))film.focus({preventScroll:true});
-  activeScene=view.active;updateScene();
- }
- if(!seeking)position.value=view.progress.toFixed(3);
- film.style.setProperty('--camera-scale',view.scale.toFixed(5));film.style.setProperty('--camera-z',view.subjectZ.toFixed(3)+'px');
- film.style.setProperty('--garden-scale',view.gardenScale.toFixed(5));film.style.setProperty('--garden-z',view.gardenZ.toFixed(3)+'px');
- scenes.forEach((scene,i)=>{const state=view.scenes[i];scene.classList.toggle('in-view',state.weight>.001);scene.style.opacity=String(state.weight);scene.style.transform=state.transform;scene.style.filter=state.filter;});
+ paintFrame=0;cameraPosition=journeyProgress(scrollY,ranges);
+ const sample=reduced?Math.round(cameraPosition):cameraPosition,view=cameraState(sample);
+ if(view.active!==activeScene){activeScene=view.active;updateScene();}
+ if(!seeking)position.value=cameraPosition.toFixed(3);
+ landscape.render(view,mode);
+ if(document.body.dataset.layout==='stacked'&&foregroundCtx){foregroundCtx.clearRect(0,0,foreground.width,foreground.height);foregroundCtx.drawImage($('#world'),0,0);}
+ const metrics=actorLayout(viewportWidth,viewportHeight,view.actor,document.body.dataset.layout==='stacked',keyboard);
+ couple.style.width=metrics.width.toFixed(2)+'px';
+ document.body.style.setProperty('--foreground-top',Math.max(0,metrics.top-24).toFixed(2)+'px');
+ couple.style.transform=`translate3d(${metrics.left.toFixed(2)}px,${metrics.top.toFixed(2)}px,0) rotateY(${view.actor.turn.toFixed(2)}deg)`;
  poses.forEach((pose,i)=>{pose.style.opacity=String(view.poses[i]);pose.classList.toggle('current',view.poses[i]>.5);});
 }
-function requestCamera(){if(!cameraFrame&&!document.hidden)cameraFrame=requestAnimationFrame(tickCamera);}
-function tickCamera(time){
- cameraFrame=0;const dt=lastCameraTime?Math.min(.05,(time-lastCameraTime)/1000):1/60;lastCameraTime=time;
- if(playing){
-  if(replaying){if(cameraPosition<.002&&Math.abs(cameraVelocity)<.005)replaying=false;}
-  else targetProgress=boundedProgress(targetProgress+dt/9.5,scenes.length);
+function schedulePaint(){if(!paintFrame)paintFrame=requestAnimationFrame(renderCamera);}
+function measureJourney(){
+ measureFrame=0;
+ const focused=editing(),visualHeight=viewport?.height||innerHeight;
+ if(!focused)baseline=visualHeight;
+ keyboard=(!viewport||Math.abs(viewport.scale-1)<.02)&&keyboardVisible(baseline,visualHeight,focused);
+ document.body.classList.toggle('keyboard-open',keyboard);
+ if(!keyboard){
+  viewportWidth=document.documentElement.clientWidth;viewportHeight=innerHeight;
+  document.body.dataset.layout=viewportWidth<=700||(viewportWidth<=900&&viewportHeight>viewportWidth)?'stacked':'split';
+  document.body.style.setProperty('--view-height',viewportHeight+'px');
+  landscape.resize(viewportWidth,viewportHeight);
+  foreground.width=$('#world').width;foreground.height=$('#world').height;
  }
- const next=advanceCamera(cameraPosition,cameraVelocity,targetProgress,dt);
- cameraPosition=boundedProgress(next.position,scenes.length);cameraVelocity=next.velocity;
- if(Math.abs(cameraPosition-targetProgress)<.0002&&Math.abs(cameraVelocity)<.001){cameraPosition=targetProgress;cameraVelocity=0;}
+ ranges=scenes.map((scene,i)=>{
+  const subject=i===0?scene:scene.querySelector('.chapter-paper'),box=subject.getBoundingClientRect();
+  return readingRange(scrollY+box.top,scrollY+box.bottom,viewportHeight);
+ });
  renderCamera();
- if(playing&&targetProgress===scenes.length-1&&cameraVelocity===0){playing=false;updateScene();}
- if(playing||cameraVelocity!==0||cameraPosition!==targetProgress)requestCamera();else lastCameraTime=0;
 }
-function pauseFilm(){if(playing){playing=false;replaying=false;updateScene();}}
-function seekCamera(value,immediate=false){
- targetProgress=boundedProgress(value,scenes.length);if(reduced)targetProgress=Math.round(targetProgress);
- if(reduced||immediate){cancelAnimationFrame(cameraFrame);cameraFrame=0;lastCameraTime=0;cameraPosition=targetProgress;cameraVelocity=0;renderCamera();}
- else requestCamera();
+function scheduleMeasure(){if(!measureFrame)measureFrame=requestAnimationFrame(measureJourney);}
+function pauseFilm(){playing=false;cancelAnimationFrame(playbackFrame);playbackFrame=0;playbackTime=0;updateScene();}
+function scrollAtProgress(value){
+ const progress=boundedProgress(value),base=Math.floor(progress),fraction=progress-base;
+ if(!fraction)return base===0?0:ranges[base].start+Math.min(viewportHeight*.30,(ranges[base].end-ranges[base].start)*.4);
+ return ranges[base].end+(ranges[base+1].start-ranges[base].end)*fraction;
 }
-function goScene(index,immediate=false){pauseFilm();clearTimeout(wheelTimer);seekCamera(Math.round(boundedScene(index,scenes.length)),immediate);}
-$('#scene-prev').onclick=()=>goScene(Math.ceil(targetProgress-.001)-1);
-$('#scene-next').onclick=()=>goScene(Math.floor(targetProgress+.001)+1);
-position.oninput=()=>{pauseFilm();clearTimeout(wheelTimer);seekCamera(Number(position.value));};
+function goScene(i,immediate=false){pauseFilm();window.scrollTo({top:scrollAtProgress(Math.round(boundedProgress(i))),behavior:immediate||reduced?'instant':'smooth'});}
+$('#scene-prev').onclick=()=>goScene(Math.ceil(cameraPosition-.001)-1);
+$('#scene-next').onclick=()=>goScene(Math.floor(cameraPosition+.001)+1);
+position.oninput=()=>{pauseFilm();window.scrollTo({top:scrollAtProgress(Number(position.value)),behavior:'instant'});};
 position.addEventListener('pointerdown',()=>seeking=true);
-window.addEventListener('pointerup',()=>{seeking=false;});window.addEventListener('pointercancel',()=>{seeking=false;});
-playButton.onclick=()=>{
- clearTimeout(wheelTimer);
- if(playing){pauseFilm();seekCamera(activeScene);return;}
- if(reduced)return;
- playing=true;replaying=cameraPosition>=scenes.length-1-.01;
- if(replaying)targetProgress=0;else targetProgress=cameraPosition;
- updateScene();requestCamera();
-};
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const i=scenes.findIndex(scene=>scene.id===a.hash.slice(1));if(i<0)return;e.preventDefault();goScene(i);history.replaceState(null,'',a.hash);}));
-film.addEventListener('wheel',e=>{
- if(e.ctrlKey||Math.abs(e.deltaX)>Math.abs(e.deltaY)||dialog.open)return;
- if(e.target.closest('input,select,textarea,.paper,.wish-list,#event-cards')){if(playing){pauseFilm();seekCamera(activeScene);}return;}
- const scene=scenes[activeScene],down=e.deltaY>0;
- if(scene.scrollHeight>scene.clientHeight+2&&(down&&scene.scrollTop+scene.clientHeight<scene.scrollHeight-3||!down&&scene.scrollTop>3)){if(playing){pauseFilm();seekCamera(activeScene);}return;}
- e.preventDefault();pauseFilm();
- const delta=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?film.clientHeight:1);
- if(reduced){clearTimeout(wheelTimer);wheelTimer=setTimeout(()=>goScene(activeScene+(down?1:-1)),120);return;}
- seekCamera(targetProgress+Math.max(-.35,Math.min(.35,delta/500)));
- clearTimeout(wheelTimer);wheelTimer=setTimeout(()=>seekCamera(down?Math.ceil(targetProgress-.001):Math.floor(targetProgress+.001)),220);
-},{passive:false});
-let gesture=null;film.addEventListener('touchstart',e=>{if(playing){pauseFilm();seekCamera(activeScene);}if(e.target.closest('input,textarea,select,.paper,.memory-card,.wish-list,#event-cards'))return;gesture={x:e.touches[0].clientX,y:e.touches[0].clientY,top:scenes[activeScene].scrollTop};},{passive:true});
-film.addEventListener('touchend',e=>{if(!gesture)return;const dx=e.changedTouches[0].clientX-gesture.x,dy=e.changedTouches[0].clientY-gesture.y,scene=scenes[activeScene];const scrolled=Math.abs(scene.scrollTop-gesture.top)>2;gesture=null;if(!scrolled&&Math.abs(dy)>70&&Math.abs(dy)>Math.abs(dx)*1.4)goScene(activeScene+(dy<0?1:-1));},{passive:true});
-document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea,select,button,[contenteditable]')||dialog.open||document.body.classList.contains('intro-open'))return;if(['ArrowDown','PageDown'].includes(e.key)){e.preventDefault();goScene(Math.floor(targetProgress+.001)+1);}if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();goScene(Math.ceil(targetProgress-.001)-1);}if(e.key==='Home'){e.preventDefault();goScene(0);}if(e.key==='End'){e.preventDefault();goScene(scenes.length-1);}});
-film.addEventListener('focusin',e=>{if(e.target.closest('input,textarea,select,.paper')){pauseFilm();clearTimeout(wheelTimer);seekCamera(activeScene);}});
-$('#memory').addEventListener('click',()=>{pauseFilm();seekCamera(activeScene);});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){pauseFilm();cancelAnimationFrame(cameraFrame);cameraFrame=0;lastCameraTime=0;}else if(cameraPosition!==targetProgress)requestCamera();});
-function settleReducedMotion(){if(reduced){pauseFilm();clearTimeout(wheelTimer);seekCamera(activeScene,true);document.querySelectorAll('.memory-image-frame img').forEach(img=>img.getAnimations().forEach(a=>a.cancel()));}updateScene();}
-$('#motion').addEventListener('click',settleReducedMotion);preference.addEventListener('change',settleReducedMotion);
-updateScene();renderCamera();if(location.hash){const i=scenes.findIndex(scene=>scene.id===location.hash.slice(1));if(i>=0)goScene(i,true);}
-
-// The illustration remains visible as an image if SVG loading is unavailable.
-function initGarden(){
- const image=$('.stage-art > img'),motes=$('.garden-motes');
- if(image)fetch(image.getAttribute('src')).then(r=>{if(!r.ok)throw Error();return r.text();}).then(source=>{
-  const svg=new DOMParser().parseFromString(source,'image/svg+xml').documentElement;
-  if(svg.localName!=='svg'||svg.namespaceURI!=='http://www.w3.org/2000/svg')return;
-  svg.querySelectorAll('script,foreignObject').forEach(node=>node.remove());
-  svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
-  image.replaceWith(document.importNode(svg,true));
- }).catch(()=>{});
- if(motes)for(let i=0;i<8;i++){
-  const petal=document.createElement('span');petal.style.setProperty('--mote-x',(12+i*10)+'%');
-  petal.style.setProperty('--mote-delay',(-i*2.7)+'s');petal.style.setProperty('--mote-duration',(15+i%4*3)+'s');
-  petal.style.setProperty('--mote-size',(i%3+3)+'px');motes.append(petal);
- }
- let pointerFrame=0;
- const reset=()=>{cancelAnimationFrame(pointerFrame);film.style.setProperty('--look-x','0px');film.style.setProperty('--look-y','0px');film.style.setProperty('--look-turn','0deg');};
- film.addEventListener('pointermove',e=>{
-  if(reduced||e.pointerType!=='mouse'||!matchMedia('(hover:hover)').matches)return;
-  cancelAnimationFrame(pointerFrame);
-  pointerFrame=requestAnimationFrame(()=>{
-   const box=film.getBoundingClientRect(),x=(e.clientX-box.left)/box.width-.5,y=(e.clientY-box.top)/box.height-.5;
-   film.style.setProperty('--look-x',(x*6).toFixed(2)+'px');film.style.setProperty('--look-y',(y*4).toFixed(2)+'px');
-   film.style.setProperty('--look-turn',(x*3).toFixed(2)+'deg');
-  });
- },{passive:true});
- film.addEventListener('pointerleave',reset);$('#motion').addEventListener('click',reset);
- document.addEventListener('visibilitychange',()=>{film.classList.toggle('motion-paused',document.hidden);if(document.hidden)reset();});
+window.addEventListener('pointerup',()=>seeking=false);window.addEventListener('pointercancel',()=>seeking=false);
+// Auto-play uses the same document path. Slow reading passes hold the camera still.
+function playTick(time){
+ if(!playing)return;
+ const dt=playbackTime?Math.min(.05,(time-playbackTime)/1000):0;playbackTime=time;
+ const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+ if(y>=max-2){pauseFilm();return;}
+ const onCard=ranges.some(r=>y>=r.start&&y<=r.end);
+ const speed=viewportHeight/(onCard?13:3.5);
+ window.scrollTo({top:y+dt*speed,behavior:'instant'});
+ playbackFrame=requestAnimationFrame(playTick);
 }
-
-function initResponsive(){
- const viewport=window.visualViewport;
- let baseline=viewport?.height||innerHeight,lastWidth=innerWidth,resizeFrame=0;
- const editing=()=>Boolean(document.activeElement?.matches('#film input:not([type=hidden]),#film textarea,#film select'));
- const fit=()=>{
-  resizeFrame=0;
-  const height=viewport?.height||innerHeight,width=innerWidth,focused=editing();
-  const rotated=Math.abs(width-lastWidth)>100;
-  if(!focused||rotated)baseline=height;
-  const keyboard=(!viewport||Math.abs(viewport.scale-1)<.02)&&keyboardVisible(baseline,height,focused);
-  if(!focused||rotated||!document.body.dataset.layout)document.body.dataset.layout=width<=700||(width<=900&&innerHeight>width)?'stacked':'split';
-  lastWidth=width;
-  document.body.classList.toggle('keyboard-open',keyboard);
-  if(!viewport||Math.abs(viewport.scale-1)<.02)document.body.style.setProperty('--app-height',Math.round(height)+'px');
-  else document.body.style.removeProperty('--app-height');
-  const box=film.getBoundingClientRect(),metrics=stageLayout(box.width,box.height,document.body.dataset.layout==='stacked',keyboard);
-  film.style.setProperty('--character-floor',metrics.floor.toFixed(2)+'px');
-  film.style.setProperty('--couple-width',metrics.couple.toFixed(2)+'px');
-  film.style.setProperty('--couple-bottom',metrics.bottom.toFixed(2)+'px');
-  film.style.setProperty('--garden-width',metrics.garden.toFixed(2)+'px');
-  if(keyboard&&focused){
-   const input=document.activeElement,scene=input.closest('.depth-scene');
-   if(scene){const field=input.getBoundingClientRect(),bounds=scene.getBoundingClientRect();if(field.bottom>bounds.bottom-12)scene.scrollTop+=field.bottom-bounds.bottom+12;else if(field.top<bounds.top+12)scene.scrollTop-=bounds.top-field.top+12;}
-  }
- };
- const schedule=()=>{if(!resizeFrame)resizeFrame=requestAnimationFrame(fit);};
- if('ResizeObserver' in window)new ResizeObserver(schedule).observe(film);
- viewport?.addEventListener('resize',schedule);window.addEventListener('resize',schedule);
- document.addEventListener('focusin',schedule);document.addEventListener('focusout',schedule);
- fit();
-}
+playButton.onclick=()=>{if(playing){pauseFilm();return;}if(reduced||document.body.classList.contains('intro-open'))return;if(scrollY>=document.documentElement.scrollHeight-innerHeight-3)window.scrollTo({top:0,behavior:'instant'});playing=true;playbackTime=0;updateScene();playbackFrame=requestAnimationFrame(playTick);};
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+ const id=a.hash.slice(1),i=id==='home'&&a.closest('#thanks')?0:scenes.findIndex(s=>s.id===id);if(i<0)return;
+ e.preventDefault();goScene(i);history.replaceState(null,'',i===0?'#arrival':a.hash);
+}));
+// Never prevent wheel, touch or native keyboard scrolling. The document supplies the motion.
+window.addEventListener('scroll',schedulePaint,{passive:true});
+window.addEventListener('wheel',()=>{if(playing)pauseFilm();},{passive:true});
+window.addEventListener('touchstart',()=>{if(playing)pauseFilm();},{passive:true});
+document.addEventListener('keydown',e=>{if(playing&&['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key))pauseFilm();});
+film.addEventListener('focusin',()=>{if(playing)pauseFilm();scheduleMeasure();});
+document.addEventListener('focusout',scheduleMeasure);
+$('#memory').addEventListener('click',()=>{if(playing)pauseFilm();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseFilm();else schedulePaint();});
+document.addEventListener('palettechange',schedulePaint);
+document.addEventListener('invitationopen',()=>{if(!location.hash)window.scrollTo({top:0,behavior:'instant'});scheduleMeasure();});
+$('#motion').addEventListener('click',()=>{pauseFilm();schedulePaint();});preference.addEventListener('change',()=>{pauseFilm();schedulePaint();});
+window.addEventListener('resize',scheduleMeasure);viewport?.addEventListener('resize',scheduleMeasure);
+if('ResizeObserver' in window)new ResizeObserver(scheduleMeasure).observe(film);
+document.fonts?.ready.then(scheduleMeasure);
+updateScene();measureJourney();
+if(location.hash){const i=scenes.findIndex(s=>s.id===location.hash.slice(1));if(i>=0)requestAnimationFrame(()=>goScene(i,true));}

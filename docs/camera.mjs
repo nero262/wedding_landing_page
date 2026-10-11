@@ -1,31 +1,42 @@
-import { boundedScene } from './depth.mjs';
-export function boundedProgress(value,count=6){return boundedScene(value,count);}
-const smooth=t=>t*t*(3-2*t);
-const mixWindow=(t,a,b)=>smooth(Math.max(0,Math.min(1,(t-a)/(b-a))));
-// Exact critically damped integration: retargeting preserves camera velocity.
-export function advanceCamera(position,velocity,target,seconds){
- const dt=Math.max(0,Math.min(.1,seconds)),omega=6.5,decay=Math.exp(-omega*dt);
- const distance=position-target,travel=(velocity+omega*distance)*dt;
- return {position:target+(distance+travel)*decay,velocity:(velocity-omega*travel)*decay};
+export const CAMERA_STOPS=[0,18,41,66,92,119,145];
+export const HILL_DEPTHS=[27,38,51,67,84,104,128,153,192];
+export const clamp=(v,min=0,max=1)=>Math.max(min,Math.min(max,v));
+export const ease=t=>{t=clamp(t);return clamp(t*t*t*(t*(t*6-15)+10));};
+export const mix=(a,b,t)=>a+(b-a)*t;
+export function boundedProgress(value,count=7){return clamp(Number(value)||0,0,count-1);}
+// The camera is held for the entire visible reading range. Only blank gaps advance it.
+export function journeyProgress(scroll,ranges){
+ if(!ranges.length)return 0;
+ if(scroll<=ranges[0].end)return 0;
+ for(let i=1;i<ranges.length;i++){
+  const previous=ranges[i-1],current=ranges[i];
+  if(scroll<current.start)return i-1+clamp((scroll-previous.end)/Math.max(1,current.start-previous.end));
+  if(scroll<=current.end)return i;
+ }
+ return ranges.length-1;
 }
-function lensAt(progress){
- const stops=[1.025,1.075,1.04,1.025,1.055,1.08];
- const i=Math.min(stops.length-2,Math.floor(progress)),t=progress-i;
- const a=stops[Math.max(0,i-1)],b=stops[i],c=stops[i+1],d=stops[Math.min(stops.length-1,i+2)];
- return Math.max(1.02,Math.min(1.085,.5*((2*b)+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t)));
+export function readingRange(top,bottom,height){return {start:Math.max(0,top-height),end:Math.max(0,bottom)};}
+export function portalFrame(width,height){
+ const narrow=width<720;
+ const frameWidth=Math.min(width*(narrow?.98:.62),height*.65),frameHeight=frameWidth*4/3;
+ return {x:(width-frameWidth)/2,y:height*.95-frameHeight,width:frameWidth,height:frameHeight};
 }
-export function cameraState(value,count=6){
- const progress=boundedProgress(value,count),base=Math.floor(progress),fraction=progress-base;
- const dissolve=mixWindow(fraction,.28,.72),poseDissolve=mixWindow(fraction,.4,.82);
- const active=Math.min(count-1,base+(dissolve>=.5?1:0));
+// Every value is a pure function of scroll progress, so reversing retraces the same route.
+export function cameraState(value){
+ const progress=boundedProgress(value),base=Math.min(5,Math.floor(progress)),t=progress-base,u=ease(t);
+ const x=[0,0,-5,4,-3,3,0],elevation=[3,3,4.2,2.4,3.6,2.8,3];
+ const actorX=[.5,.79,.20,.80,.20,.79,.5],actorY=[.92,.9,.89,.9,.89,.9,.92];
+ const actorMix=base===0?ease((t-.62)/.38):u;
+ const poseIndices=[0,0,1,2,3,4,5],poseMix=base===0?0:ease((t-.30)/.50);
+ const poses=Array(6).fill(0);poses[poseIndices[base]]+=1-poseMix;poses[poseIndices[base+1]]+=poseMix;
  return {
-  progress,active,scale:lensAt(Math.min(5,progress)),subjectZ:progress*2,
-  gardenScale:1+progress*.008,gardenZ:-28+progress*2,
-  scenes:Array.from({length:count},(_,i)=>{
-   const weight=i===base?1-dissolve:i===base+1?dissolve:0;
-   const distance=progress-i;
-   return {weight,transform:`translateZ(${(distance*100).toFixed(3)}px) scale(${Math.max(.8,Math.min(1.2,1+distance*.035)).toFixed(5)})`,filter:`blur(${((1-weight)*3).toFixed(3)}px)`};
-  }),
-  poses:Array.from({length:count},(_,i)=>i===base?1-poseDissolve:i===base+1?poseDissolve:0)
+  progress,active:Math.min(6,Math.round(progress)),z:mix(CAMERA_STOPS[base],CAMERA_STOPS[base+1],u),
+  x:mix(x[base],x[base+1],u),elevation:mix(elevation[base],elevation[base+1],u),
+  roll:Math.sin(Math.PI*t)*Math.sin(base*1.7)*.003,
+  room:base===0?1-ease((t-.36)/.24):0,roomScale:base===0?1+ease(t/.6)*2.7:3.7,
+  actor:{x:mix(actorX[base],actorX[base+1],actorMix),y:mix(actorY[base],actorY[base+1],actorMix),size:mix(base===0?1.32:1,1,actorMix),turn:Math.sin(Math.PI*actorMix)*(base%2?2:-2)},
+  poses,portalScale:22/(167-mix(CAMERA_STOPS[base],CAMERA_STOPS[base+1],u))
  };
 }
+// Used by all scenery planes; near objects expand and leave the frame as the lens passes.
+export function projectPlane(depth,cameraZ){const distance=depth-cameraZ;return {distance,scale:distance>0?40/distance:0,opacity:ease((distance-3)/8)};}

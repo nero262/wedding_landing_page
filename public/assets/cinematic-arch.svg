@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="800" viewBox="0 0 600 800" fill="none">
+<defs xmlns="http://www.w3.org/2000/svg"><linearGradient id="arch-leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7f8e74" stop-opacity=".27" />
+      <stop offset="1" stop-color="#a4af91" stop-opacity=".07" />
+    </linearGradient>
+    <linearGradient id="arch-petal" x1="-5" y1="-40" x2="5" y2="5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fffdf5" stop-opacity=".95" />
+      <stop offset=".62" stop-color="#f5edda" stop-opacity=".8" />
+      <stop offset="1" stop-color="#bcb394" stop-opacity=".35" />
+    </linearGradient>
+    <linearGradient id="arch-silk" x1="107" y1="618" x2="156" y2="773" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fdf8e9" stop-opacity=".88" />
+      <stop offset=".45" stop-color="#d7ccac" stop-opacity=".35" />
+      <stop offset=".75" stop-color="#fff8e6" stop-opacity=".7" />
+      <stop offset="1" stop-color="#c9ba94" stop-opacity=".15" />
+    </linearGradient>
+    <g id="arch-leaf-shape" stroke="#859176" stroke-opacity=".4" stroke-width=".75" stroke-linecap="round">
+      <path d="M0 0C-12-9-15-27-5-40C3-25 8-10 0 0Z" fill="url(#arch-leaf)" />
+      <path d="M0-1C-3-13-5-24-5-37M-3-15L-9-20M-4-24L0-30" stroke-width=".45" stroke-opacity=".33" />
+    </g>
+    <path id="arch-petal-shape" d="M0 3C-9-4-21-12-21-24C-21-32-14-36-7-33C-3-40 8-42 15-34C27-21 12-4 0 3Z" fill="url(#arch-petal)" stroke="#b4af94" stroke-opacity=".28" stroke-width=".55" />
+    <g id="arch-camellia">
+      <g opacity=".88">
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(51.4)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(102.8)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(154.2)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(205.6)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(257)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(308.4)" />
+      </g>
+      <g transform="rotate(24) scale(.67)">
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(60)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(120)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(180)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(240)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(300)" />
+      </g>
+      <g transform="rotate(7) scale(.35)">
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(72)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(144)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(216)" />
+        <use href="#arch-petal-shape" xlink:href="#arch-petal-shape" transform="rotate(288)" />
+      </g>
+      <g stroke="#b4a16f" stroke-opacity=".73" stroke-width=".65">
+        <path d="M0 2L-2-7M1 1L6-5M0 1L-7-2M1 2L5 8M0 2L-5 7" />
+        <g fill="#baa474" stroke="none">
+          <circle cy="1" r="2.3" />
+          <circle cx="-2" cy="-7" r="1.1" />
+          <circle cx="6" cy="-5" r="1" />
+          <circle cx="-7" cy="-2" r="1.1" />
+          <circle cx="5" cy="8" r="1" />
+          <circle cx="-5" cy="7" r="1" />
+        </g>
+      </g>
+    </g>
+    <g id="arch-bud" stroke="#89967d" stroke-opacity=".4" stroke-width=".65">
+      <path d="M0 0C-9-3-15-11-11-18C-7-24 2-23 5-18C14-14 12-5 0 0Z" fill="url(#arch-petal)" />
+      <path d="M0 0C-5-6-6-15-2-20M0 0L-6-4M0 0L5-4" />
+    </g>
+    </defs>
+<defs><linearGradient id="arch-metal" x1="80" y1="150" x2="520" y2="700" gradientUnits="userSpaceOnUse"><stop stop-color="#9f9876" stop-opacity=".7"/><stop offset=".5" stop-color="#dbcda2"/><stop offset="1" stop-color="#9c9c78" stop-opacity=".8"/></linearGradient><linearGradient id="arch-ribbon" x1="80" y1="570" x2="185" y2="790" gradientUnits="userSpaceOnUse"><stop stop-color="#fffaf0" stop-opacity=".9"/><stop offset=".45" stop-color="#d4c6a4" stop-opacity=".64"/><stop offset=".7" stop-color="#fff7e3" stop-opacity=".92"/><stop offset="1" stop-color="#c4b690" stop-opacity=".58"/></linearGradient><filter id="arch-flower-shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="-1" dy="2" stdDeviation="1.8" flood-color="#53624c" flood-opacity=".15"/></filter></defs>
+<g class="cinematic-arch-frame" stroke="url(#arch-metal)" stroke-linecap="round"><path d="M106 774V312C106 168 190 78 300 78C410 78 494 168 494 312V774" stroke-width="4"/><path d="M117 775V314C117 178 197 93 300 93C403 93 483 178 483 314V775" stroke-width="1.1"/><path d="M108 751H131M94 775H137M469 751H494M464 775H506" stroke-width="2"/><path d="M108 387V316C108 174 192 80 300 80" stroke="#fff8d8" stroke-opacity=".7" stroke-width="1.2"/></g>
+<g class="cinematic-arch-vines" stroke="#748468" stroke-opacity=".78" stroke-width="1.35" stroke-linecap="round"><path d="M115 763C95 722 123 670 101 626C78 580 111 533 113 491C115 449 87 405 108 358C127 316 132 272 169 230C211 184 214 129 285 109"/><path d="M115 763C95 722 123 670 101 626C78 580 111 533 113 491C115 449 87 405 108 358C127 316 132 272 169 230C211 184 214 129 285 109" transform="translate(600 0) scale(-1 1)"/><path d="M102 627C61 611 55 579 56 553M113 493C144 479 149 455 149 433M109 359C72 345 74 307 69 289M169 230C147 217 152 190 157 171M218 158C213 135 223 113 237 99M483 610C525 595 536 569 532 539M486 467C464 453 462 431 464 413M478 338C512 318 516 295 510 274M431 223C461 205 458 176 448 158M375 141C390 109 372 85 350 72"/></g>
+<g class="cinematic-arch-foliage-left">
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(113.0 750.0) rotate(-81.0) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(105.0 740.0) rotate(56.7) scale(0.403)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(104.0 721.0) rotate(36.0) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(112.0 690.0) rotate(-81.0) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(109.0 661.0) rotate(36.0) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(101.0 651.0) rotate(-25.2) scale(0.552)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(101.0 628.0) rotate(-81.0) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(94.0 598.0) rotate(36.0) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(102.0 567.0) rotate(-81.0) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(94.0 557.0) rotate(56.7) scale(0.502)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(112.0 539.0) rotate(36.0) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(114.0 508.0) rotate(-81.0) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(110.0 478.0) rotate(36.0) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(102.0 468.0) rotate(-25.2) scale(0.453)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(102.0 448.0) rotate(-81.0) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(101.0 418.0) rotate(36.0) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(105.0 382.0) rotate(-81.0) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(97.0 372.0) rotate(56.7) scale(0.403)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(117.0 347.0) rotate(84.1) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(128.0 318.0) rotate(-31.6) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(139.0 286.0) rotate(86.9) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(131.0 276.0) rotate(-60.8) scale(0.552)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(155.0 253.0) rotate(-28.6) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(174.0 225.0) rotate(89.6) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(191.0 197.0) rotate(-26.1) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(183.0 187.0) rotate(18.3) scale(0.502)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(207.0 170.0) rotate(92.1) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(226.0 143.0) rotate(-23.7) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(249.0 123.0) rotate(94.2) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(241.0 113.0) rotate(-66.0) scale(0.453)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(273.0 113.0) rotate(-22.3) scale(0.810)"/>
+</g>
+<g class="cinematic-arch-foliage-right">
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(487.0 750.0) rotate(81.0) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(495.0 740.0) rotate(-56.7) scale(0.403)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(496.0 721.0) rotate(-36.0) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(488.0 690.0) rotate(81.0) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(491.0 661.0) rotate(-36.0) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(499.0 651.0) rotate(25.2) scale(0.552)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(499.0 628.0) rotate(81.0) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(506.0 598.0) rotate(-36.0) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(498.0 567.0) rotate(81.0) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(506.0 557.0) rotate(-56.7) scale(0.502)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(488.0 539.0) rotate(-36.0) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(486.0 508.0) rotate(81.0) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(490.0 478.0) rotate(-36.0) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(498.0 468.0) rotate(25.2) scale(0.453)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(498.0 448.0) rotate(81.0) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(499.0 418.0) rotate(-36.0) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(495.0 382.0) rotate(81.0) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(503.0 372.0) rotate(-56.7) scale(0.403)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(483.0 347.0) rotate(-84.1) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(472.0 318.0) rotate(31.6) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(461.0 286.0) rotate(-86.9) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(469.0 276.0) rotate(60.8) scale(0.552)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(445.0 253.0) rotate(28.6) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(426.0 225.0) rotate(-89.6) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(409.0 197.0) rotate(26.1) scale(0.810)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(417.0 187.0) rotate(-18.3) scale(0.502)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(393.0 170.0) rotate(-92.1) scale(0.890)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(374.0 143.0) rotate(23.7) scale(0.650)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(351.0 123.0) rotate(-94.2) scale(0.730)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(359.0 113.0) rotate(66.0) scale(0.453)"/>
+<use href="#arch-leaf-shape" xlink:href="#arch-leaf-shape" transform="translate(327.0 113.0) rotate(22.3) scale(0.810)"/>
+</g>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(56.0 553.0) rotate(-18.0) scale(0.650)"/>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(149.0 433.0) rotate(25.0) scale(0.650)"/>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(69.0 289.0) rotate(-30.0) scale(0.680)"/>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(157.0 171.0) rotate(-10.0) scale(0.560)"/>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(237.0 99.0) rotate(20.0) scale(0.600)"/>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(532.0 539.0) rotate(21.0) scale(0.600)"/>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(464.0 413.0) rotate(-28.0) scale(0.670)"/>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(510.0 274.0) rotate(27.0) scale(0.630)"/>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(448.0 158.0) rotate(32.0) scale(0.620)"/>
+<use href="#arch-bud" xlink:href="#arch-bud" transform="translate(350.0 72.0) rotate(5.0) scale(0.640)"/>
+<g class="cinematic-arch-ribbons" fill="url(#arch-ribbon)" stroke="#b8ac8b" stroke-opacity=".42" stroke-width=".75"><path d="M105 587C76 610 118 637 93 670C68 703 84 735 59 771L81 764C109 732 85 711 109 681C144 638 101 623 123 606Z"/><path d="M118 599C139 616 125 649 146 676C171 708 148 742 169 768L151 759C137 735 157 711 130 682C102 651 129 634 105 615Z"/><path d="M477 599C495 620 476 645 497 673C522 706 504 737 529 758L545 752C515 735 541 705 513 673C489 645 514 623 496 600Z"/><path d="M111 602C94 627 115 645 99 673C85 697 92 722 77 745M487 610C501 632 488 649 506 675C520 695 516 723 528 740" stroke="#fff9e8" stroke-opacity=".85" stroke-width="1.15" fill="none"/></g>
+<g class="cinematic-arch-flowers" filter="url(#arch-flower-shadow)">
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(107.0 615.0) rotate(-12.0) scale(0.880)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(88.0 652.0) rotate(27.0) scale(0.550)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(119.0 585.0) rotate(-27.0) scale(0.540)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(111.0 466.0) rotate(20.0) scale(0.700)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(92.0 443.0) rotate(-17.0) scale(0.460)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(120.0 353.0) rotate(8.0) scale(0.810)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(142.0 322.0) rotate(-28.0) scale(0.520)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(160.0 249.0) rotate(30.0) scale(0.690)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(209.0 169.0) rotate(-8.0) scale(0.600)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(253.0 118.0) rotate(14.0) scale(0.570)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(289.0 102.0) rotate(-11.0) scale(0.550)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(326.0 109.0) rotate(24.0) scale(0.680)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(355.0 124.0) rotate(-17.0) scale(0.490)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(409.0 175.0) rotate(25.0) scale(0.750)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(451.0 249.0) rotate(-4.0) scale(0.650)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(483.0 360.0) rotate(21.0) scale(0.690)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(477.0 386.0) rotate(-18.0) scale(0.480)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(488.0 545.0) rotate(11.0) scale(0.720)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(474.0 575.0) rotate(-23.0) scale(0.500)"/>
+<use href="#arch-camellia" xlink:href="#arch-camellia" transform="translate(498.0 670.0) rotate(25.0) scale(0.720)"/>
+</g>
+<g class="cinematic-arch-gold" stroke="#c7b07d" stroke-opacity=".66" stroke-width=".9" stroke-linecap="round"><path d="M70 744C52 719 58 684 65 669M541 666C556 690 550 722 542 735M272 81C282 60 302 58 312 73C328 56 347 71 342 89"/><circle cx="65" cy="667" r="2.2" fill="#c7b07d"/><circle cx="542" cy="738" r="2.2" fill="#c7b07d"/><path d="M302 65V77M296 71H308" stroke-opacity=".65"/></g>
+</svg>

@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="800" viewBox="0 0 600 800" fill="none">
+<defs xmlns="http://www.w3.org/2000/svg"><linearGradient id="tree-leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7f8e74" stop-opacity=".27" />
+      <stop offset="1" stop-color="#a4af91" stop-opacity=".07" />
+    </linearGradient>
+    <linearGradient id="tree-petal" x1="-5" y1="-40" x2="5" y2="5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fffdf5" stop-opacity=".95" />
+      <stop offset=".62" stop-color="#f5edda" stop-opacity=".8" />
+      <stop offset="1" stop-color="#bcb394" stop-opacity=".35" />
+    </linearGradient>
+    <linearGradient id="tree-silk" x1="107" y1="618" x2="156" y2="773" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fdf8e9" stop-opacity=".88" />
+      <stop offset=".45" stop-color="#d7ccac" stop-opacity=".35" />
+      <stop offset=".75" stop-color="#fff8e6" stop-opacity=".7" />
+      <stop offset="1" stop-color="#c9ba94" stop-opacity=".15" />
+    </linearGradient>
+    <g id="tree-leaf-shape" stroke="#859176" stroke-opacity=".4" stroke-width=".75" stroke-linecap="round">
+      <path d="M0 0C-12-9-15-27-5-40C3-25 8-10 0 0Z" fill="url(#tree-leaf)" />
+      <path d="M0-1C-3-13-5-24-5-37M-3-15L-9-20M-4-24L0-30" stroke-width=".45" stroke-opacity=".33" />
+    </g>
+    <path id="tree-petal-shape" d="M0 3C-9-4-21-12-21-24C-21-32-14-36-7-33C-3-40 8-42 15-34C27-21 12-4 0 3Z" fill="url(#tree-petal)" stroke="#b4af94" stroke-opacity=".28" stroke-width=".55" />
+    <g id="tree-camellia">
+      <g opacity=".88">
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(51.4)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(102.8)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(154.2)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(205.6)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(257)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(308.4)" />
+      </g>
+      <g transform="rotate(24) scale(.67)">
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(60)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(120)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(180)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(240)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(300)" />
+      </g>
+      <g transform="rotate(7) scale(.35)">
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(72)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(144)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(216)" />
+        <use href="#tree-petal-shape" xlink:href="#tree-petal-shape" transform="rotate(288)" />
+      </g>
+      <g stroke="#b4a16f" stroke-opacity=".73" stroke-width=".65">
+        <path d="M0 2L-2-7M1 1L6-5M0 1L-7-2M1 2L5 8M0 2L-5 7" />
+        <g fill="#baa474" stroke="none">
+          <circle cy="1" r="2.3" />
+          <circle cx="-2" cy="-7" r="1.1" />
+          <circle cx="6" cy="-5" r="1" />
+          <circle cx="-7" cy="-2" r="1.1" />
+          <circle cx="5" cy="8" r="1" />
+          <circle cx="-5" cy="7" r="1" />
+        </g>
+      </g>
+    </g>
+    <g id="tree-bud" stroke="#89967d" stroke-opacity=".4" stroke-width=".65">
+      <path d="M0 0C-9-3-15-11-11-18C-7-24 2-23 5-18C14-14 12-5 0 0Z" fill="url(#tree-petal)" />
+      <path d="M0 0C-5-6-6-15-2-20M0 0L-6-4M0 0L5-4" />
+    </g>
+    </defs>
+<defs><linearGradient id="tree-bark" x1="217" y1="500" x2="315" y2="720" gradientUnits="userSpaceOnUse"><stop stop-color="#536452"/><stop offset=".5" stop-color="#77816b"/><stop offset="1" stop-color="#92917a"/></linearGradient><linearGradient id="tree-canopy" x1="100" y1="130" x2="480" y2="490" gradientUnits="userSpaceOnUse"><stop stop-color="#889b7b" stop-opacity=".3"/><stop offset="1" stop-color="#b9c3a0" stop-opacity=".13"/></linearGradient><radialGradient id="tree-root-shadow"><stop stop-color="#50634b" stop-opacity=".19"/><stop offset="1" stop-color="#50634b" stop-opacity="0"/></radialGradient><filter id="tree-soft-shadow" x="-15%" y="-10%" width="135%" height="130%"><feDropShadow dx="-2" dy="3" stdDeviation="1.5" flood-color="#3d5039" flood-opacity=".13"/></filter></defs>
+<ellipse cx="286" cy="768" rx="122" ry="18" fill="url(#tree-root-shadow)"/>
+<g class="cinematic-tree-canopy" fill="url(#tree-canopy)"><path d="M111 378C53 363 53 291 86 260C59 208 105 143 157 145C170 86 239 89 263 120C304 76 376 91 382 139C442 121 495 169 481 217C541 245 520 310 477 325C487 375 422 418 381 400C343 453 270 440 246 414C201 451 135 425 111 378Z"/><path d="M143 185C134 143 186 116 221 142C262 112 313 119 326 153C365 137 403 163 400 191C449 193 469 241 440 272C460 308 430 349 394 348C362 390 310 364 289 346C261 381 200 374 187 343C141 347 115 304 139 274C100 254 109 204 143 185Z" opacity=".58"/></g>
+<g class="cinematic-tree-trunk" fill="url(#tree-bark)"><path d="M260 758C278 692 277 642 274 585C271 541 256 497 249 452C236 420 210 398 184 374L189 367C213 386 234 401 250 419C247 375 251 330 270 285L278 288C264 329 260 370 265 410C284 378 313 353 346 333L351 339C307 374 278 412 269 453C274 505 291 545 291 590C294 648 288 699 310 758C293 751 279 753 260 758Z"/><path d="M252 456C222 442 187 443 162 411L166 406C194 432 221 430 249 441ZM270 489C303 471 325 444 335 410L342 411C333 455 305 483 275 506ZM287 573C326 559 338 535 351 506L357 508C345 543 329 569 288 589Z"/></g>
+<g class="cinematic-tree-branches" stroke="#6a7b60" stroke-linecap="round" stroke-linejoin="round"><path d="M184 373C159 358 151 331 144 306M167 345C137 345 117 332 100 310M143 306C139 279 148 255 139 228M270 286C273 252 261 224 251 201M266 249C294 236 309 214 314 188M251 201C240 170 247 157 252 143M346 334C377 315 391 281 401 253M374 312C405 310 428 297 443 278M401 254C398 226 409 209 428 196M335 412C360 386 382 380 407 369M351 506C374 482 389 461 393 440" stroke-width="3"/><path d="M100 310L83 293M105 314L101 289M139 228L126 208M145 271L169 250M251 201L224 188M264 231L242 223M284 244L288 214M314 188L335 170M311 201L298 186M401 253L421 244M411 218L396 204M443 278L457 263M436 287L453 287M407 369L428 352M390 378L410 387M393 440L411 425M384 462L407 458" stroke-width="1.15"/></g>
+<g stroke="#e5d6b2" stroke-opacity=".35" stroke-linecap="round"><path d="M301 749C284 688 286 642 283 590C281 545 265 498 260 454M263 416C258 370 263 331 275 297" stroke-width="1.4"/><path d="M275 736C277 699 284 667 277 627M280 603C273 566 273 544 267 528" stroke-width=".7" stroke-opacity=".18"/></g>
+<g class="cinematic-tree-leaves" filter="url(#tree-soft-shadow)">
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(99.0 302.0) rotate(-106.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(99.4 304.2) rotate(-83.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(102.3 305.9) rotate(-60.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(107.0 306.1) rotate(-37.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(111.9 304.2) rotate(-14.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(140.0 232.0) rotate(-61.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(142.6 233.4) rotate(-38.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(146.4 233.2) rotate(-15.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(149.9 231.1) rotate(8.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(151.4 227.4) rotate(31.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(165.0 269.0) rotate(19.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(167.5 267.5) rotate(42.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(167.8 264.9) rotate(65.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(165.3 262.3) rotate(88.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(160.2 260.6) rotate(111.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(217.0 190.0) rotate(-106.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(217.4 192.2) rotate(-83.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(220.3 193.9) rotate(-60.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(225.0 194.1) rotate(-37.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(229.9 192.2) rotate(-14.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(252.0 144.0) rotate(-46.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(255.1 144.9) rotate(-23.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(258.7 144.0) rotate(0.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(261.2 141.4) rotate(23.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(261.3 137.5) rotate(46.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(276.0 257.0) rotate(-21.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(279.3 256.9) rotate(2.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(282.0 255.1) rotate(25.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(282.7 252.0) rotate(48.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(280.3 248.5) rotate(71.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(317.0 190.0) rotate(-1.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(320.1 189.2) rotate(22.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(321.7 186.8) rotate(45.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(320.7 183.7) rotate(68.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(316.8 181.0) rotate(91.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(342.0 169.0) rotate(-10.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(345.2 168.5) rotate(13.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(347.4 166.4) rotate(36.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(347.2 163.2) rotate(59.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(343.9 160.1) rotate(82.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(400.0 212.0) rotate(-71.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(402.2 213.7) rotate(-48.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(406.0 213.9) rotate(-25.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(410.0 212.2) rotate(-2.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(412.4 208.8) rotate(21.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(431.0 196.0) rotate(-4.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(434.2 195.3) rotate(19.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(436.0 193.0) rotate(42.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(435.2 189.9) rotate(65.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(431.5 187.0) rotate(88.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(438.0 283.0) rotate(24.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(440.3 281.4) rotate(47.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(440.3 278.8) rotate(70.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(437.5 276.3) rotate(93.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(432.2 274.9) rotate(116.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(415.0 366.0) rotate(24.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(417.3 364.4) rotate(47.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(417.3 361.8) rotate(70.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(414.5 359.3) rotate(93.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(409.2 357.9) rotate(116.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(395.0 446.0) rotate(-21.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(398.3 445.9) rotate(2.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(401.0 444.1) rotate(25.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(401.7 441.0) rotate(48.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(399.3 437.5) rotate(71.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(192.0 386.0) rotate(-91.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(193.2 388.1) rotate(-68.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(196.7 389.2) rotate(-45.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(201.3 388.5) rotate(-22.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(205.3 385.8) rotate(1.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(348.0 338.0) rotate(14.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(350.7 336.6) rotate(37.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(351.3 334.1) rotate(60.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(349.2 331.3) rotate(83.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(344.3 329.3) rotate(106.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(119.0 361.0) rotate(-112.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(119.1 363.2) rotate(-89.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(121.7 365.1) rotate(-66.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(126.3 365.6) rotate(-43.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(131.5 364.1) rotate(-20.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(169.0 167.0) rotate(-81.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(170.8 168.9) rotate(-58.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(174.5 169.6) rotate(-35.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(178.8 168.4) rotate(-12.0) scale(0.850)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(182.1 165.3) rotate(11.0) scale(1.060)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(358.0 154.0) rotate(-8.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(361.2 153.4) rotate(15.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(363.3 151.2) rotate(38.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(362.8 148.1) rotate(61.0) scale(0.920)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(359.4 145.0) rotate(84.0) scale(1.130)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(463.0 241.0) rotate(26.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(465.2 239.3) rotate(49.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(465.1 236.7) rotate(72.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(462.1 234.3) rotate(95.0) scale(0.990)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(456.7 233.1) rotate(118.0) scale(0.780)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(185.0 227.0) rotate(-20.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(192.0 231.0) rotate(1.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(199.0 235.0) rotate(22.0) scale(0.860)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(224.0 276.0) rotate(25.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(231.0 280.0) rotate(46.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(238.0 284.0) rotate(67.0) scale(0.860)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(334.0 251.0) rotate(50.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(341.0 255.0) rotate(71.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(348.0 259.0) rotate(92.0) scale(0.860)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(352.0 301.0) rotate(-10.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(359.0 305.0) rotate(11.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(366.0 309.0) rotate(32.0) scale(0.860)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(190.0 327.0) rotate(-40.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(197.0 331.0) rotate(-19.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(204.0 335.0) rotate(2.0) scale(0.860)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(257.0 342.0) rotate(60.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(264.0 346.0) rotate(81.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(271.0 350.0) rotate(102.0) scale(0.860)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(394.0 327.0) rotate(20.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(401.0 331.0) rotate(41.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(408.0 335.0) rotate(62.0) scale(0.860)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(135.0 190.0) rotate(-40.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(142.0 194.0) rotate(-19.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(149.0 198.0) rotate(2.0) scale(0.860)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(302.0 131.0) rotate(30.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(309.0 135.0) rotate(51.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(316.0 139.0) rotate(72.0) scale(0.860)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(443.0 332.0) rotate(75.0) scale(0.720)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(450.0 336.0) rotate(96.0) scale(0.790)"/>
+<use href="#tree-leaf-shape" xlink:href="#tree-leaf-shape" transform="translate(457.0 340.0) rotate(117.0) scale(0.860)"/>
+</g>
+<g class="cinematic-tree-flowers">
+<use href="#tree-camellia" xlink:href="#tree-camellia" transform="translate(152.0 245.0) rotate(30.0) scale(0.490)"/>
+<use href="#tree-camellia" xlink:href="#tree-camellia" transform="translate(205.0 184.0) rotate(-12.0) scale(0.400)"/>
+<use href="#tree-camellia" xlink:href="#tree-camellia" transform="translate(316.0 188.0) rotate(17.0) scale(0.490)"/>
+<use href="#tree-camellia" xlink:href="#tree-camellia" transform="translate(407.0 257.0) rotate(-27.0) scale(0.430)"/>
+<use href="#tree-camellia" xlink:href="#tree-camellia" transform="translate(383.0 377.0) rotate(30.0) scale(0.420)"/>
+<use href="#tree-camellia" xlink:href="#tree-camellia" transform="translate(460.0 287.0) rotate(20.0) scale(0.350)"/>
+<use href="#tree-camellia" xlink:href="#tree-camellia" transform="translate(236.0 143.0) rotate(0.0) scale(0.300)"/>
+<use href="#tree-bud" xlink:href="#tree-bud" transform="translate(93.0 302.0) rotate(-51.0) scale(0.600)"/>
+<use href="#tree-bud" xlink:href="#tree-bud" transform="translate(167.0 170.0) rotate(-10.0) scale(0.600)"/>
+<use href="#tree-bud" xlink:href="#tree-bud" transform="translate(337.0 153.0) rotate(45.0) scale(0.600)"/>
+<use href="#tree-bud" xlink:href="#tree-bud" transform="translate(417.0 366.0) rotate(65.0) scale(0.600)"/>
+<use href="#tree-bud" xlink:href="#tree-bud" transform="translate(395.0 448.0) rotate(30.0) scale(0.600)"/>
+</g><g class="cinematic-tree-fallen-petals" fill="#f4edda" fill-opacity=".55"><path d="M209 759C203 753 207 745 214 749C219 754 214 760 209 759ZM344 752C342 746 347 742 353 746C356 752 351 756 344 752Z"/></g></svg>

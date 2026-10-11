@@ -51,9 +51,15 @@ Chạy `npm run build:pages` để tạo `docs/`. Trong Settings → Pages, ch�
 
 Bản Pages chỉ chứa giao diện, minh họa và nội dung công khai. Không chứa trang admin, database hoặc cấu hình bí mật. Các nút gửi RSVP/lời chúc được tắt và ghi rõ không lưu dữ liệu. Máy chủ Node vẫn dùng cho bản có chức năng đầy đủ.
 
-## Typography & scene animation
+## Kiểu chữ và hành trình máy quay
 
-Tiêu đề dùng Cormorant Garamond, nội dung/biểu mẫu dùng Be Vietnam Pro, tải Google Fonts với display=swap và font dự phòng. CSP cho phép đúng hai miền font. Chuyển động dùng một tiến độ camera liên tục trong `public/camera.mjs`, với tích phân giảm chấn giữ vận tốc khi đổi hướng. Nhân vật giữ rõ nét và chân làm tâm zoom; chữ và vườn có độ sâu riêng. Khung hình giữ nguyên; dùng nút lên/xuống hoặc vuốt dọc vùng trống để đi qua các chương. Giảm chuyển động bỏ các hiệu ứng này. Thanh điều hướng có nét 1 px, chấm nhỏ và vùng chạm rộng.
+Cormorant Garamond cho tên/tiêu đề, Be Vietnam Pro cho nội dung tiếng Việt và biểu mẫu; Google Fonts dùng display=swap, có font dự phòng. Trang cuộn tài liệu tự nhiên, không ghim nội dung, không chặn wheel/touch/phím cuộn và không tự nhảy đến cảnh tiếp theo. Nền là một thế giới phối cảnh nhiều lớp, tính theo vị trí cuộn.
+
+`public/camera.mjs` định nghĩa bảy điểm dừng: khung cửa trong phòng → lời mời → album → lễ cưới → hồi âm → lưu bút → vòm hoa. Khi bất kỳ phần nào của tấm thiệp còn trong khung nhìn, máy quay giữ nguyên. Chỉ các khoảng trống giữa thiệp làm máy tiến/lùi. Đường cong quintic làm vận tốc và gia tốc về 0 ở đầu/cuối từng đoạn. Mọi trạng thái là hàm của vị trí cuộn nên cuộn ngược đi đúng đường cũ. Phòng mở rộng qua hai mép và tan hết trước khi nhân vật chuyển từ hiên về góc.
+
+`public/landscape.mjs` dựng phối cảnh bằng phép chiếu các mặt phẳng trong tọa độ 3D: chín lớp đồi ở chín độ sâu, cây, hồ, vòm hoa, khung cửa có chiều sâu và bóng. Cửa đầu dùng chính đường cong trong SVG vòm cuối, giữ tỷ lệ 600×800. Chòm sao D & N bám theo tọa độ vòm và nằm phía trên nhân vật trong chế độ Đêm sao. Đây là hiệu ứng 3D bằng phép chiếu canvas/CSS, không phải mô hình nhân vật 3D có xương chuyển động.
+
+Nút **Xem như phim** cuộn trên cùng đường tài liệu, chậm lại để đọc thiệp. Cuộn/chạm/phím cuộn, focus biểu mẫu, mở ảnh hoặc chuyển tab đều dừng chế độ tự chạy. Giảm chuyển động đổi phối cảnh tại điểm dừng và tắt tự chạy. Có thể kéo tiến độ hoặc dùng nút trước/sau.
 
 ## Hình minh họa & mỹ thuật
 
@@ -61,12 +67,12 @@ Bản mới dùng tranh màu nước tạo bằng Imagegen: khung cửa bình mi
 
 Các asset trong `public/assets/`: `hero-dawn.webp`, `memory-rings.webp`, `memory-night.webp`; nhánh hoa `botanical.svg` và con dấu `wax-seal.svg` được vẽ bằng vector. Phong thư và thẻ giấy dùng nếp gấp, đường viền mảnh, bóng sáng mềm. WebP chỉ chuyển định dạng ảnh gốc, không thay nội dung hình. Bản Pages sao chép các asset này vào `docs/assets/`.
 
-## Cảnh theo chiều sâu và búp bê
+## Nhân vật và phối cảnh responsive
 
-Khung nhìn giữ nguyên trong một cú máy mô phỏng liên tục: tiến độ từ 0 đến 5 điều khiển zoom nhân vật, chiều sâu vườn và hòa nội dung. Các dáng búp bê chuyển sau chữ một nhịp; không vẽ lại vòm giữa các chặng. Nút **Xem như phim** tự trôi qua các chặng trong khoảng 50 giây. Chạm, cuộn hoặc lấy focus trong biểu mẫu sẽ dừng phim; rời tab cũng dừng. Có thể xem tiếp, kéo tiến độ hoặc chuyển từng chặng bằng nút. Điều khiển bằng nút lên/xuống, wheel, phím lên/xuống hoặc vuốt dọc vùng trống. Các cảnh không hoạt động dùng inert và aria-hidden. Nội dung dài vẫn cuộn bên trong cảnh để không mất thông tin; nhập biểu mẫu không kích hoạt chuyển cảnh.
+Cặp búp bê dùng atlas 3 cột × 2 hàng (`public/assets/couple-poses.webp`), sáu dáng: nắm tay, tựa vai, cùng cầm hoa, vẫy chào, tạo tim, cúi cảm ơn. Đây là nhân vật minh họa, không phải ngoại hình thật. Các dáng hòa chuyển theo đường máy quay, vị trí đổi góc ở từng phần. Khi đổi sắc trời, trang phục cũng chuyển giữa ivory, cacao/champagne và navy/ice blue.
 
-Cặp búp bê xuất hiện liên tục ở một vùng riêng, dùng atlas 3 cột × 2 hàng (`public/assets/couple-poses.webp`), sáu dáng thống nhất trang phục/ngoại hình: nắm tay, tựa vai, cùng cầm hoa, vẫy chào, tạo tim, cúi cảm ơn. Đây là nhân vật minh họa, không phải ngoại hình thật. Tạo bằng Imagegen với nền trong suốt; các dáng hòa chuyển khi đổi cảnh. Giảm chuyển động tắt zoom và hòa chuyển.
+Trên PC, tấm thiệp và cặp nhân vật nằm ở hai phía đối diện. Trên điện thoại, thiệp dùng chiều rộng đầy đủ; một lớp phong cảnh phía dưới giữ nhân vật luôn nhìn rõ và che phần nội dung đang đi ra khỏi vùng đọc. Nội dung tiếp tục cuộn tự nhiên để đọc đầy đủ, không tạo hộp cuộn bên trong. Khi bàn phím mở, dải nhân vật và điều khiển được ẩn để ưu tiên nhập biểu mẫu. Input 16px, vùng chạm tối thiểu 44px, có safe-area và hỗ trợ màn hình ngang.
 
-## Phối cảnh
+Agent design expert vẽ `cinematic-tree.svg` và `cinematic-arch.svg`: lá có gân, hoa nhiều lớp cánh, nhánh mềm, dải lụa và viền vàng. SVG hỗ trợ cả href/xlink:href, không có tài nguyên bên ngoài. `docs/` nhận bản sao khi chạy build:pages.
 
-Các cảnh dùng cùng vùng chữ và vùng nội dung chính, đồng nhất điểm nhìn theo tâm vùng nội dung. Desktop phóng lớn cặp búp bê trong khu vườn, nhấn sáng nhân vật và giữ tâm zoom ở chân. Điện thoại đặt cặp búp bê ở giữa dải riêng phía dưới; vùng chữ và biểu mẫu nằm phía trên, không che nhân vật. Tranh minh họa nằm trong album. Màn hình thấp cho phép cuộn nội bộ cảnh để tránh cắt nội dung. Album/thẻ thông tin dùng cùng trục căn và bỏ góc nghiêng ngẫu nhiên. Zoom chuyển cảnh giảm để giữ cảm giác chiều sâu mà không phóng chữ quá mạnh.
+Đã kiểm tra toán học về điểm dừng, đường lùi, tính liên tục, việc cửa tan trước khi nhân vật di chuyển và giới hạn nhân vật trên sáu kích thước khung nhìn. Đã xem khung phối cảnh bằng renderer canvas native; chưa kiểm thử giao diện hoàn chỉnh trong trình duyệt thật hoặc đo FPS trên thiết bị.

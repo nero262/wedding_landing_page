@@ -11,44 +11,61 @@
 <a href="#home" class="brand" aria-label="Dương và Ngân">D<span>&</span>N</a><p class="header-note">MỘT NGÀY ĐẸP · MỘT ĐỜI CHUNG</p><div class="tools"><label class="sr-only" for="theme">Đổi sắc trời</label><select id="theme"><option value="auto">Tự động</option><option value="day">Bình minh</option><option value="dusk">Hoàng hôn</option><option value="night">Đêm sao</option></select><button id="motion" aria-pressed="false">Giảm chuyển động</button></div>
 </header>
 
-<div id="intro" class="intro"><p class="eyebrow">MỘT LỜI MỜI DÀNH CHO BẠN</p><button id="open" class="envelope" aria-label="Mở thiệp cưới"><span class="envelope-back"></span><span class="letter"><img class="letter-botanical" src="/assets/botanical.svg" alt="">Dương & Ngân<small>29 · 11 · 2026</small><span class="letter-rule"></span></span><span class="envelope-front"></span><span class="flap"></span><span class="seal"><img src="/assets/wax-seal.svg" alt="Con dấu D và N"></span></button><p>Chạm để mở một ngày đặc biệt</p><button class="text-button" id="skip">Xem lời mời ngay ↓</button></div>
+<div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Mở thiệp cưới Dương và Ngân"><p class="eyebrow">MỘT LỜI MỜI DÀNH CHO BẠN</p><button id="open" class="envelope" aria-label="Mở thiệp cưới"><span class="envelope-back"></span><span class="letter"><img class="letter-botanical" src="/assets/botanical.svg" alt="">Dương & Ngân<small>29 · 11 · 2026</small><span class="letter-rule"></span></span><span class="envelope-front"></span><span class="flap"></span><span class="seal"><img src="/assets/wax-seal.svg" alt="Con dấu D và N"></span></button><p>Chạm để mở một ngày đặc biệt</p><button class="text-button" id="skip">Bước vào câu chuyện ↓</button></div>
 
-<main id="film" tabindex="0" aria-label="Thiệp cưới theo chiều sâu, dùng phím lên xuống để đi qua từng cảnh">
+<main id="film" tabindex="0" aria-label="Thiệp cưới, cuộn để đi qua thung lũng">
 
-<div class="stage-art" aria-hidden="true"><img src="/assets/garden-stage.svg" alt=""><div class="garden-motes" aria-hidden="true"></div></div>
-<div class="scene-light" aria-hidden="true"></div>
-<p class="garden-title" aria-hidden="true">CÙNG NHAU · QUA MỌI SẮC TRỜI</p>
-
-<section id="home" class="hero">
-<div class="hero-copy reveal"><p class="eyebrow">THIỆP MỜI LỄ THÀNH HÔN</p><p id="personal" class="personal" hidden></p><h1>Dương <em>&</em><br>Ngân</h1><p class="tagline">Một ngày đặc biệt,<br><i>một đời có nhau.</i></p><div class="date">29 <span>·</span> 11 <span>·</span> 2026</div><p class="fullnames">Lương Tùng Dương & Võ Thị Thúy Ngân</p><div class="actions"><a class="button" href="#rsvp">Xác nhận tham dự ↗</a><a class="text-button" href="#event">Thông tin lễ cưới</a></div></div><a href="#story" class="scroll-note">Mở từng chương của chúng mình ↓</a>
+<div id="landscape" aria-hidden="true"><canvas id="world"></canvas><div class="cinema-grain"></div></div>
+<section id="arrival" class="arrival" tabindex="-1" aria-label="Nhìn qua khung cửa vào thung lũng"><div class="arrival-caption"><p class="eyebrow">DƯƠNG & NGÂN · 29.11.2026</p><p>Một ngày đẹp.<br><i>Một đời có nhau.</i></p></div><a href="#home" class="arrival-scroll">Cuộn để bước vào câu chuyện<span>↓</span></a></section>
+<div class="camera-gap door-gap" aria-hidden="true"></div>
+<section id="home" class="hero chapter chapter-left">
+<div class="chapter-paper">
+<div class="hero-copy reveal"><p class="eyebrow">THIỆP MỜI LỄ THÀNH HÔN</p><p id="personal" class="personal" hidden></p><h1>Dương <em>&</em><br>Ngân</h1><p class="tagline">Một ngày đặc biệt,<br><i>một đời có nhau.</i></p><div class="date">29 <span>·</span> 11 <span>·</span> 2026</div><p class="fullnames">Lương Tùng Dương & Võ Thị Thúy Ngân</p><div class="actions"><a class="button" href="#rsvp">Xác nhận tham dự ↗</a><a class="text-button" href="#event">Thông tin lễ cưới</a></div></div><a href="#story" class="scroll-note">Cuộn tiếp để đi qua thung lũng ↓</a>
+</div>
 </section>
 
-<section id="story" class="story section">
+<div class="camera-gap" aria-hidden="true"></div>
+<section id="story" class="story section chapter chapter-right">
+<div class="chapter-paper">
 <div class="section-heading reveal"><p class="eyebrow">01 / NHỮNG NGÀY CÓ NHAU</p><h2>Từ những điều nhỏ.<br><i>Đến một đời chung.</i></h2><p>Những khoảnh khắc của chúng mình sẽ được lưu giữ ở đây.</p></div><div class="memory-stage"><button class="memory-card" id="memory" aria-label="Xem hình kỷ niệm đầy đủ"><span class="memory-image-frame"><img id="memory-image" src="/assets/hero-dawn.webp" alt="Tranh màu nước đôi uyên ương dưới khung cửa bình minh"></span><span id="memory-caption">Một khởi đầu dịu dàng</span><small>HÌNH MINH HỌA · SẼ THAY BẰNG ẢNH CỦA CHÚNG MÌNH</small></button></div><div class="memory-controls"><button id="prev" aria-label="Ảnh trước">←</button><span id="memory-count">01 / 03</span><button id="next" aria-label="Ảnh tiếp theo">→</button></div>
+</div>
 </section>
 
-<section id="event" class="section event">
+<div class="camera-gap" aria-hidden="true"></div>
+<section id="event" class="section event chapter chapter-left">
+<div class="chapter-paper">
 <div class="section-heading reveal"><p class="eyebrow">02 / NGÀY CHÚNG MÌNH THÀNH ĐÔI</p><h2>Hẹn bạn,<br><i>ngày vui của chúng mình.</i></h2></div><div id="event-cards"><div class="event-card reveal"><p class="eyebrow">LỄ THÀNH HÔN</p><div class="event-date">29 <span>THÁNG 11<br>NĂM 2026</span></div><p>Chủ nhật · Giờ tổ chức sẽ cập nhật</p><hr><h3>Địa điểm sẽ cập nhật</h3><p>Chúng mình sẽ bổ sung địa chỉ và lịch trình<br>khi mọi thứ đã sẵn sàng.</p><div class="actions"><button disabled>Chỉ đường · Sắp có</button><button disabled>Thêm lịch · Sắp có</button></div></div></div>
+</div>
 </section>
 
-<section id="rsvp" class="section rsvp">
+<div class="camera-gap" aria-hidden="true"></div>
+<section id="rsvp" class="section rsvp chapter chapter-right">
+<div class="chapter-paper">
 <div class="section-heading reveal"><p class="eyebrow">03 / HẸN GẶP BẠN</p><h2>Ngày ấy sẽ đẹp hơn<br><i>khi có bạn.</i></h2><p>Một lời hồi âm để chúng mình chuẩn bị đón bạn chu đáo.</p></div><form id="rsvp-form" class="paper reveal"><div class="form-grid"><label class="wide">Tên của bạn<input name="name" required maxlength="100" autocomplete="name" placeholder="Chúng mình nên gọi bạn là…"></label><label>Bạn có thể đến cùng chúng mình?<select name="attendance" required><option value="yes">Mình sẽ đến ♡</option><option value="maybe">Mình sẽ xác nhận sau</option><option value="no">Tiếc quá, mình không thể đến</option></select></label><label id="guests-label">Số người tham dự, gồm cả bạn<input name="guests" type="number" min="1" max="20" value="1" required></label><label class="wide">Lời nhắn riêng · tùy chọn<textarea name="message" maxlength="1000" rows="2" placeholder="Nhắn một điều với chúng mình…"></textarea></label></div><label class="honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label><p class="privacy">Thông tin chỉ dành cho Dương & Ngân để chuẩn bị lễ cưới. Lời nhắn này không được công khai.</p><button class="button" type="submit">Gửi lời hồi âm ↗</button><p class="status" role="status" aria-live="polite"></p></form>
+</div>
 </section>
 
-<section id="wishes" class="section wishes">
+<div class="camera-gap" aria-hidden="true"></div>
+<section id="wishes" class="section wishes chapter chapter-left">
+<div class="chapter-paper">
 <div class="section-heading reveal"><p class="eyebrow">04 / GỬI MỘT LỜI THƯƠNG</p><h2>Những lời chúc,<br><i>chúng mình giữ mãi.</i></h2></div><form id="wish-form" class="paper reveal"><label>Tên của bạn<input name="name" required maxlength="100" autocomplete="name"></label><label>Lời chúc cho hai đứa<textarea name="message" required maxlength="1000" rows="3" placeholder="Viết một lời thương…"></textarea></label><label class="honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label><p class="privacy">Lời chúc sẽ xuất hiện cùng tên bạn sau khi được hai chúng mình duyệt.</p><button type="submit" class="button">Gửi lời chúc ♡</button><p class="status" role="status" aria-live="polite"></p></form><div id="wish-list" class="wish-list" aria-live="polite"></div>
+</div>
 </section>
 
-<footer id="thanks" class="section">
-<p class="eyebrow">MỘT NGÀY, MỘT ĐỜI</p><h2>Cảm ơn bạn đã ở đây.</h2><p>Cảm ơn bạn đã trở thành một phần<br>trong ngày đặc biệt của chúng mình.</p><p class="signature">Dương & Ngân</p><p>29 · 11 · 2026</p><a class="text-button" href="#home">Về đầu thiệp ↑</a>
+<div class="camera-gap" aria-hidden="true"></div>
+<footer id="thanks" class="section chapter chapter-final">
+<div class="chapter-paper">
+<p class="eyebrow">MỘT NGÀY, MỘT ĐỜI</p><h2>Cảm ơn bạn đã ở đây.</h2><p>Cảm ơn bạn đã trở thành một phần<br>trong ngày đặc biệt của chúng mình.</p><p class="signature">Dương & Ngân</p><p>29 · 11 · 2026</p><a class="text-button" href="#home">Về lại khung cửa ↑</a>
+</div>
 </footer>
 
+<canvas id="world-foreground" aria-hidden="true"></canvas>
 <aside id="couple-companion" aria-hidden="true">
 <div class="doll-glow"></div><div class="doll-platform"></div><div class="doll-pose pose-0 current"><span class="doll-outfit outfit-day"></span><span class="doll-outfit outfit-dusk"></span><span class="doll-outfit outfit-night"></span></div><div class="doll-pose pose-1"><span class="doll-outfit outfit-day"></span><span class="doll-outfit outfit-dusk"></span><span class="doll-outfit outfit-night"></span></div><div class="doll-pose pose-2"><span class="doll-outfit outfit-day"></span><span class="doll-outfit outfit-dusk"></span><span class="doll-outfit outfit-night"></span></div><div class="doll-pose pose-3"><span class="doll-outfit outfit-day"></span><span class="doll-outfit outfit-dusk"></span><span class="doll-outfit outfit-night"></span></div><div class="doll-pose pose-4"><span class="doll-outfit outfit-day"></span><span class="doll-outfit outfit-dusk"></span><span class="doll-outfit outfit-night"></span></div><div class="doll-pose pose-5"><span class="doll-outfit outfit-day"></span><span class="doll-outfit outfit-dusk"></span><span class="doll-outfit outfit-night"></span></div>
 </aside>
 
 </main>
-<div class="film-controls" aria-label="Điều khiển thước phim"><button id="play-film" class="play-film" aria-pressed="false" aria-label="Xem thiệp như một đoạn phim tự chạy">Xem như phim ▷</button><button id="scene-prev" aria-label="Trở lại cảnh trước">↑</button><div class="film-timeline"><label id="scene-label" for="scene-position">01 / 06 · Lời mời</label><input id="scene-position" type="range" min="0" max="5" step="0.01" value="0" aria-label="Tiến độ máy quay trong thiệp"></div><button id="scene-next" aria-label="Đi sâu đến cảnh tiếp theo">↓</button></div>
+<div class="film-controls" aria-label="Điều khiển thước phim"><button id="play-film" class="play-film" aria-pressed="false" aria-label="Xem thiệp như một đoạn phim tự chạy">Xem như phim ▷</button><button id="scene-prev" aria-label="Trở lại chặng trước">↑</button><div class="film-timeline"><label id="scene-label" for="scene-position">01 / 07 · Khung cửa</label><input id="scene-position" type="range" min="0" max="6" step="0.01" value="0" aria-label="Tiến độ máy quay trong thiệp"></div><button id="scene-next" aria-label="Đi đến chặng tiếp theo">↓</button></div>
 <nav class="bottom-nav" aria-label="Truy cập nhanh">
 <a href="#event">Lễ cưới</a><a href="#rsvp">Hồi âm ↗</a><a href="#wishes">Lời chúc</a>
 </nav>
