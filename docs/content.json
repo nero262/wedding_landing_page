@@ -1,0 +1,40 @@
+{
+  "couple": {
+    "groom": "Lương Tùng Dương",
+    "bride": "Võ Thị Thúy Ngân",
+    "shortGroom": "Dương",
+    "shortBride": "Ngân"
+  },
+  "date": "2026-11-29",
+  "invitation": "Một ngày đặc biệt, một đời có nhau.",
+  "events": [
+    {
+      "title": "Lễ thành hôn",
+      "date": "2026-11-29",
+      "time": "",
+      "address": "",
+      "venue": "",
+      "mapUrl": ""
+    }
+  ],
+  "memories": [
+    {
+      "src": "./memory-1.svg",
+      "alt": "Minh họa bình minh bên khung cửa",
+      "caption": "Một khởi đầu dịu dàng",
+      "placeholder": true
+    },
+    {
+      "src": "./memory-2.svg",
+      "alt": "Minh họa hai tách trà cạnh nhau",
+      "caption": "Cùng đi qua những ngày",
+      "placeholder": true
+    },
+    {
+      "src": "./memory-3.svg",
+      "alt": "Minh họa đêm sao qua khung cửa",
+      "caption": "Và chọn ở bên nhau",
+      "placeholder": true
+    }
+  ]
+}

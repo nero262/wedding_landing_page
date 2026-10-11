@@ -2,3 +2,5 @@
 
 .compact-date{font-size:clamp(24px,3vw,38px);letter-spacing:2px}.event-card+.event-card{margin-top:25px}.admin details{margin:30px 0}.admin summary{cursor:pointer;padding:15px;border:1px solid var(--line)}
 html:not(.js) .intro{display:none}
+
+.demo-banner{max-width:1000px;margin:0 auto;padding:12px 20px;text-align:center;font:11px/1.6 Arial,sans-serif;letter-spacing:.5px;border:1px solid var(--line);background:var(--paper)}

@@ -44,3 +44,9 @@ Biểu mẫu dùng ID gửi để chống tạo bản ghi trùng khi thử lại
 - Chưa nghiệm thu bằng trình duyệt thật/đo FPS trên điện thoại.
 
 noindex không phải bảo vệ bằng mật khẩu. Repo private cũng không tự bảo vệ một website đã được triển khai. Trước khi phát hành cần quyết định kiểm soát truy cập, cấu hình HTTPS, nơi lưu dữ liệu và thời hạn lưu.
+
+## GitHub Pages — demo giao diện
+
+Chạy `npm run build:pages` để tạo `docs/`. Trong Settings → Pages, chọn Deploy from a branch → main → /docs → Save. Repo private cần gói GitHub hỗ trợ Pages cho private repos. Không đổi repo thành public chỉ để bật Pages.
+
+Bản Pages chỉ chứa giao diện, minh họa và nội dung công khai. Không chứa trang admin, database hoặc cấu hình bí mật. Các nút gửi RSVP/lời chúc được tắt và ghi rõ không lưu dữ liệu. Máy chủ Node vẫn dùng cho bản có chức năng đầy đủ.
