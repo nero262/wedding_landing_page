@@ -24,21 +24,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 .eyebrow{font:500 9px/1.7 var(--sans);letter-spacing:2.6px;color:var(--muted);text-transform:uppercase}
 .caption{font:9px/1.7 var(--sans);letter-spacing:1.4px;color:var(--muted)}
-.button{display:inline-flex;justify-content:center;align-items:center;gap:14px;min-height:46px;padding:13px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);font:11px/1.5 var(--sans);letter-spacing:.25px;border-radius:2px;transition:background .25s,box-shadow .25s}
+.button{display:inline-flex;justify-content:center;align-items:center;gap:14px;min-height:46px;padding:13px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);font:12px/1.5 var(--sans);letter-spacing:.25px;border-radius:2px;transition:background .25s,box-shadow .25s}
 .button:hover{background:var(--accent);box-shadow:0 5px 16px -8px rgba(var(--cast),.3)}
-.text-button{display:inline-flex;align-items:center;min-height:44px;padding:10px 0;border:0;border-bottom:1px solid var(--line);background:transparent;border-radius:0;font:11px/1.5 var(--sans)}
+.text-button{display:inline-flex;align-items:center;min-height:44px;padding:10px 0;border:0;border-bottom:1px solid var(--line);background:transparent;border-radius:0;font:12px/1.5 var(--sans)}
 .actions{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
 #sky{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1}
 .sun{position:fixed;pointer-events:none;z-index:-1;inset:-25% -12% auto auto;width:75vw;height:80vh;background:radial-gradient(ellipse at 70% 30%,var(--glow),transparent 68%);opacity:.45;transition:background 1s}
 
 /* The outer frame behaves like a single bound invitation, never a page stack. */
-.film-layout{height:100dvh;min-height:360px;overflow:hidden;display:flex;flex-direction:column;padding:0 clamp(14px,3.7vw,64px);isolation:isolate}
+.film-layout{height:100vh;height:var(--app-height,100dvh);min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) max(clamp(14px,3.7vw,64px),env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(clamp(14px,3.7vw,64px),env(safe-area-inset-left,0px));isolation:isolate}
 header{height:83px;flex:0 0 83px;display:flex;justify-content:space-between;align-items:center;gap:15px;position:relative;z-index:5;max-width:1500px;width:100%;margin:auto}
 .brand{font:italic 32px/1 var(--serif);letter-spacing:-2px;display:flex;align-items:center;gap:5px}
 .brand span{font-size:17px;letter-spacing:0}
 .header-note{margin:0 auto 0 28px;font:9px var(--sans);letter-spacing:2.1px;color:var(--muted)}
 .tools{display:flex;align-items:center;gap:9px}
-.tools select,.tools button{background:transparent;border-color:transparent;min-height:44px;font:9px/1.5 var(--sans);padding:8px}
+.tools select,.tools button{background:transparent;border-color:transparent;min-height:44px;font:12px/1.5 var(--sans);padding:8px}
 .tools button{border-left:1px solid var(--line);border-radius:0}
 .demo-banner{flex:0 0 auto;text-align:center;padding:3px 10px 7px;font:9px/1.5 var(--sans);color:var(--muted)}
 #film{position:relative;flex:1;min-height:0;max-width:1500px;width:100%;margin:0 auto;border:1px solid var(--line);border-radius:160px 5px 5px 5px;background:linear-gradient(115deg,var(--surface),transparent 74%);box-shadow:inset 1px 1px 0 var(--rim),-5px 9px 12px -12px rgba(var(--cast),.18),-16px 30px 58px -35px rgba(var(--cast),.15);isolation:isolate;perspective:1600px;perspective-origin:35% 50%;overflow:hidden}
@@ -49,7 +49,7 @@ header{height:83px;flex:0 0 83px;display:flex;justify-content:space-between;alig
 body[data-theme=dusk] .stage-art :is(img,svg){filter:sepia(.2);opacity:.88}
 body[data-theme=night] .stage-art :is(img,svg){filter:brightness(1.35) saturate(.5);opacity:.72}
 .garden-title{position:absolute;bottom:17px;left:61%;right:1%;text-align:center;z-index:3;pointer-events:none;font:8px/1.7 var(--sans);letter-spacing:2px;color:var(--muted)}
-.js #film>.depth-scene{position:absolute;inset:0;max-width:none;margin:0;width:100%;height:100%;padding:clamp(25px,5vh,56px) 42% clamp(25px,4vh,44px) clamp(44px,6.5vw,100px);visibility:hidden;opacity:0;pointer-events:none;transform-origin:35% 50%;backface-visibility:hidden;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent;z-index:1}
+.js #film>.depth-scene{position:absolute;inset:0;max-width:none;margin:0;width:100%;height:100%;padding:clamp(25px,5vh,56px) 42% clamp(25px,4vh,44px) clamp(44px,6.5vw,100px);visibility:hidden;opacity:0;pointer-events:none;transform-origin:35% 50%;backface-visibility:hidden;overflow:auto;overflow-x:hidden;overscroll-behavior:contain;scroll-padding:20px;scrollbar-width:thin;scrollbar-color:var(--line) transparent;z-index:1}
 .js #film>.depth-scene.current{visibility:visible;opacity:1;pointer-events:auto;z-index:2}
 .js #film>.depth-scene.in-view{visibility:visible;will-change:transform,opacity,filter}
 .reveal{opacity:1;transform:none}
@@ -58,7 +58,7 @@ body[data-theme=night] .stage-art :is(img,svg){filter:brightness(1.35) saturate(
 .section-heading .eyebrow{margin-bottom:10px}
 .section-heading h2{font-size:clamp(34px,3.5vw,52px);line-height:1.08;letter-spacing:-.9px;margin:10px 0 15px}
 .section-heading h2 i{color:var(--accent);font-weight:400}
-.section-heading>p:last-child{max-width:370px;margin-bottom:0;color:var(--muted);font-size:11px;line-height:1.9}
+.section-heading>p:last-child{max-width:370px;margin-bottom:0;color:var(--muted);font-size:13px;line-height:1.9}
 
 /* Names are the hero. The same sculptural couple accompanies every chapter. */
 .hero{display:flex;flex-direction:column;justify-content:safe center}
@@ -73,7 +73,7 @@ body[data-theme=night] .stage-art :is(img,svg){filter:brightness(1.35) saturate(
 .hero .actions{gap:20px}
 .personal{font-size:12px;font-style:italic;color:var(--accent)}
 .scroll-note{display:block;width:max-content;font:9px/1.6 var(--sans);color:var(--muted);margin-top:19px;letter-spacing:.35px}
-#couple-companion{position:absolute;z-index:3;right:8.2%;bottom:12%;width:clamp(220px,28%,380px);aspect-ratio:2/3;pointer-events:none;perspective:900px}
+#couple-companion{position:absolute;z-index:3;right:8.2%;bottom:var(--couple-bottom,12%);width:var(--couple-width,clamp(160px,25%,380px));aspect-ratio:2/3;pointer-events:none;perspective:900px}
 .doll-pose{position:absolute;inset:0;opacity:0;transform:none;transition:none;filter:drop-shadow(1px -1px 0 rgba(255,248,222,.24)) drop-shadow(-2px 3px 3px rgba(var(--cast),.14)) drop-shadow(-8px 11px 11px rgba(var(--cast),.18))}
 .doll-pose.current{opacity:1}
 .doll-outfit{position:absolute;inset:0;background-size:300% 200%;background-position:inherit;background-repeat:no-repeat;opacity:0;transition:opacity .9s ease-in-out}
@@ -148,18 +148,18 @@ body.reduced .stage-art,body.reduced .stage-art svg,body.reduced #couple-compani
 .event-card h3{font-size:23px;margin:0 0 8px}
 hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 .event-card .actions{gap:10px;margin-top:17px}
-.event-card button,.event-card .button{font-size:9px;min-height:44px;padding:10px 14px}
+.event-card button,.event-card .button{font-size:11px;min-height:44px;padding:10px 14px}
 .event-card+.event-card{margin-top:20px}
 .paper{border:0;border-top:1px solid var(--line);background:transparent;padding:20px 0 0;max-width:540px}
-.paper label{display:block;font:10px/1.6 var(--sans);margin-bottom:14px;min-width:0}
-.paper input,.paper select,.paper textarea{display:block;width:100%;margin-top:4px;border:1px solid var(--line);border-radius:2px;background:var(--surface);padding:10px 12px;font:13px/1.5 var(--sans);box-shadow:inset 0 1px 0 var(--rim)}
+.paper label{display:block;font:12px/1.6 var(--sans);margin-bottom:14px;min-width:0}
+.paper input,.paper select,.paper textarea{display:block;width:100%;min-width:0;max-width:100%;min-height:44px;margin-top:4px;border:1px solid var(--line);border-radius:2px;background:var(--surface);padding:10px 12px;font:16px/1.5 var(--sans);box-shadow:inset 0 1px 0 var(--rim)}
 .paper input::placeholder,.paper textarea::placeholder{color:var(--muted);opacity:.7}
 .paper textarea{resize:vertical;min-height:70px;max-height:160px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}
+.form-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 15px}
 .form-grid .wide{grid-column:1/-1}
 .paper .button{min-height:44px;padding:11px 20px}
-.privacy{font:9px/1.8 var(--sans);color:var(--muted);margin:0 0 13px;max-width:480px}
-.status{font:10px/1.7 var(--sans);margin:10px 0 0;min-height:17px}
+.privacy{font:11px/1.8 var(--sans);color:var(--muted);margin:0 0 13px;max-width:480px}
+.status{font:12px/1.7 var(--sans);margin:10px 0 0;min-height:17px}
 .status.error{color:#b65643}
 .honeypot{position:absolute;left:-9999px}
 .rsvp,.wishes{display:flex;flex-direction:column;justify-content:safe center}
@@ -176,28 +176,28 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 #thanks .text-button{margin-top:17px}
 
 /* A six-stop thread along the foot of the page. */
-.film-controls{display:flex;align-items:center;gap:16px;width:min(660px,80%);margin:0 auto;padding:12px 0 0;flex:0 0 60px;min-height:60px}
+.film-controls{display:flex;align-items:center;gap:16px;width:min(660px,80%);margin:0 auto;padding:6px 0 0;flex:0 0 64px;min-height:64px}
 .film-controls>button{flex:0 0 auto;border:0;background:transparent;min-width:44px;min-height:44px;padding:8px;font-size:17px}
 .film-controls .play-film{font:10px/1.5 var(--sans);letter-spacing:.2px;min-width:112px;border-right:1px solid var(--line);border-radius:0;padding-right:16px}
 .film-controls .play-film[aria-pressed=true]{color:var(--accent)}
-.film-timeline{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px}
-#scene-label{font:8px/1.3 var(--sans);letter-spacing:1.2px;color:var(--muted)}
-#scene-position{-webkit-appearance:none;appearance:none;width:100%;height:14px;background:transparent;cursor:pointer;margin:0;padding:0;accent-color:var(--accent)}
+.film-timeline{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px}
+#scene-label{font:10px/1.3 var(--sans);letter-spacing:1.2px;color:var(--muted)}
+#scene-position{-webkit-appearance:none;appearance:none;width:100%;height:32px;background:transparent;cursor:pointer;margin:0;padding:0;accent-color:var(--accent)}
 #scene-position::-webkit-slider-runnable-track{height:1px;background:var(--line)}
 #scene-position::-moz-range-track{height:1px;background:var(--line)}
 #scene-position::-webkit-slider-thumb{-webkit-appearance:none;width:7px;height:7px;margin-top:-3px;background:var(--accent);border:1px solid var(--bg);border-radius:50%;box-shadow:0 0 0 3px var(--bg)}
 #scene-position::-moz-range-thumb{width:6px;height:6px;background:var(--accent);border:1px solid var(--bg);border-radius:50%;box-shadow:0 0 0 3px var(--bg)}
-.bottom-nav{display:flex;justify-content:center;gap:26px;flex:0 0 33px;margin:0;background:transparent}
-.bottom-nav a{font:9px/1.5 var(--sans);padding:4px 0 10px;color:var(--muted);min-height:30px}
+.bottom-nav{display:flex;justify-content:center;gap:26px;flex:0 0 44px;margin:0;background:transparent}
+.bottom-nav a{display:flex;align-items:center;justify-content:center;font:11px/1.5 var(--sans);padding:8px 12px;color:var(--muted);min-height:44px}
 .bottom-nav a[aria-current=step]{color:var(--ink)}
 
 /* The opening paper envelope uses the same material as the stage. */
-.intro{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:17px;perspective:1200px;transition:opacity 1s,visibility 1s}
-.intro:before{content:'';position:absolute;width:420px;height:580px;border:1px solid var(--line);border-radius:220px 220px 0 0;pointer-events:none;opacity:.4}
+.intro{position:fixed;inset:0;padding:20px;overflow:auto;z-index:20;background:var(--bg);display:flex;align-items:center;justify-content:safe center;flex-direction:column;gap:17px;perspective:1200px;transition:opacity 1s,visibility 1s}
+.intro:before{content:'';position:absolute;width:min(420px,88vw);height:min(580px,86dvh);border:1px solid var(--line);border-radius:220px 220px 0 0;pointer-events:none;opacity:.4}
 .intro.gone{opacity:0;visibility:hidden;pointer-events:none}
 .intro>p:not(.eyebrow){font:italic 23px/1.3 var(--serif);color:var(--muted);margin:0;z-index:1}
 .intro .eyebrow{z-index:1}
-.envelope{position:relative;width:320px;height:210px;margin:45px 0 25px;border:0;background:none;padding:0;transform-style:preserve-3d;isolation:isolate;filter:drop-shadow(-2px 4px 3px rgba(var(--cast),.1)) drop-shadow(-15px 24px 20px rgba(var(--cast),.16))}
+.envelope{position:relative;flex-shrink:0;width:min(320px,calc(100vw - 48px));height:auto;aspect-ratio:32/21;margin:35px 0 22px;border:0;background:none;padding:0;transform-style:preserve-3d;isolation:isolate;filter:drop-shadow(-2px 4px 3px rgba(var(--cast),.1)) drop-shadow(-15px 24px 20px rgba(var(--cast),.16))}
 .envelope-back,.envelope-front,.flap,.letter,.seal{position:absolute;display:block}
 .envelope-back{inset:0;background:#d9d8c4;box-shadow:inset -1px 1px 0 #fff9e4}
 .letter{inset:12px;background:#fbf9f0;color:#59614e;padding:30px 10px;font:italic 31px/1.2 var(--serif);transition:transform 1.6s .65s;box-shadow:-2px 4px 9px rgba(var(--cast),.12);overflow:hidden}
@@ -206,13 +206,13 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 .letter-rule{display:block;width:40px;border-top:1px solid #c7c5ad;margin:17px auto}
 .envelope-front{inset:0;background:linear-gradient(145deg,#eeeddf,#d8d9c6);clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);border:1px solid #c2c4ae}
 .flap{inset:0;background:linear-gradient(170deg,#e4e5d3,#d5d7c0);clip-path:polygon(0 0,100% 0,50% 57%);transform-origin:top;transition:transform 1s;backface-visibility:hidden;filter:drop-shadow(0 2px 2px rgba(var(--cast),.15))}
-.seal{width:55px;height:55px;top:86px;left:132px;transition:opacity .3s;filter:drop-shadow(-2px 3px 2px rgba(var(--cast),.15))}
+.seal{width:55px;height:55px;top:41%;left:calc(50% - 27.5px);transition:opacity .3s;filter:drop-shadow(-2px 3px 2px rgba(var(--cast),.15))}
 .seal img{display:block;width:100%;height:100%}
 .opening .flap{transform:rotateX(180deg)}
 .opening .seal{opacity:0}
 .opening .letter{transform:translateY(-110px) translateZ(4px)}
 body.intro-open{overflow:hidden}
-dialog{border:1px solid var(--line);background:var(--paper);color:var(--ink);max-width:90vw;max-height:92dvh;padding:18px;border-radius:3px}
+dialog{overflow:auto;border:1px solid var(--line);background:var(--paper);color:var(--ink);max-width:90vw;max-height:92dvh;padding:18px;border-radius:3px}
 dialog::backdrop{background:rgba(14,23,15,.78);backdrop-filter:blur(6px)}
 dialog img{max-height:72dvh;max-width:100%;display:block;margin:auto}
 dialog button{display:block;margin-left:auto;margin-bottom:12px}
@@ -230,129 +230,79 @@ noscript{font-size:12px}html:not(.js) #film{overflow:auto}html:not(.js) #film>.s
 .admin details{margin:30px 0}
 .admin summary{cursor:pointer;padding:15px;border:1px solid var(--line)}
 
-@media(min-width:1100px) and (max-height:760px){
- header{height:66px;flex-basis:66px}
- .js #film>.depth-scene{padding-top:27px;padding-bottom:27px}
- .hero h1{font-size:108px;margin:23px 0 21px}
- .tagline{font-size:22px;margin-bottom:12px}
- .date{margin-top:17px;padding-top:12px}
- .fullnames{margin-bottom:15px}
- .scroll-note{margin-top:16px}
- .section-heading h2{font-size:38px}
- .memory-card img{max-height:185px}
- .paper{padding-top:13px}
- .paper label{margin-bottom:9px}
- .paper input,.paper select,.paper textarea{padding:8px 11px}
- .rsvp .section-heading h2,.wishes .section-heading h2{font-size:34px;margin-bottom:8px}
- .rsvp .section-heading>p:last-child{display:none}
- .film-controls{flex-basis:52px;min-height:52px;padding-top:8px}
+
+/* Stage dimensions come from its actual available space, not a fixed device size. */
+header,.tools,.hero-copy,.section-heading,.paper,.memory-stage,#event-cards{min-width:0}
+.hero-copy,.section-heading,.paper,#event-cards{overflow-wrap:anywhere}
+.depth-scene>*{flex-shrink:0}
+.tools select{min-width:0}.tools{flex-shrink:1}
+.header-note{white-space:nowrap}
+#scene-label{text-align:center;max-width:100%}
+.paper label,.event-card p,.privacy,.status{overflow-wrap:anywhere}
+@media(max-width:1100px){.header-note{display:none}.js #film>.depth-scene{padding-left:42px;padding-right:41%}.hero h1{font-size:clamp(70px,9vw,108px)}}
+@media(max-height:760px){
+ header{height:60px;flex-basis:60px}
+ .js #film>.depth-scene{padding-top:24px;padding-bottom:24px}
+ .hero h1{font-size:clamp(64px,8vw,102px);margin:15px 0}
+ .tagline{font-size:21px}.section-heading h2{font-size:36px}
+ .memory-card img{max-height:190px}
 }
-@media(max-width:1000px) and (min-width:701px){
- .film-layout{padding:0 22px}
- .header-note{display:none}
- #film{border-top-left-radius:100px}
- #film:before{border-top-left-radius:88px}
- .js #film>.depth-scene{padding-left:42px;padding-right:41%;padding-top:25px;padding-bottom:25px}
- .hero h1{font-size:105px}
- .tagline{font-size:22px}
- .section-heading h2{font-size:36px}
- .actions{gap:12px}
- .fullnames{max-width:300px}
- #couple-companion{width:24%;right:7.5%}
- .form-grid{grid-template-columns:1fr;gap:0}
- .rsvp{justify-content:flex-start}
- .rsvp .paper label{margin-bottom:9px}
- .memory-card img{max-height:215px}
+body[data-layout=stacked]{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+body[data-layout=stacked] header{height:64px;flex-basis:64px;gap:8px}
+body[data-layout=stacked] .brand{font-size:28px;flex:0 0 auto}
+body[data-layout=stacked] .header-note{display:none}
+body[data-layout=stacked] .tools{gap:2px;justify-content:flex-end;flex:1}
+body[data-layout=stacked] .tools select{font-size:16px;width:130px;max-width:48%;padding:8px 3px}
+body[data-layout=stacked] .tools button{font-size:11px;max-width:110px;padding:7px 5px;line-height:1.4}
+body[data-layout=stacked] #film{border-top-left-radius:72px;perspective-origin:50% 42%}
+body[data-layout=stacked] #film:before{inset:8px;border-top-left-radius:64px}
+body[data-layout=stacked] #film>.depth-scene{inset:0 0 var(--character-floor,180px);height:calc(100% - var(--character-floor,180px));padding:24px clamp(18px,5vw,32px) 22px;transform-origin:50% 42%;justify-content:flex-start}
+body[data-layout=stacked] .stage-art{inset:auto auto -26px 50%;width:var(--garden-width,250px);height:calc(var(--garden-width,250px)*1.305);margin-left:calc(var(--garden-width,250px)*-.5);opacity:.86}
+body[data-layout=stacked] #couple-companion{left:50%;right:auto;margin-left:calc(var(--couple-width,110px)*-.5)}
+body[data-layout=stacked] .scene-light{background:radial-gradient(ellipse at 50% 88%,var(--glow),transparent 48%)}
+body[data-layout=stacked] .garden-title{left:0;right:0;bottom:4px;width:100%;font-size:7px;letter-spacing:1px}
+body[data-layout=stacked] .hero h1{font-size:clamp(68px,20vw,88px);line-height:.98;letter-spacing:-2px;margin:16px 0 12px}
+body[data-layout=stacked] .hero .eyebrow{font-size:9px;letter-spacing:1.5px}
+body[data-layout=stacked] .tagline{font-size:20px;line-height:1.35;margin-bottom:10px}
+body[data-layout=stacked] .date{font-size:12px;letter-spacing:2px;margin-top:16px;padding-top:12px}
+body[data-layout=stacked] .fullnames{font-size:11px;margin-bottom:16px}
+body[data-layout=stacked] .actions{gap:10px 16px}
+body[data-layout=stacked] .hero .button{padding:11px 14px}
+body[data-layout=stacked] .scroll-note{display:none}
+body[data-layout=stacked] .section-heading{margin-bottom:16px}
+body[data-layout=stacked] .section-heading h2,body[data-layout=stacked] .story .section-heading h2{font-size:34px;line-height:1.12}
+body[data-layout=stacked] .section-heading>p:last-child{font-size:12px;line-height:1.75}
+body[data-layout=stacked] .memory-card img{max-height:230px;aspect-ratio:1.55}
+body[data-layout=stacked] .memory-card span{font-size:22px}
+body[data-layout=stacked] .memory-card small{font-size:9px;letter-spacing:.3px}
+body[data-layout=stacked] .event-card{padding:20px 18px;border:1px solid var(--line)}
+body[data-layout=stacked] .event-date.compact-date{font-size:clamp(32px,9vw,42px)}
+body[data-layout=stacked] .form-grid{grid-template-columns:minmax(0,1fr);gap:0}
+body[data-layout=stacked] .paper label{font-size:12px}
+body[data-layout=stacked] .paper input,body[data-layout=stacked] .paper select,body[data-layout=stacked] .paper textarea{font-size:16px;padding:10px}
+body[data-layout=stacked] .privacy,body[data-layout=stacked] .status{font-size:11px}
+body[data-layout=stacked] .film-controls{width:100%;gap:4px}
+body[data-layout=stacked] .film-controls .play-film{font-size:10px;min-width:88px;max-width:98px;padding:6px;white-space:normal}
+body[data-layout=stacked] .film-controls>button:not(.play-film){min-width:44px;padding:6px}
+body[data-layout=stacked] #scene-label{font-size:9px;letter-spacing:0}
+body[data-layout=stacked] .bottom-nav{gap:14px}
+body[data-layout=stacked] #thanks h2{font-size:clamp(36px,10vw,48px)}
+body[data-layout=stacked] .intro .eyebrow{font-size:9px;letter-spacing:1.6px}
+body.keyboard-open .stage-art,body.keyboard-open #couple-companion,body.keyboard-open .garden-title,body.keyboard-open .film-controls,body.keyboard-open .bottom-nav{display:none}
+body.keyboard-open header{height:52px;flex-basis:52px}
+body.keyboard-open #film>.depth-scene{inset:0;height:100%;padding-top:18px}
+@media(max-width:1000px) and (max-height:500px){
+ .film-layout{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+ header{height:52px;flex-basis:52px}.tools select{font-size:16px}.header-note{display:none}
+ #film{border-top-left-radius:55px}#film:before{border-top-left-radius:43px}
+ .js #film>.depth-scene{padding:18px 40% 20px 28px;justify-content:flex-start}
+ .hero h1{font-size:64px}.section-heading h2{font-size:32px}
+ .film-controls{width:min(640px,90%)}
+ .intro{gap:10px}.envelope{width:min(260px,57vh);margin:15px 0}.intro:before{display:none}
+ .letter{font-size:24px;padding:20px 8px}.intro>p:not(.eyebrow){font-size:20px}
+ .seal{width:44px;height:44px;left:calc(50% - 22px)}
 }
-@media(max-width:700px){
- .film-layout{padding:0 13px;min-height:320px}
- header{height:64px;flex-basis:64px;padding:0 3px}
- .brand{font-size:27px}
- .header-note{display:none}
- .tools{gap:0}
- .tools select,.tools button{font-size:8px;padding:8px 5px}
- .tools select{max-width:141px}
- .tools button{max-width:108px}
- #film{border-top-left-radius:82px;perspective-origin:50% 42%}
- #film:before{inset:8px;border-top-left-radius:74px}
- .js #film>.depth-scene{inset:0 0 205px;width:100%;height:calc(100% - 205px);padding:24px 26px 16px;transform-origin:50% 42%;overflow:auto;justify-content:flex-start}
- .stage-art{inset:auto calc(50% - 130px) -28px auto;width:260px;height:340px;opacity:.86}
- .scene-light{background:radial-gradient(ellipse at 50% 88%,var(--glow),transparent 48%)}
- .garden-title{left:0;right:0;bottom:6px;width:100%;font-size:6px;letter-spacing:1px}
- #couple-companion{width:116px;right:calc(50% - 58px);bottom:12px;aspect-ratio:2/3}
- .doll-platform{height:7px}
- .doll-glow{opacity:.12}
- .hero{justify-content:flex-start}
- .hero h1{font-size:clamp(76px,21.5vw,88px);line-height:.92;margin:16px 0 14px;letter-spacing:-2px}
- .hero h1 em{font-size:.5em;padding-left:2px}
- .hero .eyebrow{font-size:8px;letter-spacing:1.8px}
- .tagline{font-size:18px;line-height:1.3;max-width:270px;margin-bottom:10px}
- .date{font-size:10px;letter-spacing:2.8px;padding-top:13px;margin-top:19px}
- .fullnames{font-size:10px;max-width:290px;margin-bottom:12px}
- .actions{gap:13px}
- .button{font-size:10px;padding:11px 16px;min-height:44px}
- .text-button{font-size:10px}
- .hero .actions{align-items:flex-start;gap:8px 16px}
- .scroll-note{display:none}
- .section-heading{margin-bottom:16px}
- .section-heading .eyebrow{font-size:7px;letter-spacing:1.5px}
- .section-heading h2,.story .section-heading h2{font-size:34px;letter-spacing:-.7px;margin:10px 0 11px}
- .section-heading>p:last-child{font-size:10px;line-height:1.8;max-width:260px}
- .story .section-heading>p:last-child{display:none}
- .memory-card img{max-height:200px;aspect-ratio:1.55}
- .memory-card span{font-size:21px}
- .memory-card small{font-size:6px;letter-spacing:.2px;max-width:250px}
- .memory-controls{margin-top:3px}
- .event-card{padding:18px 18px;border:1px solid var(--line);background:var(--surface)}
- .event-card:before{right:16px;top:17px}
- .event-date.compact-date{font-size:40px}
- .event-card h3{font-size:21px}
- .event-card p{font-size:12px}
- .event-card hr{margin:15px 0}
- .event-card .actions{gap:7px}
- .event-card button,.event-card .button{padding:9px 10px;font-size:8px}
- .rsvp .section-heading h2,.wishes .section-heading h2{font-size:32px;line-height:1.06;margin-bottom:8px}
- .rsvp .section-heading>p:last-child{display:none}
- .rsvp .section-heading,.wishes .section-heading{margin-bottom:6px}
- .paper{padding-top:12px}
- .form-grid{gap:0 9px}
- .paper label{font-size:11px;margin-bottom:10px}
- .paper input,.paper select,.paper textarea{font-size:16px;padding:8px 9px}
- .paper select{font-size:13px;min-height:42px}
- .paper textarea{min-height:60px}
- .privacy{font-size:9px;line-height:1.7;margin-bottom:10px}
- .status{font-size:9px}
- #thanks h2{font-size:49px;max-width:310px}
- #thanks>p:not(.eyebrow):not(.signature){font-size:12px}
- .signature{font-size:31px;margin-top:16px}
- .film-controls{width:100%;gap:5px;flex-basis:52px;min-height:52px;padding-top:8px}
- .film-controls .play-film{font-size:9px;min-width:92px;padding:8px 9px 8px 0}
- .film-controls>button:not(.play-film){min-width:36px;padding:6px}
- #scene-label{font-size:7px;letter-spacing:.7px}
- .bottom-nav{flex-basis:29px;gap:23px}
- .bottom-nav a{font-size:8px}
- .intro:before{width:310px;height:485px;border-radius:170px 170px 0 0}
- .intro .eyebrow{font-size:8px;letter-spacing:1.8px}
- .envelope{width:290px;height:190px}
- .seal{width:49px;height:49px;left:120px;top:79px}
- .letter{font-size:28px;padding-top:27px}
- .admin td,.admin th{min-width:100px}
-}
-@media(max-width:700px) and (min-height:780px){
- .js #film>.depth-scene{inset:0 0 240px;height:calc(100% - 240px);padding-top:24px}
- #couple-companion{width:132px;right:calc(50% - 66px);bottom:12px}
- .stage-art{width:280px;height:365px;right:calc(50% - 140px)}
- .garden-title{width:100%}
- .hero h1{margin-top:16px;margin-bottom:14px}
-}
-@media(max-height:600px) and (max-width:700px){
- .js #film>.depth-scene{inset:0 0 110px;height:calc(100% - 110px);padding-top:23px}
- #couple-companion{width:58px;right:calc(50% - 29px);bottom:10px}
- .stage-art{width:150px;height:190px;right:calc(50% - 75px);bottom:-15px}
- .garden-title{width:100%;font-size:5px;bottom:4px}
- .hero h1{font-size:76px}
- .film-controls{flex-basis:46px;min-height:46px}
-}
+@media(max-width:360px){body[data-layout=stacked] .tools button{max-width:94px;font-size:10px}body[data-layout=stacked] .hero .actions{gap:8px}.bottom-nav{gap:8px}}
 body.reduced *,body.reduced *:before,body.reduced *:after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 body.reduced .doll-pose{transform:none}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.doll-pose{transform:none}}

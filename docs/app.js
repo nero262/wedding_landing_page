@@ -1,6 +1,7 @@
 'use strict';
 import { boundedScene } from './depth.mjs';
 import { boundedProgress,advanceCamera,cameraState } from './camera.mjs';
+import { stageLayout,keyboardVisible } from './layout.mjs';
 document.documentElement.classList.add('js');
 const $=s=>document.querySelector(s);
 const demo=document.body.dataset.demo==='true';
@@ -83,6 +84,7 @@ if(!demo)fetch('/api/wishes').then(r=>{if(!r.ok)throw Error();return r.json();})
 
 // One uninterrupted camera timeline. Text, scenery and actors share its position.
 const film=$('#film');
+initResponsive();
 initGarden();
 const scenes=Array.from(film.children).filter(el=>el.matches('section,footer'));
 const sceneNames=['Lời mời','Những ngày có nhau','Lễ cưới','Hồi âm','Lời chúc','Lời cảm ơn'];
@@ -196,4 +198,36 @@ function initGarden(){
  },{passive:true});
  film.addEventListener('pointerleave',reset);$('#motion').addEventListener('click',reset);
  document.addEventListener('visibilitychange',()=>{film.classList.toggle('motion-paused',document.hidden);if(document.hidden)reset();});
+}
+
+function initResponsive(){
+ const viewport=window.visualViewport;
+ let baseline=viewport?.height||innerHeight,lastWidth=innerWidth,resizeFrame=0;
+ const editing=()=>Boolean(document.activeElement?.matches('#film input:not([type=hidden]),#film textarea,#film select'));
+ const fit=()=>{
+  resizeFrame=0;
+  const height=viewport?.height||innerHeight,width=innerWidth,focused=editing();
+  const rotated=Math.abs(width-lastWidth)>100;
+  if(!focused||rotated)baseline=height;
+  const keyboard=(!viewport||Math.abs(viewport.scale-1)<.02)&&keyboardVisible(baseline,height,focused);
+  if(!focused||rotated||!document.body.dataset.layout)document.body.dataset.layout=width<=700||(width<=900&&innerHeight>width)?'stacked':'split';
+  lastWidth=width;
+  document.body.classList.toggle('keyboard-open',keyboard);
+  if(!viewport||Math.abs(viewport.scale-1)<.02)document.body.style.setProperty('--app-height',Math.round(height)+'px');
+  else document.body.style.removeProperty('--app-height');
+  const box=film.getBoundingClientRect(),metrics=stageLayout(box.width,box.height,document.body.dataset.layout==='stacked',keyboard);
+  film.style.setProperty('--character-floor',metrics.floor.toFixed(2)+'px');
+  film.style.setProperty('--couple-width',metrics.couple.toFixed(2)+'px');
+  film.style.setProperty('--couple-bottom',metrics.bottom.toFixed(2)+'px');
+  film.style.setProperty('--garden-width',metrics.garden.toFixed(2)+'px');
+  if(keyboard&&focused){
+   const input=document.activeElement,scene=input.closest('.depth-scene');
+   if(scene){const field=input.getBoundingClientRect(),bounds=scene.getBoundingClientRect();if(field.bottom>bounds.bottom-12)scene.scrollTop+=field.bottom-bounds.bottom+12;else if(field.top<bounds.top+12)scene.scrollTop-=bounds.top-field.top+12;}
+  }
+ };
+ const schedule=()=>{if(!resizeFrame)resizeFrame=requestAnimationFrame(fit);};
+ if('ResizeObserver' in window)new ResizeObserver(schedule).observe(film);
+ viewport?.addEventListener('resize',schedule);window.addEventListener('resize',schedule);
+ document.addEventListener('focusin',schedule);document.addEventListener('focusout',schedule);
+ fit();
 }
