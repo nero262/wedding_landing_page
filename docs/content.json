@@ -19,21 +19,21 @@
   ],
   "memories": [
     {
-      "src": "./memory-1.svg",
-      "alt": "Minh họa bình minh bên khung cửa",
+      "src": "./assets/hero-dawn.webp",
+      "alt": "Tranh màu nước đôi uyên ương dưới khung cửa bình minh",
       "caption": "Một khởi đầu dịu dàng",
       "placeholder": true
     },
     {
-      "src": "./memory-2.svg",
-      "alt": "Minh họa hai tách trà cạnh nhau",
-      "caption": "Cùng đi qua những ngày",
+      "src": "./assets/memory-rings.webp",
+      "alt": "Tranh màu nước hai chiếc nhẫn cưới bên nhành hoa trắng",
+      "caption": "Chọn một người, cùng một đời",
       "placeholder": true
     },
     {
-      "src": "./memory-3.svg",
-      "alt": "Minh họa đêm sao qua khung cửa",
-      "caption": "Và chọn ở bên nhau",
+      "src": "./assets/memory-night.webp",
+      "alt": "Tranh màu nước khu vườn và hai chiếc ghế dưới đêm sao",
+      "caption": "Cùng nhau, qua mọi sắc trời",
       "placeholder": true
     }
   ]

@@ -58,3 +58,9 @@ Mỗi phần là một cảnh toàn màn hình. Vuốt ngang trên điện tho�
 ## Typography & scene animation
 
 Tiêu đề dùng Cormorant Garamond, nội dung/biểu mẫu dùng Be Vietnam Pro, tải Google Fonts với display=swap và font dự phòng. CSP cho phép đúng hai miền font. Chuyển cảnh bằng timeline 840–1050 ms, easing tăng/giảm tốc, parallax từng lớp và hiệu ứng xuất hiện lệch nhịp. Vuốt vẫn dùng native scrolling; pointer/touch ngắt hoạt họa đang chạy. Giảm chuyển động bỏ các hiệu ứng này. Thanh điều hướng có nét 1 px, chấm nhỏ và vùng chạm rộng.
+
+## Hình minh họa & mỹ thuật
+
+Bản mới dùng tranh màu nước tạo bằng Imagegen: khung cửa bình minh/đôi uyên ương, nhẫn cưới bên hoa và khu vườn đêm. Đây là hình minh họa, không phải ngoại hình thật của Dương & Ngân. Prompt mỹ thuật: editorial watercolor + fine graphite, cotton paper, muted ivory/champagne/sage, delicate botanical details, no text or clipart.
+
+Các asset trong `public/assets/`: `hero-dawn.webp`, `memory-rings.webp`, `memory-night.webp`; nhánh hoa `botanical.svg` và con dấu `wax-seal.svg` được vẽ bằng vector. Phong thư và thẻ giấy dùng nếp gấp, đường viền mảnh, bóng sáng mềm. WebP chỉ chuyển định dạng ảnh gốc, không thay nội dung hình. Bản Pages sao chép các asset này vào `docs/assets/`.

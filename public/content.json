@@ -1,11 +1,40 @@
 {
- "couple":{"groom":"Lương Tùng Dương","bride":"Võ Thị Thúy Ngân","shortGroom":"Dương","shortBride":"Ngân"},
- "date":"2026-11-29",
- "invitation":"Một ngày đặc biệt, một đời có nhau.",
- "events":[{"title":"Lễ thành hôn","date":"2026-11-29","time":"","address":"","venue":"","mapUrl":""}],
- "memories":[
-  {"src":"/memory-1.svg","alt":"Minh họa bình minh bên khung cửa","caption":"Một khởi đầu dịu dàng","placeholder":true},
-  {"src":"/memory-2.svg","alt":"Minh họa hai tách trà cạnh nhau","caption":"Cùng đi qua những ngày","placeholder":true},
-  {"src":"/memory-3.svg","alt":"Minh họa đêm sao qua khung cửa","caption":"Và chọn ở bên nhau","placeholder":true}
- ]
+  "couple": {
+    "groom": "Lương Tùng Dương",
+    "bride": "Võ Thị Thúy Ngân",
+    "shortGroom": "Dương",
+    "shortBride": "Ngân"
+  },
+  "date": "2026-11-29",
+  "invitation": "Một ngày đặc biệt, một đời có nhau.",
+  "events": [
+    {
+      "title": "Lễ thành hôn",
+      "date": "2026-11-29",
+      "time": "",
+      "address": "",
+      "venue": "",
+      "mapUrl": ""
+    }
+  ],
+  "memories": [
+    {
+      "src": "/assets/hero-dawn.webp",
+      "alt": "Tranh màu nước đôi uyên ương dưới khung cửa bình minh",
+      "caption": "Một khởi đầu dịu dàng",
+      "placeholder": true
+    },
+    {
+      "src": "/assets/memory-rings.webp",
+      "alt": "Tranh màu nước hai chiếc nhẫn cưới bên nhành hoa trắng",
+      "caption": "Chọn một người, cùng một đời",
+      "placeholder": true
+    },
+    {
+      "src": "/assets/memory-night.webp",
+      "alt": "Tranh màu nước khu vườn và hai chiếc ghế dưới đêm sao",
+      "caption": "Cùng nhau, qua mọi sắc trời",
+      "placeholder": true
+    }
+  ]
 }
