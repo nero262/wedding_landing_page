@@ -53,7 +53,7 @@ Bản Pages chỉ chứa giao diện, minh họa và nội dung công khai. Khô
 
 ## Typography & scene animation
 
-Tiêu đề dùng Cormorant Garamond, nội dung/biểu mẫu dùng Be Vietnam Pro, tải Google Fonts với display=swap và font dự phòng. CSP cho phép đúng hai miền font. Chuyển cảnh theo chiều sâu trong 950 ms, easing mềm và hòa chuyển. Khung hình giữ nguyên; dùng nút lên/xuống hoặc vuốt dọc vùng trống để đi qua các chương. Giảm chuyển động bỏ các hiệu ứng này. Thanh điều hướng có nét 1 px, chấm nhỏ và vùng chạm rộng.
+Tiêu đề dùng Cormorant Garamond, nội dung/biểu mẫu dùng Be Vietnam Pro, tải Google Fonts với display=swap và font dự phòng. CSP cho phép đúng hai miền font. Chuyển động dùng một tiến độ camera liên tục trong `public/camera.mjs`, với tích phân giảm chấn giữ vận tốc khi đổi hướng. Nhân vật giữ rõ nét và chân làm tâm zoom; chữ và vườn có độ sâu riêng. Khung hình giữ nguyên; dùng nút lên/xuống hoặc vuốt dọc vùng trống để đi qua các chương. Giảm chuyển động bỏ các hiệu ứng này. Thanh điều hướng có nét 1 px, chấm nhỏ và vùng chạm rộng.
 
 ## Hình minh họa & mỹ thuật
 
@@ -63,10 +63,10 @@ Các asset trong `public/assets/`: `hero-dawn.webp`, `memory-rings.webp`, `memor
 
 ## Cảnh theo chiều sâu và búp bê
 
-Chuyển cảnh nay giữ nguyên khung nhìn: lớp hiện tại phóng gần và tan, lớp kế tiếp tiến từ xa vào, không trượt ngang. Điều khiển bằng nút lên/xuống, wheel, phím lên/xuống hoặc vuốt dọc vùng trống. Các cảnh không hoạt động dùng inert và aria-hidden. Nội dung dài vẫn cuộn bên trong cảnh để không mất thông tin; nhập biểu mẫu không kích hoạt chuyển cảnh.
+Khung nhìn giữ nguyên trong một cú máy mô phỏng liên tục: tiến độ từ 0 đến 5 điều khiển zoom nhân vật, chiều sâu vườn và hòa nội dung. Các dáng búp bê chuyển sau chữ một nhịp; không vẽ lại vòm giữa các chặng. Nút **Xem như phim** tự trôi qua các chặng trong khoảng 50 giây. Chạm, cuộn hoặc lấy focus trong biểu mẫu sẽ dừng phim; rời tab cũng dừng. Có thể xem tiếp, kéo tiến độ hoặc chuyển từng chặng bằng nút. Điều khiển bằng nút lên/xuống, wheel, phím lên/xuống hoặc vuốt dọc vùng trống. Các cảnh không hoạt động dùng inert và aria-hidden. Nội dung dài vẫn cuộn bên trong cảnh để không mất thông tin; nhập biểu mẫu không kích hoạt chuyển cảnh.
 
 Cặp búp bê xuất hiện liên tục ở một vùng riêng, dùng atlas 3 cột × 2 hàng (`public/assets/couple-poses.webp`), sáu dáng thống nhất trang phục/ngoại hình: nắm tay, tựa vai, cùng cầm hoa, vẫy chào, tạo tim, cúi cảm ơn. Đây là nhân vật minh họa, không phải ngoại hình thật. Tạo bằng Imagegen với nền trong suốt; các dáng hòa chuyển khi đổi cảnh. Giảm chuyển động tắt zoom và hòa chuyển.
 
 ## Phối cảnh
 
-Các cảnh dùng cùng vùng chữ và vùng nội dung chính, đồng nhất điểm nhìn theo tâm vùng nội dung. Desktop dành một cột riêng cho cặp búp bê và dùng bóng tiếp đất nhẹ. Điện thoại dành dải dưới riêng cho búp bê để không che biểu mẫu; tranh ở cảnh đầu nằm cạnh tên thay vì phủ dưới chữ. Màn hình thấp cho phép cuộn nội bộ cảnh để tránh cắt nội dung. Album/thẻ thông tin dùng cùng trục căn và bỏ góc nghiêng ngẫu nhiên. Zoom chuyển cảnh giảm để giữ cảm giác chiều sâu mà không phóng chữ quá mạnh.
+Các cảnh dùng cùng vùng chữ và vùng nội dung chính, đồng nhất điểm nhìn theo tâm vùng nội dung. Desktop phóng lớn cặp búp bê trong khu vườn, nhấn sáng nhân vật và giữ tâm zoom ở chân. Điện thoại đặt cặp búp bê ở giữa dải riêng phía dưới; vùng chữ và biểu mẫu nằm phía trên, không che nhân vật. Tranh minh họa nằm trong album. Màn hình thấp cho phép cuộn nội bộ cảnh để tránh cắt nội dung. Album/thẻ thông tin dùng cùng trục căn và bỏ góc nghiêng ngẫu nhiên. Zoom chuyển cảnh giảm để giữ cảm giác chiều sâu mà không phóng chữ quá mạnh.
