@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" fill="none">
+  <defs>
+    <linearGradient id="arch" x1="300" y1="100" x2="300" y2="780" gradientUnits="userSpaceOnUse"><stop stop-color="#e4cf9d" stop-opacity=".24"/><stop offset=".58" stop-color="#c5c5af" stop-opacity=".08"/><stop offset="1" stop-color="#b6bea7" stop-opacity=".28"/></linearGradient>
+    <linearGradient id="gold" x1="100" y1="210" x2="480" y2="730" gradientUnits="userSpaceOnUse"><stop stop-color="#baa178" stop-opacity=".22"/><stop offset=".45" stop-color="#c1aa78" stop-opacity=".68"/><stop offset="1" stop-color="#a3ab95" stop-opacity=".35"/></linearGradient>
+    <radialGradient id="ground" cx=".5" cy=".4" r=".5"><stop stop-color="#929e81" stop-opacity=".17"/><stop offset="1" stop-color="#929e81" stop-opacity="0"/></radialGradient>
+    <radialGradient id="light"><stop stop-color="#fff0c9" stop-opacity=".64"/><stop offset="1" stop-color="#fff0c9" stop-opacity="0"/></radialGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7f8e74" stop-opacity=".23"/><stop offset="1" stop-color="#a4af91" stop-opacity=".04"/></linearGradient>
+    <linearGradient id="petal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf5" stop-opacity=".8"/><stop offset="1" stop-color="#cabd9d" stop-opacity=".2"/></linearGradient>
+    <g id="bloom"><path d="M0 0C-20-3-22-18-13-22C-4-25 2-15 0 0Z" fill="url(#petal)"/><path d="M0 0C-6-17 3-29 13-24C22-19 12-5 0 0Z" fill="url(#petal)"/><path d="M0 0C9-15 25-13 24-3C24 7 10 10 0 0Z" fill="url(#petal)"/><path d="M0 0C18 8 15 22 5 23C-4 24-9 9 0 0Z" fill="url(#petal)"/><path d="M0 0C-7 14-22 15-24 5C-25-5-10-10 0 0Z" fill="url(#petal)"/><circle r="3" fill="#bba77d" fill-opacity=".65"/></g>
+    <g id="sprig" stroke="#819078" stroke-opacity=".45" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M55 231C60 186 37 137 39 100C41 61 63 29 83 9M46 160C24 146 11 123 6 103M41 102C69 86 83 69 91 48M47 71C38 51 29 40 25 22"/>
+      <path d="M55 204C24 195 23 177 27 165C47 169 59 187 55 204ZM55 185C76 174 81 156 75 144C54 155 50 170 55 185ZM44 143C17 141 7 125 8 112C29 115 42 124 44 143ZM39 112C56 96 61 81 56 70C40 80 34 98 39 112ZM45 82C30 72 25 57 29 46C43 53 48 68 45 82ZM57 49C75 48 87 32 85 21C66 26 56 37 57 49ZM12 119C-2 118-11 105-8 95C6 97 14 108 12 119ZM70 81C93 78 104 61 100 51C85 54 74 68 70 81Z" fill="url(#leaf)"/>
+      <use href="#bloom" x="83" y="9" transform="rotate(12 83 9) scale(.65)" stroke="none"/>
+      <use href="#bloom" x="6" y="103" transform="translate(4 18) scale(.6)" stroke="none"/>
+    </g>
+  </defs>
+  <!-- A hand-drawn architectural niche. Open sky stays transparent in every theme. -->
+  <ellipse cx="397" cy="231" rx="178" ry="215" fill="url(#light)"/>
+  <path d="M119 739V334C119 213 200 127 300 127C400 127 481 213 481 334V739" fill="url(#arch)"/>
+  <path d="M104 752V331C104 203 191 111 300 111C409 111 496 203 496 331V752" stroke="url(#gold)" stroke-width="1.2"/>
+  <path d="M119 739V334C119 213 200 127 300 127C400 127 481 213 481 334V739" stroke="url(#gold)" stroke-width=".65"/>
+  <path d="M136 733V337C136 226 209 143 300 143C391 143 464 226 464 337V733" stroke="#cfbc91" stroke-opacity=".17" stroke-width=".6"/>
+  <path d="M120 386V334C120 216 200 128 300 128" stroke="#fffaf0" stroke-opacity=".75" stroke-width="1"/>
+  <ellipse cx="300" cy="755" rx="272" ry="79" fill="url(#ground)"/>
+  <g stroke="#9fa589" stroke-opacity=".16" stroke-width=".7"><path d="M78 746C202 726 398 726 523 746M53 772C187 750 411 750 548 772M110 801C230 782 375 782 488 801M209 736L124 799M274 732L255 813M336 733L377 811M401 736L493 797"/></g>
+  <g transform="translate(65 503) rotate(-11 55 231)"><use href="#sprig"/><use href="#bloom" x="41" y="101" transform="scale(.65) translate(20 100)"/></g>
+  <g transform="translate(531 523) scale(-.92 1.06)"><use href="#sprig"/><use href="#bloom" x="32" y="110" transform="translate(12 17) scale(.8)"/></g>
+  <g transform="translate(81 703) rotate(-63) scale(.77)"><use href="#sprig"/></g>
+  <g transform="translate(510 722) rotate(58) scale(-.65 .65)"><use href="#sprig"/></g>
+  <g stroke="#b9a27a" stroke-opacity=".6" stroke-width=".7"><path d="M403 168V182M396 175H410M435 201V209M431 205H439"/><circle cx="420" cy="157" r="1.3" fill="#b9a27a" stroke="none"/></g>
+</svg>
