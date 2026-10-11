@@ -1,31 +1,216 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" fill="none" aria-hidden="true">
   <defs>
-    <linearGradient id="arch" x1="300" y1="100" x2="300" y2="780" gradientUnits="userSpaceOnUse"><stop stop-color="#e4cf9d" stop-opacity=".24"/><stop offset=".58" stop-color="#c5c5af" stop-opacity=".08"/><stop offset="1" stop-color="#b6bea7" stop-opacity=".28"/></linearGradient>
-    <linearGradient id="gold" x1="100" y1="210" x2="480" y2="730" gradientUnits="userSpaceOnUse"><stop stop-color="#baa178" stop-opacity=".22"/><stop offset=".45" stop-color="#c1aa78" stop-opacity=".68"/><stop offset="1" stop-color="#a3ab95" stop-opacity=".35"/></linearGradient>
-    <radialGradient id="ground" cx=".5" cy=".4" r=".5"><stop stop-color="#929e81" stop-opacity=".17"/><stop offset="1" stop-color="#929e81" stop-opacity="0"/></radialGradient>
-    <radialGradient id="light"><stop stop-color="#fff0c9" stop-opacity=".64"/><stop offset="1" stop-color="#fff0c9" stop-opacity="0"/></radialGradient>
-    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7f8e74" stop-opacity=".23"/><stop offset="1" stop-color="#a4af91" stop-opacity=".04"/></linearGradient>
-    <linearGradient id="petal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf5" stop-opacity=".8"/><stop offset="1" stop-color="#cabd9d" stop-opacity=".2"/></linearGradient>
-    <g id="bloom"><path d="M0 0C-20-3-22-18-13-22C-4-25 2-15 0 0Z" fill="url(#petal)"/><path d="M0 0C-6-17 3-29 13-24C22-19 12-5 0 0Z" fill="url(#petal)"/><path d="M0 0C9-15 25-13 24-3C24 7 10 10 0 0Z" fill="url(#petal)"/><path d="M0 0C18 8 15 22 5 23C-4 24-9 9 0 0Z" fill="url(#petal)"/><path d="M0 0C-7 14-22 15-24 5C-25-5-10-10 0 0Z" fill="url(#petal)"/><circle r="3" fill="#bba77d" fill-opacity=".65"/></g>
-    <g id="sprig" stroke="#819078" stroke-opacity=".45" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M55 231C60 186 37 137 39 100C41 61 63 29 83 9M46 160C24 146 11 123 6 103M41 102C69 86 83 69 91 48M47 71C38 51 29 40 25 22"/>
-      <path d="M55 204C24 195 23 177 27 165C47 169 59 187 55 204ZM55 185C76 174 81 156 75 144C54 155 50 170 55 185ZM44 143C17 141 7 125 8 112C29 115 42 124 44 143ZM39 112C56 96 61 81 56 70C40 80 34 98 39 112ZM45 82C30 72 25 57 29 46C43 53 48 68 45 82ZM57 49C75 48 87 32 85 21C66 26 56 37 57 49ZM12 119C-2 118-11 105-8 95C6 97 14 108 12 119ZM70 81C93 78 104 61 100 51C85 54 74 68 70 81Z" fill="url(#leaf)"/>
-      <use href="#bloom" x="83" y="9" transform="rotate(12 83 9) scale(.65)" stroke="none"/>
-      <use href="#bloom" x="6" y="103" transform="translate(4 18) scale(.6)" stroke="none"/>
+    <linearGradient id="garden-arch" x1="300" y1="100" x2="300" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e4cf9d" stop-opacity=".24" />
+      <stop offset=".58" stop-color="#c5c5af" stop-opacity=".07" />
+      <stop offset="1" stop-color="#b6bea7" stop-opacity=".25" />
+    </linearGradient>
+    <linearGradient id="garden-gold" x1="105" y1="182" x2="470" y2="735" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#baa178" stop-opacity=".22" />
+      <stop offset=".43" stop-color="#c1aa78" stop-opacity=".72" />
+      <stop offset="1" stop-color="#a3ab95" stop-opacity=".38" />
+    </linearGradient>
+    <radialGradient id="garden-ground" cx=".5" cy=".4" r=".5">
+      <stop stop-color="#929e81" stop-opacity=".17" />
+      <stop offset="1" stop-color="#929e81" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="garden-light">
+      <stop stop-color="#fff0c9" stop-opacity=".65" />
+      <stop offset="1" stop-color="#fff0c9" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="garden-ray" x1="452" y1="110" x2="147" y2="690" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff4cd" stop-opacity=".37" />
+      <stop offset=".48" stop-color="#f7e2b2" stop-opacity=".12" />
+      <stop offset="1" stop-color="#f7e2b2" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="garden-leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7f8e74" stop-opacity=".27" />
+      <stop offset="1" stop-color="#a4af91" stop-opacity=".07" />
+    </linearGradient>
+    <linearGradient id="garden-petal" x1="-5" y1="-40" x2="5" y2="5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fffdf5" stop-opacity=".95" />
+      <stop offset=".62" stop-color="#f5edda" stop-opacity=".8" />
+      <stop offset="1" stop-color="#bcb394" stop-opacity=".35" />
+    </linearGradient>
+    <linearGradient id="garden-silk" x1="107" y1="618" x2="156" y2="773" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fdf8e9" stop-opacity=".88" />
+      <stop offset=".45" stop-color="#d7ccac" stop-opacity=".35" />
+      <stop offset=".75" stop-color="#fff8e6" stop-opacity=".7" />
+      <stop offset="1" stop-color="#c9ba94" stop-opacity=".15" />
+    </linearGradient>
+    <g id="garden-leaf-shape" stroke="#859176" stroke-opacity=".4" stroke-width=".75" stroke-linecap="round">
+      <path d="M0 0C-12-9-15-27-5-40C3-25 8-10 0 0Z" fill="url(#garden-leaf)" />
+      <path d="M0-1C-3-13-5-24-5-37M-3-15L-9-20M-4-24L0-30" stroke-width=".45" stroke-opacity=".33" />
+    </g>
+    <path id="garden-petal-shape" d="M0 3C-9-4-21-12-21-24C-21-32-14-36-7-33C-3-40 8-42 15-34C27-21 12-4 0 3Z" fill="url(#garden-petal)" stroke="#b4af94" stroke-opacity=".28" stroke-width=".55" />
+    <g id="garden-camellia">
+      <g opacity=".88">
+        <use href="#garden-petal-shape" />
+        <use href="#garden-petal-shape" transform="rotate(51.4)" />
+        <use href="#garden-petal-shape" transform="rotate(102.8)" />
+        <use href="#garden-petal-shape" transform="rotate(154.2)" />
+        <use href="#garden-petal-shape" transform="rotate(205.6)" />
+        <use href="#garden-petal-shape" transform="rotate(257)" />
+        <use href="#garden-petal-shape" transform="rotate(308.4)" />
+      </g>
+      <g transform="rotate(24) scale(.67)">
+        <use href="#garden-petal-shape" />
+        <use href="#garden-petal-shape" transform="rotate(60)" />
+        <use href="#garden-petal-shape" transform="rotate(120)" />
+        <use href="#garden-petal-shape" transform="rotate(180)" />
+        <use href="#garden-petal-shape" transform="rotate(240)" />
+        <use href="#garden-petal-shape" transform="rotate(300)" />
+      </g>
+      <g transform="rotate(7) scale(.35)">
+        <use href="#garden-petal-shape" />
+        <use href="#garden-petal-shape" transform="rotate(72)" />
+        <use href="#garden-petal-shape" transform="rotate(144)" />
+        <use href="#garden-petal-shape" transform="rotate(216)" />
+        <use href="#garden-petal-shape" transform="rotate(288)" />
+      </g>
+      <g stroke="#b4a16f" stroke-opacity=".73" stroke-width=".65">
+        <path d="M0 2L-2-7M1 1L6-5M0 1L-7-2M1 2L5 8M0 2L-5 7" />
+        <g fill="#baa474" stroke="none">
+          <circle cy="1" r="2.3" />
+          <circle cx="-2" cy="-7" r="1.1" />
+          <circle cx="6" cy="-5" r="1" />
+          <circle cx="-7" cy="-2" r="1.1" />
+          <circle cx="5" cy="8" r="1" />
+          <circle cx="-5" cy="7" r="1" />
+        </g>
+      </g>
+    </g>
+    <g id="garden-bud" stroke="#89967d" stroke-opacity=".4" stroke-width=".65">
+      <path d="M0 0C-9-3-15-11-11-18C-7-24 2-23 5-18C14-14 12-5 0 0Z" fill="url(#garden-petal)" />
+      <path d="M0 0C-5-6-6-15-2-20M0 0L-6-4M0 0L5-4" />
+    </g>
+    <g id="garden-star" stroke="#b9a27a" stroke-opacity=".6" stroke-width=".75" stroke-linecap="round">
+      <path d="M0-7C0-2-2 0-6 0C-2 0 0 2 0 7C0 2 2 0 6 0C2 0 0-2 0-7Z" fill="#fff5d3" fill-opacity=".35" />
     </g>
   </defs>
-  <!-- A hand-drawn architectural niche. Open sky stays transparent in every theme. -->
-  <ellipse cx="397" cy="231" rx="178" ry="215" fill="url(#light)"/>
-  <path d="M119 739V334C119 213 200 127 300 127C400 127 481 213 481 334V739" fill="url(#arch)"/>
-  <path d="M104 752V331C104 203 191 111 300 111C409 111 496 203 496 331V752" stroke="url(#gold)" stroke-width="1.2"/>
-  <path d="M119 739V334C119 213 200 127 300 127C400 127 481 213 481 334V739" stroke="url(#gold)" stroke-width=".65"/>
-  <path d="M136 733V337C136 226 209 143 300 143C391 143 464 226 464 337V733" stroke="#cfbc91" stroke-opacity=".17" stroke-width=".6"/>
-  <path d="M120 386V334C120 216 200 128 300 128" stroke="#fffaf0" stroke-opacity=".75" stroke-width="1"/>
-  <ellipse cx="300" cy="755" rx="272" ry="79" fill="url(#ground)"/>
-  <g stroke="#9fa589" stroke-opacity=".16" stroke-width=".7"><path d="M78 746C202 726 398 726 523 746M53 772C187 750 411 750 548 772M110 801C230 782 375 782 488 801M209 736L124 799M274 732L255 813M336 733L377 811M401 736L493 797"/></g>
-  <g transform="translate(65 503) rotate(-11 55 231)"><use href="#sprig"/><use href="#bloom" x="41" y="101" transform="scale(.65) translate(20 100)"/></g>
-  <g transform="translate(531 523) scale(-.92 1.06)"><use href="#sprig"/><use href="#bloom" x="32" y="110" transform="translate(12 17) scale(.8)"/></g>
-  <g transform="translate(81 703) rotate(-63) scale(.77)"><use href="#sprig"/></g>
-  <g transform="translate(510 722) rotate(58) scale(-.65 .65)"><use href="#sprig"/></g>
-  <g stroke="#b9a27a" stroke-opacity=".6" stroke-width=".7"><path d="M403 168V182M396 175H410M435 201V209M431 205H439"/><circle cx="420" cy="157" r="1.3" fill="#b9a27a" stroke="none"/></g>
+  <g class="garden-light">
+    <ellipse cx="397" cy="231" rx="178" ry="215" fill="url(#garden-light)" />
+  </g>
+  <g class="garden-beams" fill="url(#garden-ray)">
+    <path d="M438 106L460 112L218 701L85 729Z" />
+    <path d="M474 113L486 118L340 676L299 686Z" opacity=".55" />
+  </g>
+  <g class="garden-architecture">
+    <path d="M119 739V334C119 213 200 127 300 127C400 127 481 213 481 334V739" fill="url(#garden-arch)" />
+    <g stroke="url(#garden-gold)">
+      <path class="garden-trace" pathLength="1" d="M104 752V331C104 203 191 111 300 111C409 111 496 203 496 331V752" stroke-width="1.2" />
+      <path class="garden-trace" pathLength="1" d="M119 739V334C119 213 200 127 300 127C400 127 481 213 481 334V739" stroke-width=".65" />
+      <path d="M110 750V333C110 208 194 118 300 118C406 118 490 208 490 333V750" stroke-width=".35" opacity=".55" />
+      <path d="M136 733V337C136 226 209 143 300 143C391 143 464 226 464 337V733" stroke-width=".6" opacity=".35" />
+    </g>
+    <g stroke="#b7a47e" stroke-opacity=".26" stroke-width=".55">
+      <path d="M107 354H135M107 362H135M464 354H493M464 362H493M111 365V724M128 365V724M473 365V724M486 365V724M95 740H144M95 748H144M458 740H505M458 748H505" />
+      <path d="M287 120C289 108 292 100 300 96C308 100 311 108 313 120M291 115L300 105L309 115M300 98V129" />
+      <circle cx="300" cy="116" r="2" fill="#b7a47e" fill-opacity=".2" />
+    </g>
+    <path class="garden-arch-highlight" d="M120 386V334C120 216 200 128 300 128" stroke="#fffaf0" stroke-opacity=".75" stroke-width="1" />
+  </g>
+  <g class="garden-ground">
+    <ellipse cx="300" cy="755" rx="272" ry="79" fill="url(#garden-ground)" />
+    <g stroke="#9fa589" stroke-opacity=".16" stroke-width=".7">
+      <path d="M78 746C202 726 398 726 523 746M53 772C187 750 411 750 548 772M110 801C230 782 375 782 488 801M209 736L124 799M274 732L255 813M336 733L377 811M401 736L493 797" />
+    </g>
+  </g>
+  <g class="garden-botanical garden-sway-left">
+    <g class="garden-vine garden-vine-left">
+      <g stroke="#819078" stroke-opacity=".5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <path class="garden-stem" d="M122 758C105 707 98 666 117 618C131 580 103 550 109 514C114 482 133 454 145 419M112 677C83 653 74 620 71 591M115 621C141 600 158 571 164 547M112 546C88 533 74 508 76 484" />
+        <path d="M88 657C69 650 60 633 62 619M128 585C147 575 153 557 150 542M109 514C129 497 140 481 142 465" stroke-width=".6" />
+      </g>
+      <use href="#garden-leaf-shape" transform="translate(112 706) rotate(-51) scale(.9)" />
+      <use href="#garden-leaf-shape" transform="translate(109 683) rotate(57) scale(1.04)" />
+      <use href="#garden-leaf-shape" transform="translate(100 654) rotate(-60) scale(1.05)" />
+      <use href="#garden-leaf-shape" transform="translate(115 620) rotate(53) scale(.9)" />
+      <use href="#garden-leaf-shape" transform="translate(79 618) rotate(-40) scale(.83)" />
+      <use href="#garden-leaf-shape" transform="translate(137 586) rotate(60) scale(.8)" />
+      <use href="#garden-leaf-shape" transform="translate(113 558) rotate(-42) scale(.95)" />
+      <use href="#garden-leaf-shape" transform="translate(110 525) rotate(63) scale(.81)" />
+      <use href="#garden-leaf-shape" transform="translate(124 480) rotate(-30) scale(.73)" />
+      <use href="#garden-leaf-shape" transform="translate(137 444) rotate(43) scale(.61)" />
+      <g class="garden-buds-left">
+        <use href="#garden-bud" transform="translate(145 420) rotate(17) scale(.75)" />
+        <use href="#garden-bud" transform="translate(164 547) rotate(14) scale(.64)" />
+        <use href="#garden-bud" transform="translate(71 591) rotate(-19) scale(.72)" />
+      </g>
+    </g>
+    <g class="garden-ribbon garden-ribbon-left">
+      <path d="M117 620C88 637 117 675 95 704C80 724 67 732 79 753C86 737 98 734 111 720C143 686 118 657 128 639C132 633 140 628 145 626Z" fill="url(#garden-silk)" stroke="#bcae8c" stroke-opacity=".28" stroke-width=".5" />
+      <path d="M123 630C104 652 119 679 105 704C95 722 79 729 80 745" stroke="#fff8e7" stroke-opacity=".7" stroke-width=".75" />
+      <path d="M128 626C143 652 134 675 151 700C164 720 177 732 170 750L157 740C166 725 145 714 138 695C125 662 131 649 114 640Z" fill="url(#garden-silk)" stroke="#bcae8c" stroke-opacity=".22" stroke-width=".5" />
+    </g>
+    <g class="garden-flowers garden-flowers-left">
+      <use href="#garden-camellia" transform="translate(120 625) rotate(-14) scale(.91)" />
+      <use href="#garden-camellia" transform="translate(93 690) rotate(28) scale(.57)" />
+      <use href="#garden-camellia" transform="translate(109 514) rotate(-27) scale(.52)" />
+      <g stroke="#91a082" stroke-opacity=".4" stroke-width=".6">
+        <path d="M130 721C153 723 165 738 174 748M145 730L150 720M155 735L165 729M163 742L160 752" />
+        <circle cx="150" cy="718" r="2.6" fill="url(#garden-petal)" />
+        <circle cx="168" cy="728" r="2.2" fill="url(#garden-petal)" />
+        <circle cx="160" cy="754" r="2.4" fill="url(#garden-petal)" />
+      </g>
+    </g>
+  </g>
+  <g class="garden-botanical garden-sway-right">
+    <g class="garden-vine garden-vine-right">
+      <g transform="translate(600 14) scale(-1 1)">
+        <g stroke="#819078" stroke-opacity=".47" stroke-width=".9" stroke-linecap="round">
+          <path class="garden-stem" d="M121 739C107 710 104 674 121 634C137 594 118 575 127 540C134 511 156 494 162 461M111 687C89 670 77 649 74 622M126 608C155 602 172 584 179 564M127 551C108 540 99 525 95 507" />
+        </g>
+        <use href="#garden-leaf-shape" transform="translate(119 718) rotate(-54) scale(.98)" />
+        <use href="#garden-leaf-shape" transform="translate(110 689) rotate(44) scale(.91)" />
+        <use href="#garden-leaf-shape" transform="translate(117 660) rotate(-42) scale(.93)" />
+        <use href="#garden-leaf-shape" transform="translate(129 623) rotate(61) scale(.88)" />
+        <use href="#garden-leaf-shape" transform="translate(86 651) rotate(-38) scale(.76)" />
+        <use href="#garden-leaf-shape" transform="translate(149 597) rotate(65) scale(.82)" />
+        <use href="#garden-leaf-shape" transform="translate(126 557) rotate(-39) scale(.87)" />
+        <use href="#garden-leaf-shape" transform="translate(142 515) rotate(38) scale(.76)" />
+        <use href="#garden-bud" transform="translate(162 461) rotate(11) scale(.76)" />
+        <use href="#garden-bud" transform="translate(95 507) rotate(-20) scale(.6)" />
+        <use href="#garden-bud" transform="translate(179 564) rotate(24) scale(.73)" />
+      </g>
+    </g>
+    <g class="garden-ribbon garden-ribbon-right">
+      <g transform="translate(600 38) scale(-.94 .94)">
+        <path d="M129 661C115 685 144 706 125 726C114 738 108 745 112 757L126 749C121 738 140 732 145 719C155 691 128 676 140 666Z" fill="url(#garden-silk)" stroke="#bcae8c" stroke-opacity=".26" stroke-width=".5" />
+        <path d="M136 669C126 689 148 707 133 724" stroke="#fff8e7" stroke-opacity=".65" stroke-width=".7" />
+      </g>
+    </g>
+    <g class="garden-flowers garden-flowers-right">
+      <use href="#garden-camellia" transform="translate(472 680) rotate(11) scale(.82)" />
+      <use href="#garden-camellia" transform="translate(476 554) rotate(-16) scale(.52)" />
+      <use href="#garden-camellia" transform="translate(505 731) rotate(40) scale(.46)" />
+    </g>
+  </g>
+  <g class="garden-crown" stroke="#91a082" stroke-opacity=".31" stroke-width=".7" stroke-linecap="round">
+    <path class="garden-trace" pathLength="1" d="M146 293C151 255 181 212 212 189C233 174 251 167 270 165" />
+    <use href="#garden-leaf-shape" transform="translate(162 249) rotate(-56) scale(.45)" />
+    <use href="#garden-leaf-shape" transform="translate(177 226) rotate(53) scale(.43)" />
+    <use href="#garden-leaf-shape" transform="translate(201 201) rotate(-41) scale(.42)" />
+    <use href="#garden-leaf-shape" transform="translate(228 180) rotate(61) scale(.4)" />
+    <use href="#garden-bud" transform="translate(270 165) rotate(74) scale(.5)" />
+    <use href="#garden-camellia" transform="translate(153 273) rotate(29) scale(.37)" stroke="none" />
+  </g>
+  <g class="garden-gold-thread" stroke="#b9a27a" stroke-opacity=".4" stroke-width=".55" stroke-linecap="round">
+    <path class="garden-trace" pathLength="1" d="M77 744C59 719 55 683 71 656C79 642 92 629 89 610M513 744C545 733 548 708 543 692C539 679 540 663 549 655" />
+    <path d="M61 700C49 697 46 687 49 681C59 683 64 691 61 700ZM550 718C563 715 566 704 563 698C553 701 548 711 550 718Z" fill="#c4b286" fill-opacity=".12" />
+    <circle cx="89" cy="609" r="2" fill="#c4b286" fill-opacity=".35" />
+    <circle cx="549" cy="654" r="2" fill="#c4b286" fill-opacity=".35" />
+  </g>
+  <g class="garden-glints">
+    <use class="garden-glint garden-glint-one" href="#garden-star" transform="translate(408 181)" />
+    <use class="garden-glint garden-glint-two" href="#garden-star" transform="translate(444 216) scale(.6)" />
+    <use class="garden-glint garden-glint-three" href="#garden-star" transform="translate(157 576) scale(.45)" />
+    <circle cx="426" cy="163" r="1.3" fill="#b9a27a" fill-opacity=".5" />
+    <circle cx="449" cy="624" r="1" fill="#b9a27a" fill-opacity=".45" />
+  </g>
+  <g class="garden-falling-petals" fill="url(#garden-petal)" stroke="#b4af94" stroke-opacity=".3" stroke-width=".45">
+    <path class="garden-loose-petal garden-loose-petal-one" d="M163 663C158 660 157 651 164 649C170 650 172 658 163 663Z" />
+    <path class="garden-loose-petal garden-loose-petal-two" d="M439 599C433 602 428 597 432 592C438 588 443 593 439 599Z" />
+    <path d="M181 771C178 765 182 760 188 763C193 768 188 773 181 771ZM433 770C429 765 432 759 438 763C442 768 439 774 433 770Z" />
+  </g>
 </svg>
