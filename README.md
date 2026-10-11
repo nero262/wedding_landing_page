@@ -50,3 +50,7 @@ noindex không phải bảo vệ bằng mật khẩu. Repo private cũng không 
 Chạy `npm run build:pages` để tạo `docs/`. Trong Settings → Pages, chọn Deploy from a branch → main → /docs → Save. Repo private cần gói GitHub hỗ trợ Pages cho private repos. Không đổi repo thành public chỉ để bật Pages.
 
 Bản Pages chỉ chứa giao diện, minh họa và nội dung công khai. Không chứa trang admin, database hoặc cấu hình bí mật. Các nút gửi RSVP/lời chúc được tắt và ghi rõ không lưu dữ liệu. Máy chủ Node vẫn dùng cho bản có chức năng đầy đủ.
+
+## Trải nghiệm thước phim ngang
+
+Mỗi phần là một cảnh toàn màn hình. Vuốt ngang trên điện thoại/trackpad; con lăn chuột chuyển cảnh; nút trái/phải, thanh chọn cảnh và phím mũi tên hỗ trợ điều hướng. Trang không cuộn dọc; nội dung dài trong một cảnh vẫn có thể cuộn nội bộ để không che biểu mẫu trên màn hình nhỏ. Giảm chuyển động chuyển cảnh tức thì.
