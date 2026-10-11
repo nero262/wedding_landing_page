@@ -20,8 +20,11 @@ test('room has fully departed before the couple moves away from the porch',()=>{
 test('camera and actors are continuous with gentle departures and arrivals at all stops',()=>{
  for(let i=1;i<6;i++){
   const before=cameraState(i-1e-5),after=cameraState(i+1e-5);
-  for(const key of ['z','x','elevation','room'])assert.ok(Math.abs(before[key]-after[key])<1e-7,key);
-  assert.ok(Math.abs(before.actor.x-after.actor.x)<1e-7);
+  for(const key of ['z','x','elevation','room','roll'])assert.ok(Math.abs(before[key]-after[key])<1e-7,key);
+  for(const key of ['x','y','size','turn','portal'])assert.ok(Math.abs(before.actor[key]-after.actor[key])<1e-7,key);
+  const stop=cameraState(i),delta=.0001;
+  for(const near of [cameraState(i-delta),cameraState(i+delta)])
+   assert.ok(Math.abs(near.roll-stop.roll)/delta<1e-5,'banking must settle before every reading stop');
  }
  for(let n=0;n<=600;n++){const s=cameraState(n/100);assert.ok(Math.abs(s.poses.reduce((a,b)=>a+b)-1)<1e-10);assert.ok(s.poses.every(x=>x>=0&&x<=1));}
 });
@@ -31,4 +34,15 @@ test('nine depth planes approach consistently and both portals share the same as
  for(const depth of HILL_DEPTHS){const a=projectPlane(depth,0),b=projectPlane(depth,depth-12);assert.ok(b.scale>a.scale);assert.equal(projectPlane(depth,depth+1).opacity,0);}
  for(const [w,h] of [[390,844],[844,390],[1440,900]]){const f=portalFrame(w,h);assert.ok(Math.abs(f.width/f.height-.75)<1e-10);assert.ok(f.x>=0&&f.y>=0);assert.ok(f.y+f.height<=h);}
  assert.equal(cameraState(6).portalScale,1);
+});
+test('pose changes never show duplicate faces and settle sharp at every reading stop',()=>{
+ for(let n=0;n<=1200;n++){
+  const state=cameraState(n/200);
+  assert.equal(state.poses.filter(Boolean).length,1);
+  assert.ok(state.poseBlur>=0&&state.poseBlur<=6);
+ }
+ for(let stop=0;stop<=6;stop++)assert.equal(cameraState(stop).poseBlur,0);
+ const before=cameraState(2.51999),after=cameraState(2.52001);
+ assert.notDeepEqual(before.poses,after.poses);
+ assert.ok(before.poseBlur>5.99&&after.poseBlur>5.99,'the pose edit occurs under peak blur');
 });

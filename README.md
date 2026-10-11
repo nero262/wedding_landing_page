@@ -59,7 +59,16 @@ Cormorant Garamond cho tên/tiêu đề, Be Vietnam Pro cho nội dung tiếng V
 
 `public/landscape.mjs` dựng phối cảnh bằng phép chiếu các mặt phẳng trong tọa độ 3D: chín lớp đồi ở chín độ sâu, cây, hồ, vòm hoa, khung cửa có chiều sâu và bóng. Cửa đầu dùng chính đường cong trong SVG vòm cuối, giữ tỷ lệ 600×800. Chòm sao D & N bám theo tọa độ vòm và nằm phía trên nhân vật trong chế độ Đêm sao. Đây là hiệu ứng 3D bằng phép chiếu canvas/CSS, không phải mô hình nhân vật 3D có xương chuyển động.
 
-Nút **Xem như phim** cuộn trên cùng đường tài liệu, chậm lại để đọc thiệp. Cuộn/chạm/phím cuộn, focus biểu mẫu, mở ảnh hoặc chuyển tab đều dừng chế độ tự chạy. Giảm chuyển động đổi phối cảnh tại điểm dừng và tắt tự chạy. Có thể kéo tiến độ hoặc dùng nút trước/sau.
+Nút **Xem như phim** cuộn trên cùng đường tài liệu, chậm lại để đọc thiệp. Vận tốc tăng/giảm bằng tích phân đường cong mũ, giữ phần lẻ của vị trí để không khựng trên màn hình 120 Hz. Cuộn/chạm/phím cuộn, focus biểu mẫu, mở ảnh hoặc chuyển tab đều dừng chế độ tự chạy. Giảm chuyển động đổi phối cảnh tại điểm dừng và tắt tự chạy. Thanh tiến độ đi liên tục theo chiều dài tài liệu; nút trước/sau đặt tấm thiệp dưới header.
+
+### Nhịp dựng và góc máy đã chỉnh
+
+1. Mở phong thư, giữ một cảnh toàn qua cửa vòm. Hai người đứng trên cùng mặt hiên, đủ lớn trên điện thoại.
+2. Máy tiến qua cửa trước; hai người giữ nguyên vị trí màn hình đến khi phòng tan hoàn toàn. Sau đó mới lùi nhẹ vào chiều sâu và chuyển sang góc, nhường chỗ cho lời mời.
+3. Hành trình qua thung lũng đi theo một vòng lượn nhẹ, không đảo trục trái/phải liên tục. Chín lớp đồi, cây, hồ và vòm được vẽ theo đúng thứ tự độ sâu; thung lũng rộng và thoải để giữ đường nhìn đến vòm xa.
+4. Máy dừng suốt khoảng thời gian bất kỳ phần nào của thiệp còn xuất hiện. Chỉ khoảng trắng làm máy chạy; độ nghiêng cũng về vận tốc và gia tốc 0 trước khi dừng.
+5. Nhân vật đổi dáng giữa đoạn máy chạy, dưới một nhịp blur ngắn 0–6–0 px. Mỗi thời điểm chỉ hiện một dáng để tránh hai khuôn mặt chồng nhau. Vị trí và kích thước tiếp tục chuyển mềm, cuộn ngược dựng lại đúng trạng thái cũ.
+6. Thiệp cuối cuộn ra hẳn, để lại cảnh toàn trước vòm hoa cùng tỷ lệ, vị trí mặt đất và trục giữa của khung cửa đầu. Đêm sao đặt D & N phía trên đôi uyên ương, bên trong vòm.
 
 ## Hình minh họa & mỹ thuật
 
@@ -69,10 +78,10 @@ Các asset trong `public/assets/`: `hero-dawn.webp`, `memory-rings.webp`, `memor
 
 ## Nhân vật và phối cảnh responsive
 
-Cặp búp bê dùng atlas 3 cột × 2 hàng (`public/assets/couple-poses.webp`), sáu dáng: nắm tay, tựa vai, cùng cầm hoa, vẫy chào, tạo tim, cúi cảm ơn. Đây là nhân vật minh họa, không phải ngoại hình thật. Các dáng hòa chuyển theo đường máy quay, vị trí đổi góc ở từng phần. Khi đổi sắc trời, trang phục cũng chuyển giữa ivory, cacao/champagne và navy/ice blue.
+Cặp búp bê dùng atlas 3 cột × 2 hàng (`public/assets/couple-poses.webp`), sáu dáng: nắm tay, tựa vai, cùng cầm hoa, vẫy chào, tạo tim, cúi cảm ơn. Đây là nhân vật minh họa, không phải ngoại hình thật. Các dáng đổi dưới motion blur theo đường máy quay, vị trí đổi góc ở từng phần. Từng dáng có neo chân riêng để bù khoảng trong suốt, cắt phần voan rời bên trái; bóng tiếp xúc nằm đúng chân. Khi đổi sắc trời, trang phục cũng chuyển giữa ivory, cacao/champagne và navy/ice blue.
 
-Trên PC, tấm thiệp và cặp nhân vật nằm ở hai phía đối diện. Trên điện thoại, thiệp dùng chiều rộng đầy đủ; một lớp phong cảnh phía dưới giữ nhân vật luôn nhìn rõ và che phần nội dung đang đi ra khỏi vùng đọc. Nội dung tiếp tục cuộn tự nhiên để đọc đầy đủ, không tạo hộp cuộn bên trong. Khi bàn phím mở, dải nhân vật và điều khiển được ẩn để ưu tiên nhập biểu mẫu. Input 16px, vùng chạm tối thiểu 44px, có safe-area và hỗ trợ màn hình ngang.
+Trên PC, tấm thiệp và cặp nhân vật nằm ở hai phía đối diện. Trên điện thoại, thiệp dùng chiều rộng đầy đủ; một lớp phong cảnh phía dưới giữ nhân vật luôn nhìn rõ và che phần nội dung đang đi ra khỏi vùng đọc. Lớp này có pointer-events:none để không chặn thao tác biểu mẫu ở vùng trong suốt. Nội dung tiếp tục cuộn tự nhiên để đọc đầy đủ, không tạo hộp cuộn bên trong. Khi bàn phím mở, dải nhân vật và điều khiển được ẩn để ưu tiên nhập biểu mẫu. Input 16px, vùng chạm tối thiểu 44px, có safe-area và hỗ trợ màn hình ngang.
 
 Agent design expert vẽ `cinematic-tree.svg` và `cinematic-arch.svg`: lá có gân, hoa nhiều lớp cánh, nhánh mềm, dải lụa và viền vàng. SVG hỗ trợ cả href/xlink:href, không có tài nguyên bên ngoài. `docs/` nhận bản sao khi chạy build:pages.
 
-Đã kiểm tra toán học về điểm dừng, đường lùi, tính liên tục, việc cửa tan trước khi nhân vật di chuyển và giới hạn nhân vật trên sáu kích thước khung nhìn. Đã xem khung phối cảnh bằng renderer canvas native; chưa kiểm thử giao diện hoàn chỉnh trong trình duyệt thật hoặc đo FPS trên thiết bị.
+Đã kiểm tra toán học về điểm dừng, đường lùi, tính liên tục, việc cửa tan trước khi nhân vật di chuyển, vị trí chân tại hai vòm và giới hạn nhân vật trên sáu kích thước khung nhìn. Kiểm tra tự chạy ở 30/60/120 Hz, tăng/giảm tốc đọc và seek liên tục qua các mốc. Đã xem khung phối cảnh bằng renderer canvas native; chưa kiểm thử giao diện hoàn chỉnh trong trình duyệt thật hoặc đo FPS trên thiết bị.

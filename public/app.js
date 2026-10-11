@@ -1,7 +1,8 @@
 'use strict';
 import { boundedProgress,cameraState,journeyProgress,readingRange } from './camera.mjs';
 import { createLandscape } from './landscape.mjs';
-import { actorLayout,keyboardVisible } from './layout.mjs';
+import { actorLayout,keyboardVisible,spriteFootOffset,spriteClipLeft } from './layout.mjs';
+import { advancePlayback,timelineValue,timelineScroll } from './journey.mjs';
 document.documentElement.classList.add('js');
 const $=s=>document.querySelector(s);
 const demo=document.body.dataset.demo==='true';
@@ -89,11 +90,17 @@ const scenes=Array.from(film.children).filter(el=>el.matches('section,footer'));
 const sceneNames=['Khung cửa','Lời mời','Những ngày có nhau','Lễ cưới','Hồi âm','Lời chúc','Lời cảm ơn'];
 const position=$('#scene-position'),playButton=$('#play-film'),couple=$('#couple-companion');
 const poses=Array.from(document.querySelectorAll('.doll-pose'));
+poses.forEach((pose,i)=>{for(const theme of ['day','dusk','night']){
+ const outfit=pose.querySelector('.outfit-'+theme);
+ outfit.style.transform=`translateY(${(spriteFootOffset(theme,i)*100).toFixed(5)}%)`;
+ outfit.style.clipPath=`inset(0 0 0 ${(spriteClipLeft(theme,i)*100).toFixed(5)}%)`;
+}});
 const foreground=$('#world-foreground'),foregroundCtx=foreground.getContext('2d');
 position.max=String(scenes.length-1);
 let ranges=[],activeScene=0,cameraPosition=0,playing=false,seeking=false,paintFrame=0;
 let viewportWidth=innerWidth,viewportHeight=innerHeight,measureFrame=0,baseline=innerHeight,keyboard=false;
-let playbackFrame=0,playbackTime=0;
+let playbackFrame=0,playbackTime=0,playbackState={position:0,speed:0};
+const maximumScroll=()=>Math.max(0,document.documentElement.scrollHeight-innerHeight);
 const viewport=window.visualViewport;
 const editing=()=>Boolean(document.activeElement?.matches('#film input,#film textarea,#film select'));
 function updateScene(){
@@ -108,11 +115,12 @@ function renderCamera(){
  paintFrame=0;cameraPosition=journeyProgress(scrollY,ranges);
  const sample=reduced?Math.round(cameraPosition):cameraPosition,view=cameraState(sample);
  if(view.active!==activeScene){activeScene=view.active;updateScene();}
- if(!seeking)position.value=cameraPosition.toFixed(3);
+ if(!seeking)position.value=timelineValue(scrollY,maximumScroll()).toFixed(3);
  landscape.render(view,mode);
  if(document.body.dataset.layout==='stacked'&&foregroundCtx){foregroundCtx.clearRect(0,0,foreground.width,foreground.height);foregroundCtx.drawImage($('#world'),0,0);}
  const metrics=actorLayout(viewportWidth,viewportHeight,view.actor,document.body.dataset.layout==='stacked',keyboard);
  couple.style.width=metrics.width.toFixed(2)+'px';
+ couple.style.setProperty('--pose-blur',view.poseBlur.toFixed(2)+'px');
  document.body.style.setProperty('--foreground-top',Math.max(0,metrics.top-24).toFixed(2)+'px');
  couple.style.transform=`translate3d(${metrics.left.toFixed(2)}px,${metrics.top.toFixed(2)}px,0) rotateY(${view.actor.turn.toFixed(2)}deg)`;
  poses.forEach((pose,i)=>{pose.style.opacity=String(view.poses[i]);pose.classList.toggle('current',view.poses[i]>.5);});
@@ -139,29 +147,33 @@ function measureJourney(){
 }
 function scheduleMeasure(){if(!measureFrame)measureFrame=requestAnimationFrame(measureJourney);}
 function pauseFilm(){playing=false;cancelAnimationFrame(playbackFrame);playbackFrame=0;playbackTime=0;updateScene();}
-function scrollAtProgress(value){
- const progress=boundedProgress(value),base=Math.floor(progress),fraction=progress-base;
- if(!fraction)return base===0?0:ranges[base].start+Math.min(viewportHeight*.30,(ranges[base].end-ranges[base].start)*.4);
- return ranges[base].end+(ranges[base+1].start-ranges[base].end)*fraction;
+function goScene(i,immediate=false){
+ pauseFilm();const stop=Math.round(boundedProgress(i));
+ const subject=stop===0?scenes[stop]:scenes[stop].querySelector('.chapter-paper');
+ const headerBottom=document.querySelector('header').getBoundingClientRect().bottom;
+ const top=stop===0?0:Math.max(0,Math.min(maximumScroll(),scrollY+subject.getBoundingClientRect().top-headerBottom-24));
+ window.scrollTo({top,behavior:immediate||reduced?'instant':'smooth'});
 }
-function goScene(i,immediate=false){pauseFilm();window.scrollTo({top:scrollAtProgress(Math.round(boundedProgress(i))),behavior:immediate||reduced?'instant':'smooth'});}
 $('#scene-prev').onclick=()=>goScene(Math.ceil(cameraPosition-.001)-1);
 $('#scene-next').onclick=()=>goScene(Math.floor(cameraPosition+.001)+1);
-position.oninput=()=>{pauseFilm();window.scrollTo({top:scrollAtProgress(Number(position.value)),behavior:'instant'});};
+position.oninput=()=>{pauseFilm();window.scrollTo({top:timelineScroll(Number(position.value),maximumScroll()),behavior:'instant'});};
 position.addEventListener('pointerdown',()=>seeking=true);
 window.addEventListener('pointerup',()=>seeking=false);window.addEventListener('pointercancel',()=>seeking=false);
 // Auto-play uses the same document path. Slow reading passes hold the camera still.
 function playTick(time){
  if(!playing)return;
- const dt=playbackTime?Math.min(.05,(time-playbackTime)/1000):0;playbackTime=time;
- const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
- if(y>=max-2){pauseFilm();return;}
- const onCard=ranges.some(r=>y>=r.start&&y<=r.end);
- const speed=viewportHeight/(onCard?13:3.5);
- window.scrollTo({top:y+dt*speed,behavior:'instant'});
+ const dt=playbackTime?Math.min(.1,(time-playbackTime)/1000):0;playbackTime=time;
+ const max=maximumScroll(),reading=ranges.some(r=>playbackState.position>=r.start&&playbackState.position<=r.end);
+ playbackState=advancePlayback(playbackState,dt,reading,viewportHeight,max);
+ window.scrollTo({top:playbackState.position,behavior:'instant'});
+ if(playbackState.position>=max-.01){pauseFilm();return;}
  playbackFrame=requestAnimationFrame(playTick);
 }
-playButton.onclick=()=>{if(playing){pauseFilm();return;}if(reduced||document.body.classList.contains('intro-open'))return;if(scrollY>=document.documentElement.scrollHeight-innerHeight-3)window.scrollTo({top:0,behavior:'instant'});playing=true;playbackTime=0;updateScene();playbackFrame=requestAnimationFrame(playTick);};
+playButton.onclick=()=>{
+ if(playing){pauseFilm();return;}if(reduced||document.body.classList.contains('intro-open'))return;
+ const restart=scrollY>=maximumScroll()-3;if(restart)window.scrollTo({top:0,behavior:'instant'});
+ playbackState={position:restart?0:scrollY,speed:0};playing=true;playbackTime=0;updateScene();playbackFrame=requestAnimationFrame(playTick);
+};
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
  const id=a.hash.slice(1),i=id==='home'&&a.closest('#thanks')?0:scenes.findIndex(s=>s.id===id);if(i<0)return;
  e.preventDefault();goScene(i);history.replaceState(null,'',i===0?'#arrival':a.hash);

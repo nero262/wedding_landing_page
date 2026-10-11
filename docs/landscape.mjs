@@ -5,6 +5,7 @@ const palettes={
  dusk:{sky:['#657b90','#c5a0a0','#efd0ad'],sun:'#ffe0a2',far:'#b5b7ae',near:'#5a6562',ridge:'#e1c4ac',fog:'#dbc6b6',lake:['#d2b9ac','#6b8188'],wall:['#dcd0c4','#ae9b90'],wood:'#8b7466',trim:'#f8dbc0',room:'#705d56'},
  night:{sky:['#030815','#0a1630','#253449'],sun:'#e1ecff',far:'#34485c',near:'#102a31',ridge:'#718c9a',fog:'#344b5b',lake:['#2b4758','#071b29'],wall:['#162232','#0b1524'],wood:'#344459',trim:'#879fbb',room:'#070e1c'}
 };
+const sceneryLayers=[...HILL_DEPTHS.map((depth,index)=>({kind:'hill',depth,index})),{kind:'arch',depth:167},{kind:'lake',depth:108},{kind:'tree',depth:82}].sort((a,b)=>b.depth-a.depth);
 // Authored profiles: nine distinct ridgelines, painted in back-to-front world coordinates.
 const ridges=[
  [.30,.18,.29,.08,.35,.15,.25], [.22,.32,.13,.27,.08,.28,.16],
@@ -36,26 +37,31 @@ export function createLandscape(canvas,onReady=()=>{}){
  }
  function ridgePath(i,projection,state){
   const s=projection.scale,baseline=height*(.46+(state.elevation-3)*.006)+height*.35*s,elevation=height*.60*s;
-  const span=width*(2.2+s*.2),offset=-width*.6-state.x*s*width*.012;
-  const values=ridges[i],step=span/(values.length-1);
-  ctx.beginPath();ctx.moveTo(offset,baseline-(values[0]+.4)*elevation);
-  for(let j=1;j<values.length;j++){
-   const px=offset+(j-1)*step,py=baseline-(values[j-1]+.4)*elevation,x=offset+j*step,y=baseline-(values[j]+.4)*elevation;
-   ctx.bezierCurveTo(px+step*.4,py,x-step*.4,y,x,y);
+  const span=width*(2.2+s*.2),offset=-width*.6-state.x*s*width*.012,values=ridges[i];
+  const archScale=22/(167-state.z),centre=width*.5-state.x*archScale*width*.015;
+  const corridor=width*(.32+.035*Math.min(s,2)),floor=height*(.46+(HILL_DEPTHS[i]>167?.035:.22)*s);
+  const points=[];
+  for(let j=0;j<=64;j++){
+   const ratio=j/64,position=ratio*(values.length-1),index=Math.min(values.length-2,Math.floor(position)),x=offset+span*ratio;
+   const raw=baseline-(mix(values[index],values[index+1],ease(position-index))+.4)*elevation;
+   const opening=Math.cos(Math.min(1,Math.abs(x-centre)/corridor)*Math.PI/2)**2;
+   points.push([x,Math.max(raw,mix(raw,floor,opening))]);
   }
-  ctx.lineTo(offset+span,height*5);ctx.lineTo(offset,height*5);ctx.closePath();
-  return {baseline,s,offset,span};
+  const path=new Path2D();path.moveTo(...points[0]);
+  for(let j=1;j<points.length;j++){const[a,b]=points[j-1],[x,y]=points[j];path.quadraticCurveTo(a,b,(a+x)/2,(b+y)/2);}
+  path.lineTo(...points.at(-1));path.lineTo(offset+span,height*6);path.lineTo(offset,height*6);path.closePath();
+  return {path,baseline,s,offset,span};
  }
  function paintHill(i,state,p){
   const q=projectPlane(HILL_DEPTHS[i],state.z);if(q.opacity<=0)return;
   ctx.save();ctx.globalAlpha=q.opacity;
   const depthTint=(8-i)/8;const g=ctx.createLinearGradient(0,height*.30,0,height*1.1);g.addColorStop(0,colorMix(p.far,p.near,depthTint*.62));g.addColorStop(1,colorMix(p.far,p.near,.30+depthTint*.68));ctx.fillStyle=g;
-  const r=ridgePath(i,q,state);ctx.fill();
+  const r=ridgePath(i,q,state);ctx.fill(r.path);
   // Fine contours disappear into atmospheric perspective rather than a hard outline.
-  ctx.save();ridgePath(i,q,state);ctx.clip();ctx.strokeStyle=p.ridge;ctx.lineWidth=.75;ctx.globalAlpha*=.07+(.10*(8-i)/8);
+  ctx.save();ctx.clip(r.path);ctx.strokeStyle=p.ridge;ctx.lineWidth=.75;ctx.globalAlpha*=.07+(.10*(8-i)/8);
   for(let line=0;line<5;line++){const y=r.baseline+line*height*.014*q.scale;ctx.beginPath();ctx.moveTo(-width*.1,y);ctx.bezierCurveTo(width*.25,y-height*.055*q.scale,width*.55,y+height*.1*q.scale,width*1.1,y-height*.01*q.scale);ctx.stroke();}
   ctx.restore();
-  ctx.globalAlpha=q.opacity*(.04+i*.019);ctx.fillStyle=p.fog;ridgePath(i,q,state);ctx.fill();ctx.restore();
+  ctx.globalAlpha=q.opacity*(.04+i*.019);ctx.fillStyle=p.fog;ctx.fill(r.path);ctx.restore();
  }
  function paintLake(state,p,night){
   const q=projectPlane(108,state.z);if(q.opacity<=0)return;
@@ -136,8 +142,12 @@ export function createLandscape(canvas,onReady=()=>{}){
   ctx.save();ctx.translate(width*.5,height*.5);ctx.rotate(state.roll);ctx.translate(-width*.5,-height*.5);
   paintSky(p,night);
   // The distant ceremonial arch remains legible beyond every ridge; nearby tree/water have their own depth.
-  for(let i=8;i>=0;i--)paintHill(i,state,p);
-  paintLake(state,p,night);paintArch(state,p,night);paintTree(state,p,night);
+  for(const layer of sceneryLayers){
+   if(layer.kind==='hill')paintHill(layer.index,state,p);
+   else if(layer.kind==='arch')paintArch(state,p,night);
+   else if(layer.kind==='lake')paintLake(state,p,night);
+   else paintTree(state,p,night);
+  }
   const mist=ctx.createLinearGradient(0,height*.35,0,height*.57);mist.addColorStop(0,'rgba(230,235,218,0)');mist.addColorStop(.5,night?'rgba(145,178,202,.025)':'rgba(240,244,228,.12)');mist.addColorStop(1,'rgba(230,235,218,0)');ctx.fillStyle=mist;ctx.fillRect(0,0,width,height);
   paintPorch(state,p);paintRoom(state,p);ctx.restore();
   const vignette=ctx.createRadialGradient(width*.5,height*.48,height*.2,width*.5,height*.5,Math.max(width,height)*.69);vignette.addColorStop(0,'rgba(0,0,0,0)');vignette.addColorStop(1,night?'rgba(0,4,14,.42)':'rgba(55,66,47,.12)');ctx.fillStyle=vignette;ctx.fillRect(0,0,width,height);

@@ -52,14 +52,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .scroll-note{display:block;width:max-content;font:9px/1.6 var(--sans);color:var(--muted);margin-top:19px;letter-spacing:.35px}
 .doll-pose{position:absolute;inset:0;opacity:0;transform:none;transition:none;filter:drop-shadow(1px -1px 0 rgba(255,248,222,.24)) drop-shadow(-2px 3px 3px rgba(var(--cast),.14)) drop-shadow(-8px 11px 11px rgba(var(--cast),.18))}
 .doll-pose.current{opacity:1}
-.doll-outfit{position:absolute;inset:0;background-size:300% 200%;background-position:inherit;background-repeat:no-repeat;opacity:0;transition:opacity .9s ease-in-out}
+.doll-outfit{position:absolute;inset:0;background-size:300% 200%;background-position:inherit;background-repeat:no-repeat;opacity:0;transition:opacity .9s ease-in-out;filter:blur(var(--pose-blur,0px))}
 .outfit-day{background-image:url('/assets/couple-poses.webp')}
 .outfit-dusk{background-image:url('/assets/couple-poses-dusk.webp')}
 .outfit-night{background-image:url('/assets/couple-poses-night.webp')}
 body:not([data-theme]) .outfit-day,body[data-theme=day] .outfit-day,body[data-theme=dusk] .outfit-dusk,body[data-theme=night] .outfit-night{opacity:1}
 .pose-0{background-position:0% 0%}.pose-1{background-position:50% 0%}.pose-2{background-position:100% 0%}.pose-3{background-position:0% 100%}.pose-4{background-position:50% 100%}.pose-5{background-position:100% 100%}
 .doll-glow{position:absolute;inset:22% -5% 0;background:radial-gradient(ellipse at 67% 39%,var(--glow),transparent 65%);opacity:.19;filter:blur(10px)}
-.doll-platform{position:absolute;left:5%;right:4%;bottom:1.5%;height:12px;background:radial-gradient(ellipse,rgba(var(--cast),.24),rgba(var(--cast),.09) 43%,transparent 72%);filter:blur(2px)}
+.doll-platform{position:absolute;left:5%;right:4%;bottom:-4px;height:12px;background:radial-gradient(ellipse,rgba(var(--cast),.24),rgba(var(--cast),.09) 43%,transparent 72%);filter:blur(2px)}
 body[data-theme=night] .doll-pose{filter:drop-shadow(1px -1px 0 rgba(207,226,255,.32)) drop-shadow(-3px 5px 3px rgba(var(--cast),.35)) drop-shadow(-8px 11px 11px rgba(var(--cast),.4))}
 
 /* Album: a quiet print with a generous photographic crop, not another frame. */
@@ -179,7 +179,7 @@ header>*{pointer-events:auto}
 #film{position:relative;margin:0;width:100%;outline:none}
 #landscape{position:fixed;inset:0;pointer-events:none;height:var(--view-height,100svh);z-index:0;overflow:hidden;background:var(--bg)}
 #world{width:100%;height:100%;display:block}
-#world-foreground{display:none;position:fixed;inset:0;width:100%;height:var(--view-height,100svh);z-index:5;mask-image:linear-gradient(to bottom,transparent var(--foreground-top,70vh),#000 calc(var(--foreground-top,70vh) + 20px));pointer-events:auto}
+#world-foreground{display:none;position:fixed;inset:0;width:100%;height:var(--view-height,100svh);z-index:5;mask-image:linear-gradient(to bottom,transparent var(--foreground-top,70vh),#000 calc(var(--foreground-top,70vh) + 20px));pointer-events:none}
 .cinema-grain{position:absolute;inset:0;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");mix-blend-mode:multiply}
 #sky{z-index:1}.sun{display:none}
 #couple-companion{position:fixed;left:0;top:0;z-index:2;width:200px;aspect-ratio:2/3;pointer-events:none;transform-origin:50% 100%;perspective:1000px;will-change:transform}
@@ -196,7 +196,7 @@ header>*{pointer-events:auto}
 .chapter-right .chapter-paper{transform:perspective(1600px) rotateY(-1deg)}
 .chapter-paper:before{content:'';position:absolute;top:14px;left:14px;width:25px;height:25px;border-left:1px solid var(--line);border-top:1px solid var(--line);pointer-events:none}
 .chapter-paper:after{content:'';position:absolute;right:14px;bottom:14px;width:25px;height:25px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);pointer-events:none}
-.chapter-final{padding-bottom:90svh;justify-content:flex-start}
+.chapter-final{padding-bottom:calc(100svh + 100px);justify-content:flex-start}
 .chapter-final .chapter-paper{width:min(370px,34%);padding:28px;background:var(--surface);backdrop-filter:blur(12px)}
 .hero h1{font-size:clamp(72px,6.8vw,105px)}
 .hero .actions{gap:12px}.hero .actions>*{font-size:11px}
