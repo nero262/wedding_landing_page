@@ -54,3 +54,7 @@ Bản Pages chỉ chứa giao diện, minh họa và nội dung công khai. Khô
 ## Trải nghiệm thước phim ngang
 
 Mỗi phần là một cảnh toàn màn hình. Vuốt ngang trên điện thoại/trackpad; con lăn chuột chuyển cảnh; nút trái/phải, thanh chọn cảnh và phím mũi tên hỗ trợ điều hướng. Trang không cuộn dọc; nội dung dài trong một cảnh vẫn có thể cuộn nội bộ để không che biểu mẫu trên màn hình nhỏ. Giảm chuyển động chuyển cảnh tức thì.
+
+## Typography & scene animation
+
+Tiêu đề dùng Cormorant Garamond, nội dung/biểu mẫu dùng Be Vietnam Pro, tải Google Fonts với display=swap và font dự phòng. CSP cho phép đúng hai miền font. Chuyển cảnh bằng timeline 840–1050 ms, easing tăng/giảm tốc, parallax từng lớp và hiệu ứng xuất hiện lệch nhịp. Vuốt vẫn dùng native scrolling; pointer/touch ngắt hoạt họa đang chạy. Giảm chuyển động bỏ các hiệu ứng này. Thanh điều hướng có nét 1 px, chấm nhỏ và vùng chạm rộng.

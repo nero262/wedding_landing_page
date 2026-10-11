@@ -18,7 +18,7 @@ export function createApp({dataDir='./data',adminPassword=process.env.ADMIN_PASS
  const rate=(req,key,max)=>{const bucket=Math.floor(Date.now()/600000),k=`${req.socket.remoteAddress}:${key}:${bucket}`;if(limits.size>5000)limits.clear();const n=(limits.get(k)||0)+1;limits.set(k,n);return n<=max;};
  const body=async req=>{let raw='';for await(const chunk of req){raw+=chunk;if(Buffer.byteLength(raw)>8192)throw Error('Yêu cầu quá lớn');}return JSON.parse(raw||'{}');};
  const server=http.createServer(async(req,res)=>{
-  res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('X-Frame-Options','DENY');res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+  res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('X-Frame-Options','DENY');res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
   try {
    const url=new URL(req.url,'http://localhost');
    if(['POST','DELETE','PATCH'].includes(req.method)){
