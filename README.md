@@ -51,16 +51,18 @@ Chạy `npm run build:pages` để tạo `docs/`. Trong Settings → Pages, ch�
 
 Bản Pages chỉ chứa giao diện, minh họa và nội dung công khai. Không chứa trang admin, database hoặc cấu hình bí mật. Các nút gửi RSVP/lời chúc được tắt và ghi rõ không lưu dữ liệu. Máy chủ Node vẫn dùng cho bản có chức năng đầy đủ.
 
-## Trải nghiệm thước phim ngang
-
-Mỗi phần là một cảnh toàn màn hình. Vuốt ngang trên điện thoại/trackpad; con lăn chuột chuyển cảnh; nút trái/phải, thanh chọn cảnh và phím mũi tên hỗ trợ điều hướng. Trang không cuộn dọc; nội dung dài trong một cảnh vẫn có thể cuộn nội bộ để không che biểu mẫu trên màn hình nhỏ. Giảm chuyển động chuyển cảnh tức thì.
-
 ## Typography & scene animation
 
-Tiêu đề dùng Cormorant Garamond, nội dung/biểu mẫu dùng Be Vietnam Pro, tải Google Fonts với display=swap và font dự phòng. CSP cho phép đúng hai miền font. Chuyển cảnh bằng timeline 840–1050 ms, easing tăng/giảm tốc, parallax từng lớp và hiệu ứng xuất hiện lệch nhịp. Vuốt vẫn dùng native scrolling; pointer/touch ngắt hoạt họa đang chạy. Giảm chuyển động bỏ các hiệu ứng này. Thanh điều hướng có nét 1 px, chấm nhỏ và vùng chạm rộng.
+Tiêu đề dùng Cormorant Garamond, nội dung/biểu mẫu dùng Be Vietnam Pro, tải Google Fonts với display=swap và font dự phòng. CSP cho phép đúng hai miền font. Chuyển cảnh theo chiều sâu trong 1100 ms, easing mềm và hòa chuyển. Khung hình giữ nguyên; dùng nút lên/xuống hoặc vuốt dọc vùng trống để đi qua các chương. Giảm chuyển động bỏ các hiệu ứng này. Thanh điều hướng có nét 1 px, chấm nhỏ và vùng chạm rộng.
 
 ## Hình minh họa & mỹ thuật
 
 Bản mới dùng tranh màu nước tạo bằng Imagegen: khung cửa bình minh/đôi uyên ương, nhẫn cưới bên hoa và khu vườn đêm. Đây là hình minh họa, không phải ngoại hình thật của Dương & Ngân. Prompt mỹ thuật: editorial watercolor + fine graphite, cotton paper, muted ivory/champagne/sage, delicate botanical details, no text or clipart.
 
 Các asset trong `public/assets/`: `hero-dawn.webp`, `memory-rings.webp`, `memory-night.webp`; nhánh hoa `botanical.svg` và con dấu `wax-seal.svg` được vẽ bằng vector. Phong thư và thẻ giấy dùng nếp gấp, đường viền mảnh, bóng sáng mềm. WebP chỉ chuyển định dạng ảnh gốc, không thay nội dung hình. Bản Pages sao chép các asset này vào `docs/assets/`.
+
+## Cảnh theo chiều sâu và búp bê
+
+Chuyển cảnh nay giữ nguyên khung nhìn: lớp hiện tại phóng gần và tan, lớp kế tiếp tiến từ xa vào, không trượt ngang. Điều khiển bằng nút lên/xuống, wheel, phím lên/xuống hoặc vuốt dọc vùng trống. Các cảnh không hoạt động dùng inert và aria-hidden. Nội dung dài vẫn cuộn bên trong cảnh để không mất thông tin; nhập biểu mẫu không kích hoạt chuyển cảnh.
+
+Cặp búp bê xuất hiện liên tục ở một vùng riêng, dùng atlas 3 cột × 2 hàng (`public/assets/couple-poses.webp`), sáu dáng thống nhất trang phục/ngoại hình: nắm tay, tựa vai, cùng cầm hoa, vẫy chào, tạo tim, cúi cảm ơn. Đây là nhân vật minh họa, không phải ngoại hình thật. Tạo bằng Imagegen với nền trong suốt; các dáng hòa chuyển khi đổi cảnh. Giảm chuyển động tắt zoom và hòa chuyển.

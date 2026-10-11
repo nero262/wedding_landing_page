@@ -184,3 +184,31 @@ body[data-theme=night] .art-light{background:linear-gradient(160deg,rgba(68,99,1
  #film .event-card:after{height:32px;margin-top:12px}
  #film .memory-card span{font-size:23px}
 }
+
+/* Depth chapters replace the horizontal strip. A persistent doll pair stays in frame. */
+.js #film{display:block;position:relative;perspective:1400px;perspective-origin:50% 45%;overflow:hidden;scroll-snap-type:none;isolation:isolate}
+.js #film>.depth-scene{position:absolute;inset:0;width:100%;height:100%;visibility:hidden;opacity:0;pointer-events:none;transform-origin:50% 45%;padding-right:clamp(160px,19vw,265px);backface-visibility:hidden;z-index:0}
+.js #film>.depth-scene.current{visibility:visible;opacity:1;pointer-events:auto;z-index:2}
+.js #film>.depth-scene.departing{visibility:visible;pointer-events:none;z-index:3}
+.js #film .hero-copy,.js #film .section-heading{transform:none;opacity:1}
+.js #film .portal-wrap,.js #film .memory-stage,.js #film #event-cards,.js #film .paper,.js #film footer>*{translate:none;scale:1;opacity:1}
+.js #film>.hero{gap:4vw}
+#couple-companion{position:absolute;right:clamp(8px,2vw,35px);bottom:20px;width:clamp(130px,15vw,210px);aspect-ratio:2/3;z-index:5;pointer-events:none;perspective:800px}
+.doll-pose{position:absolute;inset:0;background-image:url('./assets/couple-poses.webp');background-size:300% 200%;background-repeat:no-repeat;opacity:0;transform:translateZ(-20px) scale(.96);transition:opacity .7s ease,transform 1s cubic-bezier(.22,1,.36,1);filter:drop-shadow(0 12px 12px rgba(66,43,22,.12))}
+.doll-pose.current{opacity:1;transform:translateZ(0) scale(1)}
+.pose-0{background-position:0% 0%}.pose-1{background-position:50% 0%}.pose-2{background-position:100% 0%}.pose-3{background-position:0% 100%}.pose-4{background-position:50% 100%}.pose-5{background-position:100% 100%}
+.doll-glow{position:absolute;inset:25% -10% -5%;background:radial-gradient(ellipse at 50% 70%,rgba(226,203,162,.13),transparent 70%);filter:blur(15px)}
+body[data-theme=night] .doll-pose{filter:brightness(.92) drop-shadow(0 10px 15px rgba(0,0,0,.2))}
+body.reduced .doll-pose{transition:none;transform:none}
+.film-controls button:hover:not(:disabled),.film-controls #scene-prev:hover:not(:disabled){transform:none;color:var(--accent)}
+@media(max-width:700px){
+ .js #film>.depth-scene{padding-right:7%;padding-bottom:100px}
+ #couple-companion{width:83px;right:8px;bottom:3px;aspect-ratio:2/3}
+ .js #film>.hero{padding-bottom:135px}
+ #film .portal-wrap{right:-9%;opacity:.25}
+ #film .scroll-note{bottom:15px;max-width:calc(100% - 115px);font-size:9px}
+ .js #film>.depth-scene footer{padding-bottom:100px}
+}
+@media(prefers-reduced-motion:reduce){.doll-pose{transition:none;transform:none}}
+html:not(.js) #film{display:block;overflow:auto}
+html:not(.js) #film>.section,html:not(.js) #film>.hero{height:auto;min-height:100%;width:100%;}

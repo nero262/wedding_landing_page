@@ -62,7 +62,7 @@ export function createApp({dataDir='./data',adminPassword=process.env.ADMIN_PASS
    const file=path.resolve(root,relative);
    if(!file.startsWith(root+path.sep))return send(res,403,{error:'Không được truy cập'});
    let bytes;try{bytes=readFileSync(file);}catch{return send(res,404,{error:'Không tìm thấy'});}
-   const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp','.jpg':'image/jpeg','.png':'image/png'};
+   const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp','.jpg':'image/jpeg','.png':'image/png'};
    res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-cache'});res.end(req.method==='HEAD'?undefined:bytes);
   }catch{send(res,400,{error:'Không thể xử lý yêu cầu. Vui lòng thử lại.'});}
  });
