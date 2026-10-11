@@ -10,7 +10,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.65 var(--sans);transition:background 1s,color 1s}
 body[data-theme=dusk]{--bg:#eee2d9;--ink:#644f48;--muted:#917b70;--accent:#a17c61;--paper:#f7ece2;--line:rgba(137,99,74,.23);--glow:#e9b188;--cast:101,63,48;--rim:rgba(255,237,212,.9);--surface:rgba(255,245,231,.65)}
-body[data-theme=night]{--bg:#14251f;--ink:#e8e8d6;--muted:#aab7a5;--accent:#c0c8a3;--paper:#20342b;--line:rgba(204,219,181,.21);--glow:#a7c6ce;--cast:0,13,8;--rim:rgba(213,233,218,.22);--surface:rgba(30,50,40,.8);color-scheme:dark}
+body[data-theme=night]{--bg:#070e1c;--ink:#e8eef8;--muted:#a4b3cc;--accent:#bdcde7;--paper:#111e32;--line:rgba(184,206,239,.21);--glow:#8caee2;--cast:0,4,14;--rim:rgba(207,226,255,.22);--surface:rgba(16,29,49,.82);color-scheme:dark}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,.signature,.tagline,.memory-card span,.event-date{font-family:var(--serif);font-weight:400}
 h1,h2,h3,p{margin-top:0}
@@ -74,12 +74,17 @@ body[data-theme=night] .stage-art :is(img,svg){filter:brightness(1.35) saturate(
 .personal{font-size:12px;font-style:italic;color:var(--accent)}
 .scroll-note{display:block;width:max-content;font:9px/1.6 var(--sans);color:var(--muted);margin-top:19px;letter-spacing:.35px}
 #couple-companion{position:absolute;z-index:3;right:8.2%;bottom:12%;width:clamp(220px,28%,380px);aspect-ratio:2/3;pointer-events:none;perspective:900px}
-.doll-pose{position:absolute;inset:0;background-image:url('./assets/couple-poses.webp');background-size:300% 200%;background-repeat:no-repeat;opacity:0;transform:none;transition:none;filter:drop-shadow(1px -1px 0 rgba(255,248,222,.24)) drop-shadow(-2px 3px 3px rgba(var(--cast),.14)) drop-shadow(-8px 11px 11px rgba(var(--cast),.18))}
+.doll-pose{position:absolute;inset:0;opacity:0;transform:none;transition:none;filter:drop-shadow(1px -1px 0 rgba(255,248,222,.24)) drop-shadow(-2px 3px 3px rgba(var(--cast),.14)) drop-shadow(-8px 11px 11px rgba(var(--cast),.18))}
 .doll-pose.current{opacity:1}
+.doll-outfit{position:absolute;inset:0;background-size:300% 200%;background-position:inherit;background-repeat:no-repeat;opacity:0;transition:opacity .9s ease-in-out}
+.outfit-day{background-image:url('./assets/couple-poses.webp')}
+.outfit-dusk{background-image:url('./assets/couple-poses-dusk.webp')}
+.outfit-night{background-image:url('./assets/couple-poses-night.webp')}
+body:not([data-theme]) .outfit-day,body[data-theme=day] .outfit-day,body[data-theme=dusk] .outfit-dusk,body[data-theme=night] .outfit-night{opacity:1}
 .pose-0{background-position:0% 0%}.pose-1{background-position:50% 0%}.pose-2{background-position:100% 0%}.pose-3{background-position:0% 100%}.pose-4{background-position:50% 100%}.pose-5{background-position:100% 100%}
 .doll-glow{position:absolute;inset:22% -5% 0;background:radial-gradient(ellipse at 67% 39%,var(--glow),transparent 65%);opacity:.19;filter:blur(10px)}
 .doll-platform{position:absolute;left:5%;right:4%;bottom:1.5%;height:12px;background:radial-gradient(ellipse,rgba(var(--cast),.24),rgba(var(--cast),.09) 43%,transparent 72%);filter:blur(2px)}
-body[data-theme=night] .doll-pose{filter:brightness(.98) saturate(.85) drop-shadow(1px -1px 0 rgba(207,235,231,.32)) drop-shadow(-3px 5px 3px rgba(var(--cast),.35)) drop-shadow(-8px 11px 11px rgba(var(--cast),.4))}
+body[data-theme=night] .doll-pose{filter:drop-shadow(1px -1px 0 rgba(207,226,255,.32)) drop-shadow(-3px 5px 3px rgba(var(--cast),.35)) drop-shadow(-8px 11px 11px rgba(var(--cast),.4))}
 
 /* Living illustration: coordinated stems, silk and glints, with a quiet centre. */
 .stage-art{perspective:1000px}
@@ -106,7 +111,7 @@ body[data-theme=night] .doll-pose{filter:brightness(.98) saturate(.85) drop-shad
 .garden-motes{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .garden-motes span{position:absolute;left:var(--mote-x);top:24%;width:var(--mote-size);height:calc(var(--mote-size)*1.7);border-radius:85% 10% 85% 15%;background:linear-gradient(135deg,rgba(255,253,239,.9),rgba(206,169,125,.35));border:1px solid rgba(170,141,105,.09);opacity:0;animation:garden-petal-fall var(--mote-duration) linear var(--mote-delay) infinite}
 @keyframes garden-petal-fall{0%{opacity:0;transform:translate3d(0,-10px,0) rotate(0deg)}15%{opacity:.48}55%{opacity:.3}100%{opacity:0;transform:translate3d(-18px,clamp(130px,25vh,250px),0) rotate(170deg)}}
-body[data-theme=night] .garden-motes span{height:var(--mote-size);border:0;border-radius:50%;background:#e2e4bb;box-shadow:0 0 7px 2px rgba(220,229,173,.18);animation-name:garden-firefly-float;animation-timing-function:ease-in-out}
+body[data-theme=night] .garden-motes span{height:var(--mote-size);border:0;border-radius:50%;background:#e2edff;box-shadow:0 0 7px 2px rgba(182,211,255,.2);animation-name:garden-firefly-float;animation-timing-function:ease-in-out}
 @keyframes garden-firefly-float{0%,100%{opacity:.08;transform:translate(0,0) scale(.6)}40%{opacity:.58;transform:translate(-6px,-22px) scale(1)}70%{opacity:.22;transform:translate(6px,-12px) scale(.8)}}
 .motion-paused *{animation-play-state:paused!important}
 .memory-card .memory-image-frame{display:block;padding:0;margin:0;overflow:hidden;font-size:0;line-height:0}
