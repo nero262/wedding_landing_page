@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="800" viewBox="0 0 600 800" fill="none">
+<defs xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="wing-petal" x1="-5" y1="-40" x2="5" y2="5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fffdf5" stop-opacity=".95" />
+      <stop offset=".62" stop-color="#f5edda" stop-opacity=".8" />
+      <stop offset="1" stop-color="#bcb394" stop-opacity=".35" />
+    </linearGradient>
+    <path id="wing-petal-shape" d="M0 3C-9-4-21-12-21-24C-21-32-14-36-7-33C-3-40 8-42 15-34C27-21 12-4 0 3Z" fill="url(#wing-petal)" stroke="#b4af94" stroke-opacity=".28" stroke-width=".55" />
+    <g id="wing-camellia">
+      <g opacity=".88">
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(51.4)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(102.8)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(154.2)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(205.6)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(257)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(308.4)" />
+      </g>
+      <g transform="rotate(24) scale(.67)">
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(60)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(120)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(180)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(240)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(300)" />
+      </g>
+      <g transform="rotate(7) scale(.35)">
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(72)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(144)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(216)" />
+        <use href="#wing-petal-shape" xlink:href="#wing-petal-shape" transform="rotate(288)" />
+      </g>
+      <g stroke="#b4a16f" stroke-opacity=".73" stroke-width=".65">
+        <path d="M0 2L-2-7M1 1L6-5M0 1L-7-2M1 2L5 8M0 2L-5 7" />
+        <g fill="#baa474" stroke="none">
+          <circle cy="1" r="2.3" />
+          <circle cx="-2" cy="-7" r="1.1" />
+          <circle cx="6" cy="-5" r="1" />
+          <circle cx="-7" cy="-2" r="1.1" />
+          <circle cx="5" cy="8" r="1" />
+          <circle cx="-5" cy="7" r="1" />
+        </g>
+      </g>
+    </g>
+    </defs>
+<defs>
+ <linearGradient id="wing-back" x1="98" y1="74" x2="469" y2="754" gradientUnits="userSpaceOnUse"><stop stop-color="#bfc8ab"/><stop offset=".5" stop-color="#aab99b"/><stop offset="1" stop-color="#92a38b"/></linearGradient>
+ <linearGradient id="wing-leaf-left" x1="54" y1="253" x2="386" y2="609" gradientUnits="userSpaceOnUse"><stop stop-color="#c3caad"/><stop offset=".44" stop-color="#9aaf91"/><stop offset="1" stop-color="#b1bea1"/></linearGradient>
+ <linearGradient id="wing-leaf-right" x1="260" y1="316" x2="601" y2="90" gradientUnits="userSpaceOnUse"><stop stop-color="#879c83"/><stop offset=".57" stop-color="#b7c3a3"/><stop offset="1" stop-color="#ccd2b6"/></linearGradient>
+ <linearGradient id="wing-front" x1="112" y1="490" x2="531" y2="767" gradientUnits="userSpaceOnUse"><stop stop-color="#bec8ac"/><stop offset=".52" stop-color="#a3b496"/><stop offset="1" stop-color="#c7ceb3"/></linearGradient>
+ <linearGradient id="wing-stem" x1="239" y1="101" x2="579" y2="760" gradientUnits="userSpaceOnUse"><stop stop-color="#b7b08a"/><stop offset=".5" stop-color="#7f9179"/><stop offset="1" stop-color="#717f68"/></linearGradient>
+ <pattern id="wing-graphite" width="31" height="29" patternUnits="userSpaceOnUse" patternTransform="rotate(-19)"><path d="M2 4L5 6M15 13L20 14M5 21L8 20M24 25L26 26" stroke="#697e65" stroke-opacity=".11" stroke-width=".45" stroke-linecap="round"/></pattern>
+</defs>
+<!-- A near-lens botanical branch, rooted outside the lower-right frame.
+     Overlapping opaque leaves, not a single closed silhouette, conceal the edit. -->
+<g id="botanical-wing-back" fill="url(#wing-back)">
+ <path id="wing-leaf-1" d="M285 330C106 273 54 110 120-50C266 41 377 184 285 330Z"/>
+ <path id="wing-leaf-2" d="M278 358C226 227 325 87 494-30C557 187 430 308 278 358Z"/>
+ <path id="wing-leaf-8" d="M350 746C114 622 134 430 179 230C260 425 415 591 350 746Z"/>
+ <path id="wing-leaf-9" d="M427 721C256 553 252 353 339 121C482 279 581 493 427 721Z"/>
+</g>
+<g id="botanical-wing-middle" stroke="#7f9277" stroke-opacity=".3" stroke-width=".7" stroke-linejoin="round">
+ <path id="wing-leaf-3" d="M336 473C158 486 161 400 14 204C227 197 359 318 336 473Z" fill="url(#wing-leaf-left)"/>
+ <path id="wing-leaf-4" d="M317 490C307 306 441 194 633 160C620 363 504 511 317 490Z" fill="url(#wing-leaf-right)"/>
+ <path id="wing-leaf-5" d="M433 635C221 671 97 493-48 438C193 372 357 409 433 635Z" fill="url(#wing-leaf-left)"/>
+ <path id="wing-leaf-6" d="M389 660C306 512 438 432 650 396C701 596 553 708 389 660Z" fill="url(#wing-leaf-right)"/>
+</g>
+<path id="wing-leaf-7" d="M504 784C298 822 175 745 100 625C311 571 438 646 504 784Z" fill="url(#wing-front)" stroke="#879b7c" stroke-opacity=".22" stroke-width=".7"/>
+<defs><clipPath id="wing-canopy-clip"><use href="#wing-leaf-1" xlink:href="#wing-leaf-1"/><use href="#wing-leaf-2" xlink:href="#wing-leaf-2"/><use href="#wing-leaf-3" xlink:href="#wing-leaf-3"/><use href="#wing-leaf-4" xlink:href="#wing-leaf-4"/><use href="#wing-leaf-5" xlink:href="#wing-leaf-5"/><use href="#wing-leaf-6" xlink:href="#wing-leaf-6"/><use href="#wing-leaf-7" xlink:href="#wing-leaf-7"/><use href="#wing-leaf-8" xlink:href="#wing-leaf-8"/><use href="#wing-leaf-9" xlink:href="#wing-leaf-9"/></clipPath></defs>
+<g id="botanical-wing-texture" clip-path="url(#wing-canopy-clip)">
+ <rect width="600" height="800" fill="url(#wing-graphite)"/>
+</g>
+<g id="botanical-wing-veins" stroke="#687f63" stroke-opacity=".20" stroke-width=".75" stroke-linecap="round">
+ <path d="M285 330C230 205 155 71 120-36M278 358C337 230 405 88 488-17M336 473C233 366 125 282 24 212M317 490C427 357 536 238 622 166M433 635C275 538 98 470-31 439M389 660C474 550 570 459 638 405M504 784C358 717 244 670 112 629"/>
+ <path d="M250 251C189 243 136 206 107 168M217 188C177 181 134 150 114 119M182 124C184 91 169 52 146 33M313 282C365 256 418 205 443 154M348 216C383 194 424 141 442 107M392 145C374 114 387 70 410 40M281 414C231 425 190 399 159 370M232 371C205 334 188 292 159 271M176 322C127 323 82 283 60 257M367 428C426 422 481 385 520 351M419 374C466 367 519 320 547 283M476 310C502 282 525 235 557 216M350 581C278 601 218 576 164 552M268 535C225 522 196 487 155 459M184 492C124 500 67 484 17 461M429 602C492 603 548 571 589 542M482 547C510 517 558 487 604 470M381 734C335 763 277 747 246 727M294 695C271 665 234 648 198 637"/>
+</g>
+<g id="botanical-wing-rim" stroke="#f1efd0" stroke-opacity=".3" stroke-width="1.2" stroke-linecap="round"><path d="M120-34C260 48 346 189 285 313M488-17C543 156 438 296 305 342M616 173C608 353 483 488 341 489M638 409C680 572 553 685 414 664"/></g>
+<g id="botanical-wing-stems" stroke="url(#wing-stem)" stroke-linecap="round">
+ <path d="M622 861C525 766 478 701 428 630C357 531 317 427 282 323C255 242 237 147 235 78" stroke-width="8"/>
+ <path d="M622 861C525 766 478 701 428 630C357 531 317 427 282 323" stroke="#d8d1a5" stroke-opacity=".45" stroke-width="1.5"/>
+ <path d="M391 578C281 513 211 492 128 461M334 475C439 375 471 316 491 246M278 316C331 258 355 223 355 180" stroke-width="3.1"/>
+ <path d="M293 355C217 319 187 254 174 191M407 600C463 563 495 523 507 483" stroke-width="2.3"/>
+</g>
+<g id="botanical-wing-flowers">
+ <use href="#wing-camellia" xlink:href="#wing-camellia" transform="translate(174 191) rotate(-17) scale(.87)"/>
+ <use href="#wing-camellia" xlink:href="#wing-camellia" transform="translate(491 246) rotate(23) scale(.78)"/>
+ <use href="#wing-camellia" xlink:href="#wing-camellia" transform="translate(128 461) rotate(-28) scale(.69)"/>
+</g>
+</svg>

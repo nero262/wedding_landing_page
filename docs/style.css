@@ -52,11 +52,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .scroll-note{display:block;width:max-content;font:9px/1.6 var(--sans);color:var(--muted);margin-top:19px;letter-spacing:.35px}
 .doll-pose{position:absolute;inset:0;opacity:0;transform:none;transition:none;filter:drop-shadow(1px -1px 0 rgba(255,248,222,.24)) drop-shadow(-2px 3px 3px rgba(var(--cast),.14)) drop-shadow(-8px 11px 11px rgba(var(--cast),.18))}
 .doll-pose.current{opacity:1}
-.doll-outfit{position:absolute;inset:0;background-size:300% 200%;background-position:inherit;background-repeat:no-repeat;opacity:0;transition:opacity .9s ease-in-out;filter:blur(var(--pose-blur,0px))}
-.outfit-day{background-image:url('./assets/couple-poses.webp')}
-.outfit-dusk{background-image:url('./assets/couple-poses-dusk.webp')}
-.outfit-night{background-image:url('./assets/couple-poses-night.webp')}
-body:not([data-theme]) .outfit-day,body[data-theme=day] .outfit-day,body[data-theme=dusk] .outfit-dusk,body[data-theme=night] .outfit-night{opacity:1}
+.doll-visual{position:absolute;inset:0;transform:rotate(var(--character-lean,0deg));transform-origin:50% 100%}
+.doll-outfit{position:absolute;inset:0;background-position:inherit;opacity:0;transition:none;filter:blur(var(--pose-blur,0px));--face-atlas:url('./assets/couple-western.webp')}
+.outfit-western{--outfit-atlas:url('./assets/couple-western.webp')}
+.outfit-ceremony{--outfit-atlas:url('./assets/couple-ceremony.webp')}
+.outfit-evening{--outfit-atlas:url('./assets/couple-evening.webp')}
+#couple-companion[data-outfit=western] .outfit-western,#couple-companion[data-outfit=ceremony] .outfit-ceremony,#couple-companion[data-outfit=evening] .outfit-evening{opacity:1}
+.doll-piece{position:absolute;inset:0;background-image:var(--outfit-atlas);background-position:inherit;background-repeat:no-repeat;background-size:300% 200%;pointer-events:none}
+.doll-head{background-image:var(--face-atlas);transform:translateY(var(--head-anchor,0%)) rotate(var(--face-turn,0deg))}
+.bride-head{transform:translateY(var(--head-anchor,0%)) rotate(calc(-1 * var(--face-turn,0deg)))}
+.doll-veil{transform:translateX(var(--veil-shift,0px));transform-origin:85% 25%}
+.doll-hem{transform:translateX(var(--hem-shift,0px));transform-origin:55% 68%}
+.eye-lid{position:absolute;display:block;background:linear-gradient(#f1bda0,#f6c7aa);border-radius:45% 55% 35% 35%;border-bottom:.5px solid rgba(77,46,35,.75);transform:rotate(14deg) scaleY(var(--blink,0));transform-origin:50% 0;opacity:clamp(0,calc(var(--blink,0) * 16),1)}
+.character-defs{position:absolute;pointer-events:none}
+.character-occluder{position:absolute;inset:-25% -70%;background-image:url('./assets/wardrobe-foreground.svg');background-size:100% 100%;opacity:var(--edit-opacity,0);transform:translateX(var(--edit-x,-140%));filter:blur(5px);pointer-events:none}
+body[data-theme=night] .character-occluder{filter:brightness(.45) saturate(.65) blur(5px)}
 .pose-0{background-position:0% 0%}.pose-1{background-position:50% 0%}.pose-2{background-position:100% 0%}.pose-3{background-position:0% 100%}.pose-4{background-position:50% 100%}.pose-5{background-position:100% 100%}
 .doll-glow{position:absolute;inset:22% -5% 0;background:radial-gradient(ellipse at 67% 39%,var(--glow),transparent 65%);opacity:.19;filter:blur(10px)}
 .doll-platform{position:absolute;left:5%;right:4%;bottom:-4px;height:12px;background:radial-gradient(ellipse,rgba(var(--cast),.24),rgba(var(--cast),.09) 43%,transparent 72%);filter:blur(2px)}

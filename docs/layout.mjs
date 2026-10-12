@@ -10,7 +10,7 @@ export function actorLayout(width,height,actor,stacked=false,keyboard=false){
 }
 
 // Bottom edges of the connected couple in each atlas tile; transparent padding varies by pose.
-const feet={day:[602,602,601,587,587,581],dusk:[604,603,602,589,589,583],night:[604,605,604,589,589,584]};
-export function spriteFootOffset(theme,pose){return 1-(feet[theme]||feet.day)[pose]/627;}
-const left={day:[18,46,61,23,52,48],dusk:[18,44,58,21,49,47],night:[18,43,59,21,50,47]};
-export function spriteClipLeft(theme,pose){return Math.max(0,(left[theme]||left.day)[pose]-2)/418;}
+const feet={western:[609,609,608,585,584,585],ceremony:[611,613,612,579,578,580],evening:[612,614,615,581,580,580]};
+export function spriteFootOffset(outfit,pose){return 1-(feet[outfit]||feet.western)[pose]/627;}
+const left={western:[19,40,37,48,60,27],ceremony:[18,39,34,45,54,26],evening:[17,36,30,38,46,23]};
+export function spriteClipLeft(outfit,pose){return Math.max(0,(left[outfit]||left.western)[pose]-2)/418;}

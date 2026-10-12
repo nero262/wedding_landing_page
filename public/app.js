@@ -1,9 +1,11 @@
 'use strict';
-import { boundedProgress,cameraState,journeyProgress,readingRange,reducedTransition,travelPulse } from './camera.mjs';
+import { boundedProgress,cameraState,journeyProgress,readingRange,reducedTransition,travelPulse,clamp } from './camera.mjs';
 import { createLandscape } from './landscape.mjs';
 import { actorLayout,keyboardVisible,spriteFootOffset,spriteClipLeft } from './layout.mjs';
 import { timelineValue,timelineScroll } from './journey.mjs';
 import { paperBridgeFrames } from './opening.mjs';
+import { characterState } from './character.mjs';
+import { initializeCharacterParts } from './character-parts.mjs';
 document.documentElement.classList.add('js');
 const $=s=>document.querySelector(s);
 const demo=document.body.dataset.demo==='true';
@@ -104,10 +106,12 @@ const scenes=Array.from(film.children).filter(el=>el.matches('section,footer'));
 const sceneNames=['Khung cửa','Lời mời','Những ngày có nhau','Lễ cưới','Hồi âm','Lời chúc','Lời cảm ơn'];
 const position=$('#scene-position'),couple=$('#couple-companion');
 const poses=Array.from(document.querySelectorAll('.doll-pose'));
-poses.forEach((pose,i)=>{for(const theme of ['day','dusk','night']){
- const outfit=pose.querySelector('.outfit-'+theme);
- outfit.style.transform=`translateY(${(spriteFootOffset(theme,i)*100).toFixed(5)}%)`;
- outfit.style.clipPath=`inset(0 0 0 ${(spriteClipLeft(theme,i)*100).toFixed(5)}%)`;
+initializeCharacterParts(poses);
+poses.forEach((pose,i)=>{for(const wardrobe of ['western','ceremony','evening']){
+ const outfit=pose.querySelector('.outfit-'+wardrobe),offset=spriteFootOffset(wardrobe,i);
+ outfit.style.transform=`translateY(${(offset*100).toFixed(5)}%)`;
+ outfit.style.setProperty('--head-anchor',`${((spriteFootOffset('western',i)-offset)*100).toFixed(5)}%`);
+ outfit.style.clipPath=`inset(0 0 0 ${(spriteClipLeft(wardrobe,i)*100).toFixed(5)}%)`;
 }});
 const foreground=$('#world-foreground'),foregroundCtx=foreground.getContext('2d');
 position.max=String(scenes.length-1);
@@ -127,6 +131,7 @@ function renderCamera(){
  paintFrame=0;
  cameraPosition=dialog.open?2:journeyProgress(scrollY,ranges);
  const sample=reduced?Math.round(cameraPosition):cameraPosition,view=cameraState(sample);
+ const character=characterState(sample,reduced);
  document.body.dataset.camera=Number.isInteger(cameraPosition)?'still':'moving';
  drawSky(reduced?0:view.progress*2400);
  if(view.active!==activeScene){activeScene=view.active;updateScene();}
@@ -142,10 +147,19 @@ function renderCamera(){
  const metrics=actorLayout(viewportWidth,viewportHeight,view.actor,document.body.dataset.layout==='stacked',keyboard);
  couple.style.width=metrics.width.toFixed(2)+'px';
  couple.style.opacity=String(reduced?1-.75*travelPulse(cameraPosition%1):1);
- couple.style.setProperty('--pose-blur',view.poseBlur.toFixed(2)+'px');
+ couple.dataset.outfit=character.outfit;
+ couple.style.setProperty('--pose-blur',character.blur.toFixed(2)+'px');
+ couple.style.setProperty('--character-lean',character.lean.toFixed(3)+'deg');
+ couple.style.setProperty('--face-turn',character.faceTurn.toFixed(3)+'deg');
+ couple.style.setProperty('--veil-shift',character.veil.toFixed(3)+'px');
+ couple.style.setProperty('--hem-shift',character.sleeve.toFixed(3)+'px');
+ couple.style.setProperty('--blink',character.blink.toFixed(4));
+ const leg=Math.floor(sample),wardrobeEdit=!reduced&&(leg===2||leg===3),sweep=clamp((sample-leg-.44)/.16);
+ couple.style.setProperty('--edit-opacity',wardrobeEdit?character.occlusion.toFixed(4):'0');
+ couple.style.setProperty('--edit-x',`${((sweep-.5)*280).toFixed(3)}%`);
  document.body.style.setProperty('--foreground-top',Math.max(0,metrics.top-24).toFixed(2)+'px');
  couple.style.transform=`translate3d(${metrics.left.toFixed(2)}px,${metrics.top.toFixed(2)}px,0) rotateY(${view.actor.turn.toFixed(2)}deg)`;
- poses.forEach((pose,i)=>{pose.style.opacity=String(view.poses[i]);pose.classList.toggle('current',view.poses[i]>.5);});
+ poses.forEach((pose,i)=>{pose.style.opacity=i===character.pose?'1':'0';pose.classList.toggle('current',i===character.pose);});
 }
 function schedulePaint(){if(!paintFrame)paintFrame=requestAnimationFrame(renderCamera);}
 function measureJourney(){
