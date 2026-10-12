@@ -1,5 +1,6 @@
 export const CAMERA_STOPS=[0,18,41,66,92,119,145];
 export const HILL_DEPTHS=[27,38,51,67,84,104,128,139,192];
+export const WORLD_DEPTH={tree:55,lake:91,arch:167};
 export const clamp=(v,min=0,max=1)=>Math.max(min,Math.min(max,v));
 export const ease=t=>{t=clamp(t);return clamp(t*t*t*(t*(t*6-15)+10));};
 export const mix=(a,b,t)=>a+(b-a)*t;
@@ -27,7 +28,7 @@ export function portalFrame(width,height){
 // Every value is a pure function of scroll progress, so reversing retraces the same route.
 export function cameraState(value){
  const progress=boundedProgress(value),base=Math.min(5,Math.floor(progress)),t=progress-base,u=ease(t);
- const x=[0,.35,.85,1.1,.9,.45,0],elevation=[3,3.02,3.08,3.04,2.98,3.01,3];
+ const x=[0,.35,1.25,.85,.55,.25,0],elevation=[3,3.10,2.90,3.16,3.12,3.06,3];
  const actorX=[.5,.79,.20,.80,.20,.79,.5],actorY=[.92,.9,.89,.9,.89,.9,.92];
  const actorMix=base===0?ease((t-.62)/.38):u;
  const poseIndices=[0,0,1,2,3,4,5];
@@ -37,11 +38,12 @@ export function cameraState(value){
  return {
   progress,active:Math.min(6,Math.round(progress)),z:mix(CAMERA_STOPS[base],CAMERA_STOPS[base+1],u),
   x:mix(x[base],x[base+1],u),elevation:mix(elevation[base],elevation[base+1],u),
-  roll:-travelPulse(t)*.0008,
+  roll:0,
   room:base===0?1-ease((t-.36)/.24):0,roomScale:base===0?1+ease(t/.6)*2.7:3.7,
   actor:{x:mix(actorX[base],actorX[base+1],actorMix),y:mix(actorY[base],actorY[base+1],actorMix)-actorBreath*.016,size:mix(base===0?1.32:1,1,actorMix)*(1-actorBreath*.10),turn:actorBreath*(base%2?1.2:-1.2),portal:base===0?1-actorMix:base===5?actorMix:0},
-  poses,poseBlur:base>0?6*travelPulse((t-.47)/.10):0,portalScale:22/(167-mix(CAMERA_STOPS[base],CAMERA_STOPS[base+1],u))
+  poses,poseBlur:base>0?6*travelPulse((t-.47)/.10):0,portalScale:22/(WORLD_DEPTH.arch-mix(CAMERA_STOPS[base],CAMERA_STOPS[base+1],u))
  };
 }
 // Used by all scenery planes; near objects expand and leave the frame as the lens passes.
 export function projectPlane(depth,cameraZ){const distance=depth-cameraZ;return {distance,scale:distance>0?40/distance:0,opacity:ease((distance-3)/8)};}
+export function reducedTransition(value){const p=boundedProgress(value),from=Math.min(5,Math.floor(p));return {from,to:from+1,alpha:ease(p-from)};}

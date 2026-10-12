@@ -8,15 +8,15 @@
 <canvas id="sky" aria-hidden="true"></canvas><div class="sun" aria-hidden="true"></div>
 
 <header>
-<a href="#home" class="brand" aria-label="Dương và Ngân">D<span>&</span>N</a><p class="header-note">MỘT NGÀY ĐẸP · MỘT ĐỜI CHUNG</p><div class="tools"><label class="sr-only" for="theme">Đổi sắc trời</label><select id="theme"><option value="auto">Tự động</option><option value="day">Bình minh</option><option value="dusk">Hoàng hôn</option><option value="night">Đêm sao</option></select><button id="motion" aria-pressed="false">Giảm chuyển động</button></div>
+<a href="#arrival" class="brand" aria-label="Dương và Ngân">D<span>&</span>N</a><p class="header-note">MỘT NGÀY ĐẸP · MỘT ĐỜI CHUNG</p><div class="tools"><label class="sr-only" for="theme">Đổi sắc trời</label><select id="theme"><option value="auto">Tự động</option><option value="day">Bình minh</option><option value="dusk">Hoàng hôn</option><option value="night">Đêm sao</option></select><button id="motion" aria-pressed="false">Giảm chuyển động</button></div>
 </header><aside class="demo-banner" role="note">BẢN DEMO GIAO DIỆN · Xác nhận tham dự và lời chúc chưa được gửi hoặc lưu.</aside>
 
-<div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Mở thiệp cưới Dương và Ngân"><p class="eyebrow">MỘT LỜI MỜI DÀNH CHO BẠN</p><button id="open" class="envelope" aria-label="Mở thiệp cưới"><span class="envelope-back"></span><span class="letter"><img class="letter-botanical" src="./assets/botanical.svg" alt="">Dương & Ngân<small>29 · 11 · 2026</small><span class="letter-rule"></span></span><span class="envelope-front"></span><span class="flap"></span><span class="seal"><img src="./assets/wax-seal.svg" alt="Con dấu D và N"></span></button><p>Chạm để mở một ngày đặc biệt</p><button class="text-button" id="skip">Bước vào câu chuyện ↓</button></div>
+<div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Mở thiệp cưới Dương và Ngân"><p class="eyebrow">MỘT LỜI MỜI DÀNH CHO BẠN</p><button id="open" class="envelope" aria-label="Mở thiệp cưới"><span class="envelope-back"></span><span class="letter"><img class="letter-botanical" src="./assets/botanical.svg" alt="">Dương & Ngân<small>29 · 11 · 2026</small><span class="letter-rule"></span></span><span class="envelope-front"></span><span class="flap"></span><span class="ribbon" aria-hidden="true"></span><span class="seal"><img src="./assets/wax-seal.svg" alt="Con dấu D và N"></span><span class="open-label">Mở thiệp</span></button><p>Chạm để mở một ngày đặc biệt</p><button class="text-button" id="skip">Bước vào câu chuyện ↓</button></div>
 
 <main id="film" tabindex="0" aria-label="Thiệp cưới, cuộn để đi qua thung lũng">
 
 <div id="landscape" aria-hidden="true"><canvas id="world"></canvas><div class="cinema-grain"></div></div>
-<section id="arrival" class="arrival" tabindex="-1" aria-label="Nhìn qua khung cửa vào thung lũng"><div class="arrival-caption"><p class="eyebrow">DƯƠNG & NGÂN · 29.11.2026</p><p>Một ngày đẹp.<br><i>Một đời có nhau.</i></p></div><a href="#home" class="arrival-scroll">Cuộn để bước vào câu chuyện<span>↓</span></a></section>
+<section id="arrival" class="arrival" tabindex="-1" aria-label="Nhìn qua khung cửa vào thung lũng"><div class="arrival-caption"><p class="eyebrow">DƯƠNG & NGÂN · 29.11.2026</p><p class="arrival-title">Một ngày đẹp.<br><i>Một đời có nhau.</i></p><p class="arrival-welcome">Chúng mình mời bạn bước vào câu chuyện này.</p><a href="#home" class="arrival-scroll">Cuộn để bước vào câu chuyện<span>↓</span></a></div></section>
 <div class="camera-gap door-gap" aria-hidden="true"></div>
 <section id="home" class="hero chapter chapter-left">
 <div class="chapter-paper">
@@ -65,7 +65,7 @@
 </aside>
 
 </main>
-<div class="film-controls" aria-label="Điều khiển thước phim"><button id="play-film" class="play-film" aria-pressed="false" aria-label="Xem thiệp như một đoạn phim tự chạy">Xem như phim ▷</button><button id="scene-prev" aria-label="Trở lại chặng trước">↑</button><div class="film-timeline"><label id="scene-label" for="scene-position">01 / 07 · Khung cửa</label><input id="scene-position" type="range" min="0" max="6" step="0.01" value="0" aria-label="Tiến độ hành trình trong thiệp"></div><button id="scene-next" aria-label="Đi đến chặng tiếp theo">↓</button></div>
+<div class="film-controls" aria-label="Điều khiển thước phim"><button id="scene-prev" aria-label="Trở lại chặng trước">↑</button><div class="film-timeline"><label id="scene-label" for="scene-position">01 / 07 · Khung cửa</label><input id="scene-position" type="range" min="0" max="6" step="0.01" value="0" aria-label="Tiến độ hành trình trong thiệp"></div><button id="scene-next" aria-label="Đi đến chặng tiếp theo">↓</button></div>
 <nav class="bottom-nav" aria-label="Truy cập nhanh">
 <a href="#event">Lễ cưới</a><a href="#rsvp">Hồi âm ↗</a><a href="#wishes">Lời chúc</a>
 </nav>

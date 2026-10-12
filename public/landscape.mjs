@@ -1,11 +1,11 @@
-import {HILL_DEPTHS,projectPlane,portalFrame,ease,clamp,mix} from './camera.mjs';
+import {HILL_DEPTHS,WORLD_DEPTH,projectPlane,portalFrame,ease,clamp,mix} from './camera.mjs';
 const colorMix=(a,b,t)=>{const A=a.slice(1).match(/../g).map(x=>parseInt(x,16)),B=b.slice(1).match(/../g).map(x=>parseInt(x,16));return `rgb(${A.map((v,i)=>Math.round(mix(v,B[i],t))).join(',')})`;};
 const palettes={
  day:{sky:['#b4c9c7','#d9e3d7','#f3e8cb'],sun:'#fff5cd',far:'#bdcfbf',near:'#526955',ridge:'#d5dcc0',fog:'#e6e9d6',lake:['#c3d7d1','#6e9691'],wall:['#ece5d3','#c8c6af'],wood:'#8b9175',trim:'#f8f1dc',room:'#535f4d'},
  dusk:{sky:['#657b90','#c5a0a0','#efd0ad'],sun:'#ffe0a2',far:'#b5b7ae',near:'#5a6562',ridge:'#e1c4ac',fog:'#dbc6b6',lake:['#d2b9ac','#6b8188'],wall:['#dcd0c4','#ae9b90'],wood:'#8b7466',trim:'#f8dbc0',room:'#705d56'},
  night:{sky:['#030815','#0a1630','#253449'],sun:'#e1ecff',far:'#34485c',near:'#102a31',ridge:'#718c9a',fog:'#344b5b',lake:['#2b4758','#071b29'],wall:['#162232','#0b1524'],wood:'#344459',trim:'#879fbb',room:'#070e1c'}
 };
-const sceneryLayers=[...HILL_DEPTHS.map((depth,index)=>({kind:'hill',depth,index})),{kind:'arch',depth:167},{kind:'lake',depth:108},{kind:'tree',depth:82}].sort((a,b)=>b.depth-a.depth);
+const sceneryLayers=[...HILL_DEPTHS.map((depth,index)=>({kind:'hill',depth,index})),...Object.entries(WORLD_DEPTH).map(([kind,depth])=>({kind,depth}))].sort((a,b)=>b.depth-a.depth);
 // Authored profiles: nine distinct ridgelines, painted in back-to-front world coordinates.
 const ridges=[
  [.30,.18,.29,.08,.35,.15,.25], [.22,.32,.13,.27,.08,.28,.16],
@@ -16,7 +16,7 @@ const ridges=[
 export function createLandscape(canvas,onReady=()=>{}){
  const ctx=canvas.getContext('2d',{alpha:false});let width=0,height=0,lastState=null,lastTheme='day';
  const art={};
- for(const [key,file] of [['tree','cinematic-tree.svg'],['arch','cinematic-arch.svg']]){
+ for(const [key,file] of [['tree','cinematic-tree.svg'],['arch','cinematic-arch.svg'],['room','cinematic-room.svg']]){
   const img=new Image();img.decoding='async';img.src=new URL('./assets/'+file,import.meta.url).href;
   img.onload=()=>{art[key]=img;if(lastState)render(lastState,lastTheme);onReady();};
  }
@@ -27,18 +27,20 @@ export function createLandscape(canvas,onReady=()=>{}){
   ctx.bezierCurveTo(X(117),Y(178),X(197),Y(93),X(300),Y(93));
   ctx.bezierCurveTo(X(403),Y(93),X(483),Y(178),X(483),Y(314));ctx.lineTo(X(483),Y(775));
  }
- function paintSky(p,night){
+ function paintSky(p,night,state){
   const g=ctx.createLinearGradient(0,0,0,height);p.sky.forEach((c,i)=>g.addColorStop(i/2,c));ctx.fillStyle=g;ctx.fillRect(-width*.02,-height*.02,width*1.04,height*1.04);
   const sx=width*.76,sy=height*.27,rad=Math.min(width,height)*(night?.031:.049);
   const halo=ctx.createRadialGradient(sx,sy,rad*.2,sx,sy,rad*9);halo.addColorStop(0,night?'rgba(172,207,247,.12)':'rgba(255,243,199,.40)');halo.addColorStop(1,'rgba(255,240,200,0)');ctx.fillStyle=halo;ctx.fillRect(0,0,width,height);
   ctx.beginPath();ctx.arc(sx,sy,rad,0,Math.PI*2);ctx.fillStyle=p.sun;ctx.fill();
   if(night){ctx.fillStyle=p.sky[0];ctx.beginPath();ctx.arc(sx+rad*.55,sy-rad*.18,rad*.87,0,Math.PI*2);ctx.fill();}
   else{ctx.save();ctx.globalAlpha=.075;ctx.fillStyle=p.sun;for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(sx+(i-2)*rad,sy);ctx.lineTo(width*(.28+i*.12),height);ctx.lineTo(width*(.34+i*.15),height);ctx.closePath();ctx.fill();}ctx.restore();}
+  // Static dusk light at the final stop, keyed only to scroll rather than a clock.
+  if(!night){const warmth=ease((state.progress-5)/1)*.17;ctx.fillStyle=`rgba(245,183,121,${warmth})`;ctx.fillRect(0,0,width,height);}
  }
  function ridgePath(i,projection,state){
   const s=projection.scale,baseline=height*(.46+(state.elevation-3)*.006)+height*.35*s,elevation=height*.60*s;
   const span=width*(2.2+s*.2),offset=-width*.6-state.x*s*width*.012,values=ridges[i];
-  const archScale=22/(167-state.z),centre=width*.5-state.x*archScale*width*.015;
+  const archScale=22/(WORLD_DEPTH.arch-state.z),centre=width*.5-state.x*archScale*width*.015;
   const corridor=width*(.32+.035*Math.min(s,2)),floor=height*(.46+(HILL_DEPTHS[i]>167?.035:.22)*s);
   const points=[];
   for(let j=0;j<=64;j++){
@@ -64,9 +66,9 @@ export function createLandscape(canvas,onReady=()=>{}){
   ctx.globalAlpha=q.opacity*(.04+i*.019);ctx.fillStyle=p.fog;ctx.fill(r.path);ctx.restore();
  }
  function paintLake(state,p,night){
-  const q=projectPlane(108,state.z);if(q.opacity<=0)return;
-  const s=q.scale,cx=width*.53-state.x*s*width*.012,cy=height*.43+height*.30*s;
-  const rx=width*.42*s,ry=height*.13*s;
+  const q=projectPlane(WORLD_DEPTH.lake,state.z);if(q.opacity<=0)return;
+  const s=q.scale,cx=width*.94-state.x*s*width*.025,cy=height*.43+height*.20*s;
+  const rx=width*.28*s,ry=height*.075*s;
   if(cy-ry>height*1.2||rx>width*6)return;
   ctx.save();ctx.globalAlpha=q.opacity;ctx.beginPath();ctx.moveTo(cx-rx,cy);
   ctx.bezierCurveTo(cx-rx*.74,cy-ry*.70,cx-rx*.20,cy-ry,cx+rx*.44,cy-ry*.44);
@@ -81,9 +83,9 @@ export function createLandscape(canvas,onReady=()=>{}){
   ctx.save();ctx.globalAlpha=q.opacity*.16;ctx.strokeStyle=night?p.ridge:p.trim;ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,.10,Math.PI*.83);ctx.stroke();ctx.restore();
  }
  function paintTree(state,p,night){
-  const q=projectPlane(82,state.z);if(!art.tree||q.opacity<=0)return;
-  const s=q.scale,x=width*.30-state.x*s*width*.012-width*.34*s,foot=height*.43+height*.35*s;
-  const h=height*.61*s,w=h*.75;
+  const q=projectPlane(WORLD_DEPTH.tree,state.z);if(!art.tree||q.opacity<=0)return;
+  const s=q.scale,h=Math.min(height*.34,width*.70)*s,w=h*.75;
+  const x=width*.20-state.x*s*width*.015-w*.72,foot=height*.43+height*.21*s;
   if(w>width*8)return;
   ctx.save();ctx.globalAlpha=q.opacity;
   ctx.fillStyle=night?'rgba(0,4,14,.26)':'rgba(34,57,42,.12)';ctx.beginPath();ctx.ellipse(x+w*.5,foot-h*.01,w*.55,h*.024,-.12,0,Math.PI*2);ctx.fill();
@@ -91,7 +93,7 @@ export function createLandscape(canvas,onReady=()=>{}){
   ctx.drawImage(art.tree,x,foot-h,w,h);ctx.restore();
  }
  function paintArch(state,p,night){
-  const frame=portalFrame(width,height),s=22/(167-state.z);
+  const frame=portalFrame(width,height),s=22/(WORLD_DEPTH.arch-state.z);
   const w=frame.width*s,h=frame.height*s;
   const x=width/2-w/2-state.x*s*width*.015,y=height*.43+(frame.y-frame.height*.0-height*.43)*s;
   const box={x,y,width:w,height:h};
@@ -131,16 +133,34 @@ export function createLandscape(canvas,onReady=()=>{}){
   for(const side of [frame.x*.38,width-frame.x*.38]){ctx.strokeRect(side-width*.055,height*.22,width*.11,height*.54);ctx.strokeRect(side-width*.05,height*.229,width*.10,height*.52);}
   ctx.globalAlpha=state.room;const sill=ctx.createLinearGradient(0,frame.y+frame.height*.969,0,frame.y+frame.height*1.02);sill.addColorStop(0,p.trim);sill.addColorStop(.16,p.wood);sill.addColorStop(1,p.room);ctx.fillStyle=sill;ctx.fillRect(frame.x+frame.width*.18,frame.y+frame.height*.969,frame.width*.64,frame.height*.044);
   // Floorboards converge on the shared optical centre, a physical room rather than an overlay border.
-  ctx.fillStyle=p.wall[1];ctx.fillRect(-width*3,height*.99,width*7,height*3);
+  const ground=frame.y+frame.height*775/800;
+  const floor=ctx.createLinearGradient(0,ground,0,height*1.5);floor.addColorStop(0,p.wall[1]);floor.addColorStop(1,p.wood);
+  ctx.fillStyle=floor;ctx.fillRect(-width*3,ground+frame.height*.032,width*7,height*3);
   ctx.strokeStyle=p.wood;ctx.globalAlpha=state.room*.27;ctx.lineWidth=1;
-  for(let i=-3;i<=8;i++){ctx.beginPath();ctx.moveTo(width*.5+(i-2.5)*width*.08,height*.98);ctx.lineTo(width*.5+(i-2.5)*width*.32,height*1.7);ctx.stroke();}
+  for(let i=-6;i<=11;i++){ctx.beginPath();ctx.moveTo(width*.5+(i-2.5)*width*.04,ground);ctx.lineTo(width*.5+(i-2.5)*width*.32,height*1.7);ctx.stroke();}
+  for(let i=0;i<5;i++){const y=ground+(height-ground)*((i+1)/5)**1.6;ctx.beginPath();ctx.moveTo(-width,y);ctx.lineTo(width*2,y);ctx.stroke();}
+  ctx.globalAlpha=state.room*.13;ctx.fillStyle=p.sun;ctx.beginPath();ctx.moveTo(frame.x+frame.width*.20,ground);ctx.lineTo(frame.x+frame.width*.80,ground);ctx.lineTo(width*.91,height*1.15);ctx.lineTo(width*.08,height*1.15);ctx.closePath();ctx.fill();
+  if(art.room){const roomWidth=frame.width*1.7;ctx.globalAlpha=state.room*.86;if(lastTheme==='night')ctx.filter='brightness(.4) saturate(.45)';else if(lastTheme==='dusk')ctx.filter='sepia(.15)';ctx.drawImage(art.room,(width-roomWidth)/2,0,roomWidth,height);ctx.filter='none';}
   ctx.restore();
+ }
+ function paintPath(state,p,night){
+  const frame=portalFrame(width,height),ground=frame.y+frame.height*775/800,points=[];
+  for(let i=0;i<=80;i++){
+   const d=mix(state.z+6,WORLD_DEPTH.arch+24,i/80),s=22/(d-state.z);
+   const bend=-Math.sin(Math.PI*clamp(d/WORLD_DEPTH.arch))*.14;
+   points.push({x:width*.5+width*bend*s-state.x*s*width*.015,y:height*.43+(ground-height*.43)*s,w:width*.036*s});
+  }
+  ctx.save();
+  const color=ctx.createLinearGradient(0,height*.43,0,height*1.1);color.addColorStop(0,night?'#30434a':p.ridge);color.addColorStop(1,night?'#20323a':lastTheme==='dusk'?'#bca58a':'#b9bba2');ctx.fillStyle=color;
+  ctx.beginPath();points.forEach((q,i)=>i?ctx.lineTo(q.x-q.w,q.y):ctx.moveTo(q.x-q.w,q.y));
+  [...points].reverse().forEach(q=>ctx.lineTo(q.x+q.w,q.y));ctx.closePath();ctx.fill();
+  ctx.strokeStyle=p.trim;ctx.globalAlpha=.16;ctx.lineWidth=.8;ctx.beginPath();points.forEach((q,i)=>i?ctx.lineTo(q.x-q.w,q.y):ctx.moveTo(q.x-q.w,q.y));ctx.stroke();ctx.restore();
  }
  function render(state,theme='day'){
   lastState=state;lastTheme=theme;if(!ctx||!width||!height)return;
   const p=palettes[theme]||palettes.day,night=theme==='night';ctx.clearRect(0,0,width,height);
   ctx.save();ctx.translate(width*.5,height*.5);ctx.rotate(state.roll);ctx.translate(-width*.5,-height*.5);
-  paintSky(p,night);
+  paintSky(p,night,state);
   // The distant ceremonial arch remains legible beyond every ridge; nearby tree/water have their own depth.
   for(const layer of sceneryLayers){
    if(layer.kind==='hill')paintHill(layer.index,state,p);
@@ -148,6 +168,7 @@ export function createLandscape(canvas,onReady=()=>{}){
    else if(layer.kind==='lake')paintLake(state,p,night);
    else paintTree(state,p,night);
   }
+  paintPath(state,p,night);
   const mist=ctx.createLinearGradient(0,height*.35,0,height*.57);mist.addColorStop(0,'rgba(230,235,218,0)');mist.addColorStop(.5,night?'rgba(145,178,202,.025)':'rgba(240,244,228,.12)');mist.addColorStop(1,'rgba(230,235,218,0)');ctx.fillStyle=mist;ctx.fillRect(0,0,width,height);
   paintPorch(state,p);paintRoom(state,p);ctx.restore();
   const vignette=ctx.createRadialGradient(width*.5,height*.48,height*.2,width*.5,height*.5,Math.max(width,height)*.69);vignette.addColorStop(0,'rgba(0,0,0,0)');vignette.addColorStop(1,night?'rgba(0,4,14,.42)':'rgba(55,66,47,.12)');ctx.fillStyle=vignette;ctx.fillRect(0,0,width,height);

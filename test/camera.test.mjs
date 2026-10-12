@@ -1,12 +1,35 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {cameraState,journeyProgress,readingRange,portalFrame,HILL_DEPTHS,projectPlane} from '../public/camera.mjs';
+import {cameraState,journeyProgress,readingRange,portalFrame,HILL_DEPTHS,WORLD_DEPTH,projectPlane,reducedTransition} from '../public/camera.mjs';
 const ranges=Array.from({length:7},(_,i)=>readingRange(i*2400,i*2400+700,800));
 test('the camera stays still for the whole time each paper is visible',()=>{
  for(let i=0;i<ranges.length;i++)for(let y=ranges[i].start;y<=ranges[i].end;y+=37){
   assert.equal(journeyProgress(y,ranges),i);
-  assert.equal(cameraState(journeyProgress(y,ranges)).z,cameraState(i).z);
+  assert.deepEqual(cameraState(journeyProgress(y,ranges)),cameraState(i));
  }
+});
+test('tree and lake arrive at their reading stops while the arch grows along the forward route',()=>{
+ assert.ok(projectPlane(WORLD_DEPTH.tree,cameraState(2).z).scale>2);
+ assert.equal(projectPlane(WORLD_DEPTH.tree,cameraState(3).z).opacity,0);
+ assert.ok(projectPlane(WORLD_DEPTH.lake,cameraState(3).z).scale>1);
+ assert.equal(projectPlane(WORLD_DEPTH.lake,cameraState(4).z).opacity,0);
+ let previous=0;
+ for(let n=0;n<=600;n++){
+  const state=cameraState(n/100);assert.ok(state.portalScale>=previous);previous=state.portalScale;
+  assert.equal(state.roll,0,'eye-level horizon never banks or spins');
+ }
+});
+test('reduced motion dissolves between static adjacent stops and reverses to the same blend',()=>{
+ for(let stop=0;stop<6;stop++){
+  assert.equal(reducedTransition(stop).alpha,0);
+  for(let step=0;step<100;step++){
+   const progress=stop+step/100,blend=reducedTransition(progress);
+   assert.equal(blend.from,stop);assert.equal(blend.to,stop+1);
+   assert.ok(blend.alpha>=0&&blend.alpha<=1);
+   assert.deepEqual(reducedTransition(progress),blend);
+  }
+ }
+ assert.equal(reducedTransition(6).alpha,1);
 });
 test('blank gaps advance monotonically and scrolling backward retraces the same camera route',()=>{
  const forward=[];let last=-1;
