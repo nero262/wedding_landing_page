@@ -1,3 +1,4 @@
+import {createNightLake} from './night-lake.mjs';
 import {HILL_DEPTHS,WORLD_DEPTH,projectPlane,portalFrame,ease,clamp,mix} from './camera.mjs';
 const colorMix=(a,b,t)=>{const A=a.slice(1).match(/../g).map(x=>parseInt(x,16)),B=b.slice(1).match(/../g).map(x=>parseInt(x,16));return `rgb(${A.map((v,i)=>Math.round(mix(v,B[i],t))).join(',')})`;};
 const palettes={
@@ -15,6 +16,7 @@ const ridges=[
 ];
 export function createLandscape(canvas,onReady=()=>{}){
  const ctx=canvas.getContext('2d',{alpha:false});let width=0,height=0,lastState=null,lastTheme='day';
+ let nightLake=null,nightFailed=false;
  const art={};
  for(const [key,file] of [['tree','cinematic-tree.svg'],['arch','cinematic-arch.svg'],['room','cinematic-room.svg']]){
   const img=new Image();img.decoding='async';img.src=new URL('./assets/'+file,import.meta.url).href;
@@ -158,6 +160,10 @@ export function createLandscape(canvas,onReady=()=>{}){
  }
  function render(state,theme='day'){
   lastState=state;lastTheme=theme;if(!ctx||!width||!height)return;
+  if(theme==='night'&&!nightFailed){
+   try{nightLake??=createNightLake();const targetWidth=Math.min(width,1440),targetHeight=Math.round(height*targetWidth/width);ctx.drawImage(nightLake.render(state.progress,targetWidth,targetHeight),0,0,width,height);document.body.classList.add('night-3d');return;}
+   catch(error){console.warn('3D scene unavailable; using illustrated landscape.',error);nightFailed=true;document.body.classList.remove('night-3d');}
+  }
   const p=palettes[theme]||palettes.day,night=theme==='night';ctx.clearRect(0,0,width,height);
   ctx.save();ctx.translate(width*.5,height*.5);ctx.rotate(state.roll);ctx.translate(-width*.5,-height*.5);
   paintSky(p,night,state);

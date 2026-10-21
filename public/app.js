@@ -16,7 +16,7 @@ let reduced=safeGet('motion')===null?preference.matches:safeGet('motion')==='red
 function setMotion(){document.body.classList.toggle('reduced',reduced);$('#motion').setAttribute('aria-pressed',String(reduced));$('#motion').textContent=reduced?'Chuyển động nhẹ · Bật lại':'Giảm chuyển động';}
 $('#motion').onclick=()=>{reduced=!reduced;safeSet('motion',reduced?'reduce':'full');setMotion();};
 preference.addEventListener('change',e=>{if(safeGet('motion')===null){reduced=e.matches;setMotion();}});
-let mode='day';$('#theme').value=safeGet('theme')||'auto';
+let mode='day';$('#theme').value=safeGet('theme')||'night';
 function setTheme(){const hour=new Date().getHours(),choice=$('#theme').value;mode=choice==='auto'?(hour>=6&&hour<16?'day':hour>=16&&hour<19?'dusk':'night'):choice;document.body.dataset.theme=mode;document.querySelector('meta[name=theme-color]').content=getComputedStyle(document.body).getPropertyValue('--bg').trim()||'#f7eee2';document.dispatchEvent(new Event('palettechange'));}
 $('#theme').onchange=()=>{safeSet('theme',$('#theme').value);setTheme();};
 const canvas=$('#sky'),ctx=canvas.getContext('2d');let w=0,h=0,particles=[];
@@ -103,7 +103,7 @@ if(!demo)fetch('/api/wishes').then(r=>{if(!r.ok)throw Error();return r.json();})
 // The page scrolls normally. The landscape is scenery, never a pinned content container.
 const film=$('#film'),landscape=createLandscape($('#world'),schedulePaint);
 const scenes=Array.from(film.children).filter(el=>el.matches('section,footer'));
-const sceneNames=['Khung cửa','Lời mời','Những ngày có nhau','Lễ cưới','Hồi âm','Lời chúc','Lời cảm ơn'];
+const sceneNames=['Bên hồ đêm','Lời mời','Những ngày có nhau','Lễ cưới','Hồi âm','Lời chúc','Lời cảm ơn'];
 const position=$('#scene-position'),couple=$('#couple-companion');
 const poses=Array.from(document.querySelectorAll('.doll-pose'));
 initializeCharacterParts(poses);
@@ -211,3 +211,6 @@ if('ResizeObserver' in window)new ResizeObserver(scheduleMeasure).observe(film);
 document.fonts?.ready.then(scheduleMeasure);
 updateScene();measureJourney();
 if(location.hash){const i=scenes.findIndex(s=>s.id===location.hash.slice(1));if(i>=0)requestAnimationFrame(()=>goScene(i,true));}
+
+// Lemo-Opuscar capture interface: every frame can be sought independently.
+window.DUR=42;window.render=t=>{const p=Math.max(0,Math.min(6,t/6));landscape.render(cameraState(p),'night');};window.READY=true;

@@ -91,3 +91,14 @@ Trên PC, tấm thiệp và cặp nhân vật nằm ở hai phía đối diện.
 Agent design expert vẽ `cinematic-tree.svg`, `cinematic-arch.svg` và `cinematic-room.svg`: lá có gân, hoa nhiều lớp cánh, nhánh mềm, dải lụa và viền vàng; phòng có rèm linen hai bên, bàn gỗ sáng, lọ hoa và ghế đôn. Sàn gỗ hội tụ theo ngưỡng cửa, có vệt sáng từ hiên. Các vật thể tiền cảnh mở rộng và lướt ra mép cùng đường máy. SVG hỗ trợ cả href/xlink:href, không có tài nguyên bên ngoài. `docs/` nhận bản sao khi chạy build:pages.
 
 Đã kiểm tra toán học về điểm dừng, đường lùi, tính liên tục, việc cửa tan trước khi nhân vật di chuyển, vị trí chân tại hai vòm và giới hạn nhân vật trên sáu kích thước khung nhìn. Kiểm tra ba bộ xuất hiện đúng chặng, chỉ một bộ/dáng hiện mỗi lúc, neo mặt chung không lệch trên điện thoại/PC, cử chỉ tĩnh tại thẻ, cổng luôn lớn dần, cây/hồ tới đúng cảnh, toàn bộ trạng thái máy giữ nguyên trong vùng đọc, hòa chuyển giảm chuyển động và hình học mở giấy nối đúng cửa; seek liên tục qua các mốc. Đã xem khung phối cảnh bằng renderer canvas native; chưa kiểm thử giao diện hoàn chỉnh trong trình duyệt thật hoặc đo FPS trên thiết bị.
+
+
+## Bối cảnh hồ đêm — Lemo-Opuscar
+
+Bản mặc định mới mở ở Đêm sao. `public/night-lake.mjs` dựng một không gian Three.js có hồ, đường lát đá uốn cong, đèn lồng, hoa trắng, đảo và cổng lễ cưới. Máy quay và cặp đôi được xác định hoàn toàn bằng tiến độ cuộn; đọc nội dung thì nền đứng yên, cuộn ngược thì trở về cùng tọa độ. Cặp đôi trong cảnh đêm là mô hình minh họa 3D mặc váy cưới và suit theo bộ ảnh tham chiếu, không phải ảnh chân dung hoặc bản tái tạo khuôn mặt. Các chế độ bình minh/hoàng hôn giữ phần minh họa cũ. Nếu WebGL không khả dụng, trang dùng phong cảnh Canvas cũ.
+
+Treatment và nguồn: `design/night-lake/`. Áp dụng phương pháp hình ảnh xác định theo thời gian và dàn cảnh của Lemo-Opuscar, điều chỉnh nhịp điệu theo yêu cầu đọc thiệp. Thư viện Three.js được lưu trong `public/vendor/` để không phụ thuộc CDN.
+
+Dựng Pages: `npm run build:pages`. Chọn Settings → Pages → Deploy from a branch → main → /docs → Save. Biểu mẫu của bản Pages không gửi hoặc lưu thông tin. Không cần token hay backend trong gói xuất bản.
+
+Kiểm tra bản cập nhật: 23 kiểm thử Node hiện có đạt; kiểm tra cú pháp JavaScript và dựng docs đạt. Chưa hoàn tất kiểm tra hình ảnh trên trình duyệt trong môi trường tạo bản này vì Chromium không khởi chạy; cần kiểm tra desktop/mobile sau khi Pages được bật.
