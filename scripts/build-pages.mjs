@@ -6,6 +6,7 @@ const out=path.join(root,'docs');rmSync(out,{recursive:true,force:true});mkdirSy
 const assets=['style.css','monogram.svg','camera.mjs','layout.mjs','landscape.mjs','night-lake.mjs','journey.mjs','opening.mjs','character.mjs','character-parts.mjs'];for(const file of assets)copyFileSync(path.join(root,'public',file),path.join(out,file));
 cpSync(path.join(root,'public/vendor'),path.join(out,'vendor'),{recursive:true});
 cpSync(path.join(root,'public/assets'),path.join(out,'assets'),{recursive:true});
+cpSync(path.join(root,'public/scenes'),path.join(out,'scenes'),{recursive:true});
 writeFileSync(path.join(out,'style.css'),readFileSync(path.join(out,'style.css'),'utf8').replaceAll("url('/assets/","url('./assets/"));
 let html=readFileSync(path.join(root,'public/index.html'),'utf8');html=html.replace(/<body\b([^>]*)>/,'<body$1 data-demo="true">').replace(/(href|src)="\/(?!\/)/g,'$1="./').replace('</header>','</header><aside class="demo-banner" role="note">BẢN DEMO GIAO DIỆN · Xác nhận tham dự và lời chúc chưa được gửi hoặc lưu.</aside>');writeFileSync(path.join(out,'index.html'),html);
 let js=readFileSync(path.join(root,'public/app.js'),'utf8');js=js.replace("fetch('/api/content')","fetch('./content.json')").replace('`/assets/${name}.webp`','`./assets/${name}.webp`');writeFileSync(path.join(out,'app.js'),js);
