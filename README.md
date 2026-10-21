@@ -51,7 +51,7 @@ noindex không phải bảo vệ bằng mật khẩu. Repo private cũng không 
 
 ## GitHub Pages — demo giao diện
 
-Chạy `npm run build:pages` để tạo `docs/`. Trong Settings → Pages, chọn Deploy from a branch → main → /docs → Save. Repo private cần gói GitHub hỗ trợ Pages cho private repos. Không đổi repo thành public chỉ để bật Pages.
+Workflow GitHub Actions chạy `npm test`, `npm run check`, `npm run build:pages` và tự triển khai `docs/` sau mỗi commit lên `main`. Lần đầu, trong Settings → Pages → Build and deployment → Source, chọn GitHub Actions. Repo private cần gói GitHub hỗ trợ Pages cho private repos. Không đổi repo thành public chỉ để bật Pages.
 
 Bản Pages chỉ chứa giao diện, minh họa và nội dung công khai. Không chứa trang admin, database hoặc cấu hình bí mật. Các nút gửi RSVP/lời chúc được tắt và ghi rõ không lưu dữ liệu. Máy chủ Node vẫn dùng cho bản có chức năng đầy đủ.
 
@@ -103,6 +103,6 @@ Bản mặc định mới mở ở Đêm sao. `public/night-lake.mjs` dựng m�
 
 Treatment và nguồn: `design/night-lake/`. Áp dụng phương pháp hình ảnh xác định theo thời gian và dàn cảnh của Lemo-Opuscar, điều chỉnh nhịp điệu theo yêu cầu đọc thiệp. Thư viện Three.js được lưu trong `public/vendor/` để không phụ thuộc CDN.
 
-Dựng Pages: `npm run build:pages`. Chọn Settings → Pages → Deploy from a branch → main → /docs → Save. Biểu mẫu của bản Pages không gửi hoặc lưu thông tin. Không cần token hay backend trong gói xuất bản.
+Tự động triển khai Pages: workflow `.github/workflows/deploy-pages.yml` chạy kiểm thử, dựng `docs/` và deploy mỗi khi có commit lên `main`; có thể chạy thủ công trong tab Actions. Lần đầu, vào Settings → Pages → Build and deployment → Source và chọn GitHub Actions. Biểu mẫu của bản Pages không gửi hoặc lưu thông tin. Không cần token hay backend trong gói xuất bản.
 
 Kiểm tra bản cập nhật: 23 kiểm thử Node hiện có đạt; kiểm tra cú pháp JavaScript và dựng docs đạt. Chưa hoàn tất kiểm tra hình ảnh trên trình duyệt trong môi trường tạo bản này vì Chromium không khởi chạy; cần kiểm tra desktop/mobile sau khi Pages được bật.
