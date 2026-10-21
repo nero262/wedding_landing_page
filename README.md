@@ -2,6 +2,8 @@
 
 Thiệp cưới **Lương Tùng Dương & Võ Thị Thúy Ngân**, ngày **29/11/2026**. Giao diện tiếng Việt, phong thư CSS 3D, ba sắc trời chọn theo giờ thiết bị khi mở trang, bình minh bụi nắng và sao lấp lánh, album chuyển ảnh, lưu RSVP bằng SQLite và duyệt lời chúc. Không có dependency bên ngoài, không gọi dịch vụ trả phí.
 
+💌 **[Mở trang thiệp cưới](https://nero262.github.io/wedding_landing_page/)**
+
 ## Chạy
 
 Yêu cầu Node.js 24 trở lên.
