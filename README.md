@@ -4,6 +4,8 @@ Thiệp cưới **Lương Tùng Dương & Võ Thị Thúy Ngân**, ngày **29/11
 
 💌 **[Mở trang thiệp cưới](https://nero262.github.io/wedding_landing_page/)**
 
+Bản Pages hiện trình chiếu trực tiếp năm ảnh màn hình tham chiếu, giữ nguyên bố cục và mỹ thuật của ảnh gốc.
+
 ## Chạy
 
 Yêu cầu Node.js 24 trở lên.
